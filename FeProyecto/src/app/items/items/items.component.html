@@ -1,0 +1,36 @@
+<mat-table [dataSource]="dataSource">
+  <ng-container matColumnDef="denominacion">
+    <mat-header-cell *matHeaderCellDef> Denominacion</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.denominacion }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="ubicacion">
+    <mat-header-cell *matHeaderCellDef> Ubicacion</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.ubicacion }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="conjuntoEquipo">
+    <mat-header-cell *matHeaderCellDef> conjuntoEquipo</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.conjuntoEquipo }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="equipo">
+    <mat-header-cell *matHeaderCellDef> Equipo</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.equipo }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="marcaModelo">
+    <mat-header-cell *matHeaderCellDef> marcaModelo</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.marcaModelo }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="periocidad">
+    <mat-header-cell *matHeaderCellDef> periocidad</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.periocidad }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="categoria">
+    <mat-header-cell *matHeaderCellDef> categoria</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.categoria }}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="desplegarColumnas"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: desplegarColumnas"></mat-row>
+</mat-table>
+
