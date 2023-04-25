@@ -1,0 +1,83 @@
+
+<mat-table [dataSource]="dataSourcePuertos">
+  <ng-container matColumnDef="nombre">
+    <mat-header-cell *matHeaderCellDef r>nombre</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.nombre }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="items">
+    <mat-header-cell *matHeaderCellDef >Ver items</mat-header-cell>
+    <mat-cell *matCellDef="let element"><a href="/items?id={{element.id}}">ver items</a></mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="añadir">
+    <mat-header-cell *matHeaderCellDef >Añadir item</mat-header-cell>
+    <mat-cell *matCellDef="let element"><a href="/registrar?Ubicacionid={{element.id}}">Añadir item</a></mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="mantenimientos">
+    <mat-header-cell *matHeaderCellDef >ver mantenimientos</mat-header-cell>
+    <mat-cell *matCellDef="let element"><a href="">ver informes</a></mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="ubicacion">
+    <mat-header-cell *matHeaderCellDef >modificar ubicacion</mat-header-cell>
+    <mat-cell *matCellDef="let element"><a href="/añadirUbicacion">modificar ubicacion</a></mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="desplegarColumnasPuerto">
+    <mat-row *matRowDef="let row; columns: desplegarColumnasPuerto"> </mat-row>
+  </mat-header-row>
+
+</mat-table>
+
+
+<div *ngIf="mostrar == false">
+  <mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="denominacion">
+      <mat-header-cell *matHeaderCellDef> Denominacion</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.denominacion }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ubicacion">
+      <mat-header-cell *matHeaderCellDef> Ubicacion</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.ubicacion }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="conjuntoEquipo">
+      <mat-header-cell *matHeaderCellDef> conjuntoEquipo</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.conjuntoEquipo }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="equipo">
+      <mat-header-cell *matHeaderCellDef> Equipo</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.equipo }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="marcaModelo">
+      <mat-header-cell *matHeaderCellDef> marcaModelo</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.marcaModelo }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="periocidad">
+      <mat-header-cell *matHeaderCellDef> periocidad</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.periocidad }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="categoria">
+      <mat-header-cell *matHeaderCellDef> categoria</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{ element.categoria }}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="modificar">
+      <mat-header-cell *matHeaderCellDef> modificar item</mat-header-cell>
+      <mat-cell *matCellDef="let element" ><a href="registrar?id={{element.id}}"><mat-icon>update</mat-icon></a></mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="eliminar">
+      <mat-header-cell *matHeaderCellDef> eliminar item</mat-header-cell>
+      <mat-cell *matCellDef="let element"><a (click)="eliminar(element.id)"><mat-icon>delete</mat-icon></a></mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="desplegarColumnas"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: desplegarColumnas"></mat-row>
+  </mat-table>
+</div>
+
+
+
+
+

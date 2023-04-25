@@ -1,9 +1,10 @@
 export interface Mantenimiento{
+  id:string;
   descripcion:string;
   estado:string;
   corregido:boolean;
   observaciones:string;
-  periocidad:string;
   imagenes: string[];
   fecha?: Date;
+  ubicacion_id:string;
 }

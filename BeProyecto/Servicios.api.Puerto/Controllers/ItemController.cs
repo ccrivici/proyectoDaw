@@ -24,9 +24,12 @@ namespace Servicios.api.Puerto.Controllers
             return Ok(await _itemRepository.GetAll());
         }
         [HttpPost]
-        public async Task Post(ItemEntity item)
+        public async Task<OkObjectResult> Post(ItemEntity item)
         {
+            //item.id =  ""+Guid.NewGuid();
             await _itemRepository.InsertDocument(item);
+            return Ok(item);
+            
         }
         
         [HttpGet("{id}")]

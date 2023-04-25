@@ -14,16 +14,15 @@
             "categoria":"categoria"
         }
 
-            Mantenimiento    
-        {
-            "id":"6433fd9ad7d0ebc8c67a8627",
-            "descripcion":"decripscion prueba",
-            "estado":"estado prueba",
-            "corregido":true,
-            "observaciones":"conjuntoequipo2",
-            "periocidad":"equipoprueba",
-            "imagenes": ["imagen1","iamgen 2"]
-        }
+                MANTENIMIENTO
+       {
+        descripcion: 'decripscion prueba',
+        estado: 'estado prueba',
+        corregido: true,
+        observaciones: 'conjuntoequipo2',
+        imagenes: [ 'imagen1', 'iamgen 2' ],
+        fecha: { Year: 2020, Month: 1, Day: 1 }
+      }
 
             Ubicaciones
 
@@ -87,10 +86,70 @@
   "sort": "string",
   "sortDirection": "asc"
 }
+        pruebaaaa
+        {
+    _id: ObjectId("6433fd9ad7d0ebc8c55a8629"),
+    nombre: 'puerto 1',
+    tipo: 'prueba puerto',
+    items: [
+      {
+        _id: ObjectId("6433fd9ad7d0ebc8c67a8625"),
+        denominacion: 'prueb22a',
+        ubicacion: 'ubi prueba',
+        conjuntoEquipo: 'conjuntoequipo2',
+        equipo: 'equipoprueba',
+        marcaModelo: 'marca prueba',
+        periocidad: 'periocidadprueba',
+        categoria: 'categoria'
+      }
+    ],
+    mantenimientos: [
+      {
+        _id: ObjectId("6433fd9ad7d0ebc8c67a8634"),
+        descripcion: 'decripscion prueba',
+        estado: 'estado prueba',
+        corregido: true,
+        observaciones: 'conjuntoequipo2',
+        imagenes: [ 'imagen1', 'iamgen 2' ],
+        fecha: null
+      }
+    ]
+  }
+]
 
-
-
-
+        {"id": "6433fd9ad7d0ebc8c67a8666",
+    "nombre":"puerto 2",
+    "tipo":"puerto",
+    "items":[{"id":"6433fd9ad7d0ebc8c67a8625",
+            "denominacion":"edificio2",
+            "ubicacion":"ubi prueba",
+            "conjuntoEquipo":"conjuntoequipo2",
+            "equipo":"equipoprueba",
+            "marcaModelo":"marca prueba",
+            "periocidad":"periocidadprueba",
+            "categoria":"categoria"},
+            {"id":"6433fd9ad7d0ebc8c67a8628",
+            "denominacion":"edificio2",
+            "ubicacion":"ubi prueba",
+            "conjuntoEquipo":"conjuntoequipo2",
+            "equipo":"equipoprueba",
+            "marcaModelo":"marca prueba",
+            "periocidad":"periocidadprueba",
+            "categoria":"categoria"}
+            ],
+    "mantenimientos":[{
+        "id":"6433fd9ad7d0ebc8c67a8627",
+        "descripcion": "decripscion prueba",
+        "estado": "estado prueba",
+        "corregido": true,
+        "observaciones": "conjuntoequipo2",
+        "imagenes": [
+            "imagen1",
+            "iamgen 2"
+        ],
+        "fecha": null        
+    }]
+}
 
 
         */

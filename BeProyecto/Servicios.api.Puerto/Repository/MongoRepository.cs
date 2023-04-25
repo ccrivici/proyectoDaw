@@ -36,6 +36,7 @@ namespace Servicios.api.Puerto.Repository
 
         public async Task InsertDocument(TDocument document)
         {
+            
             await _collection.InsertOneAsync(document);
 
         }

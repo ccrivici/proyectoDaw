@@ -1,2 +1,13 @@
 <app-barra></app-barra>
-<router-outlet></router-outlet>
+<div class="contenedor">
+    <!-- <aside class="list" >
+        <mat-list role="list" class="listaso" >
+            <mat-list-item role="listitem" *ngFor="let element of ubicacionesData">
+              <a *ngIf="element.tipo=='puerto'" href="/puertos?id={{element.id}}">{{element.nombre}}</a>
+              <a *ngIf="element.tipo=='edificio'" href="/edificios?id={{element.id}}">{{element.nombre}}</a>
+            </mat-list-item>
+          </mat-list>
+    </aside> -->
+    <router-outlet ></router-outlet>
+
+</div>

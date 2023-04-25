@@ -1,0 +1,38 @@
+<div fxLayoutAlign="center center">
+  <mat-form-field fxFlex="60%"><!-- hacerFiltro($any($event.target).value) -->
+    <input matInput type="text" (keyup)="hacerFiltro($event)" placeholder="Introduzca texto">
+  </mat-form-field>
+</div>
+<mat-table [dataSource]="dataSourceEdificios" matSort (matSortChange)="ordenarColumna($event)">
+  <ng-container matColumnDef="nombre">
+    <mat-header-cell *matHeaderCellDef  mat-sort-header>nombre</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.nombre }}</mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="items">
+    <mat-header-cell *matHeaderCellDef  mat-sort-header>Ver items</mat-header-cell>
+    <mat-cell *matCellDef="let element"><a href="/items?id={{element.id}}">ver items</a></mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="añadir">
+    <mat-header-cell *matHeaderCellDef  mat-sort-header>Añadir item</mat-header-cell>
+    <mat-cell *matCellDef="let element"><a href="/registrar?Ubicacionid={{element.id}}">Añadir item</a></mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="mantenimientos">
+    <mat-header-cell *matHeaderCellDef  mat-sort-header>ver mantenimientos</mat-header-cell>
+    <mat-cell *matCellDef="let element"><a href="">ver informes</a></mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="ubicacion">
+    <mat-header-cell *matHeaderCellDef  mat-sort-header>modificar ubicacion</mat-header-cell>
+    <mat-cell *matCellDef="let element"><a href="/añadirUbicacion">modificar ubicacion</a></mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="desplegarColumnasPuerto">
+    <mat-row *matRowDef="let row; columns: desplegarColumnasPuerto"> </mat-row>
+  </mat-header-row>
+
+</mat-table>
+
+<mat-paginator (page)="eventoPaginador($event)" #paginacion [pageSize]="edificiosPorPagina" [pageSizeOptions]="paginaCombo" [length]="totalEdificios">
+</mat-paginator>

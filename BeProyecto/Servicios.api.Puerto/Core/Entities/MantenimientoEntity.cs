@@ -17,8 +17,8 @@ namespace Servicios.api.Puerto.Core.Entities
         [BsonElement("observaciones")]
         public string? Observaciones { get; set; }
 
-        [BsonElement("periocidad")]
-        public string? Periocidad { get; set; }
+        [BsonElement("ubicacion_id")]
+        public string? Ubicacion_id { get; set; }
 
         [BsonElement("imagenes")]
         public List<string>? Imagenes { get; set; }

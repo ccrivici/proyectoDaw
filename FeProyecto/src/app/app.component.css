@@ -3,3 +3,19 @@ mat-toolbar{
   width: 250px;
   background-color: aqua;
 }
+.list{
+  background-color: aqua;
+  width: 10%;
+  height: 800px;
+}
+a:hover,
+a:active{
+  color: #DBCDE6;
+}
+.contenedor{
+  display: flex;
+  flex-direction: row;
+}
+.content{
+  background-color: blueviolet;
+}
