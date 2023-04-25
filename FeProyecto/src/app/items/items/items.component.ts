@@ -18,6 +18,7 @@ export class ItemsComponent implements OnInit, OnDestroy{
   idUbicacion!:any;
   ubicacion!:any;
   ubicacionId!: string;
+  id!: string;
 
   constructor(private itemsService: ItemsService,private ubicacionesService:UbicacionesService) {}
 
@@ -25,23 +26,18 @@ export class ItemsComponent implements OnInit, OnDestroy{
     //this.itemsSubscription.unsubscribe();
   }
   ngOnInit(): void {
-    this.idUbicacion =this.obtenerId();
-    console.log("id de la ubicacion: "+this.idUbicacion);
+    this.obtenerId();
+    console.log("id de la ubicacion: "+this.idUbicacion+" id elemento: "+this.id +
+    " componente: items component añadir item a ubi");
     this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe(response=>{
       this.ubicacion = response;
       if (this.ubicacion != undefined){
         this.dataSource = this.ubicacion.items;
       }
       console.log("aaa"+this.ubicacion.nombre)
-      /*console.log("ahora si: "+ this.ubicacion.items[0]);
-      for (const iterator of this.ubicacion.items) {
-        console.log(iterator);
-      }*/
     },e=>{
       console.log("error: "+e);
     })
-
-
   }
   eliminar(id:string){
     console.log("eliminar item de la ubicacion "+this.ubicacion.nombre)
@@ -53,7 +49,7 @@ export class ItemsComponent implements OnInit, OnDestroy{
   obtenerId(){
     const valores = window.location.search;
     const urlParams = new URLSearchParams(valores);
-    return urlParams.get('id')+"";
-
+    this.id = urlParams.get('id')+"";
+    this.idUbicacion = urlParams.get('Ubicacionid')+"";
   }
 }

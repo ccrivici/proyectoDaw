@@ -1,0 +1,95 @@
+<section>
+  <mat-card>
+  <form
+    fxLayout="column"
+    fxLayoutAlign="center center"
+    #f="ngForm"
+    (ngSubmit)="registrarUsuario(f)"
+    fxLayoutGap="10px"
+  >
+    <h1>Registro</h1>
+
+    <!--Campo Input Nombre-->
+    <mat-form-field>
+      <mat-label>Ingrese su nombre</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="Ingrese su Nombre"
+        ngModel
+        name="nombre"
+        required
+      />
+      <mat-error>El nombre no puede estar en blanco</mat-error>
+    </mat-form-field>
+
+    <!--Campo Input Apellidos-->
+    <mat-form-field>
+      <mat-label>Ingrese sus Apellidos</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="Ingrese sus Apellidos"
+        ngModel
+        name="apellidos"
+        required
+      />
+      <mat-error>Los apellidos no puede estar en blanco</mat-error>
+    </mat-form-field>
+
+    <!--Campo Input Usuario-->
+    <mat-form-field>
+      <mat-label>Ingrese su Nombre de Usuario</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="shiquiop"
+        ngModel
+        name="usuario"
+        required
+      />
+      <mat-error>El Usuario no puede estar en blanco</mat-error>
+    </mat-form-field>
+
+    <!--Campo Input E-Mail-->
+    <mat-form-field>
+      <mat-label>Ingrese su E-Mail</mat-label>
+      <input
+        type="email"
+        matInput
+        placeholder="mail_example@gmail.com"
+        ngModel
+        name="email"
+        email
+        required
+        #emailInput="ngModel"
+      />
+      <mat-error *ngIf="emailInput.hasError('required')"
+        >El E-mail no puede estar en blanco</mat-error
+      >
+      <mat-error *ngIf="!emailInput.hasError('required')"
+        >El E-mail es invalido, debe ser formato E-mail</mat-error
+      >
+    </mat-form-field>
+
+    <!--Campo Input Contraseña-->
+    <mat-form-field hintLabel="La contraseña no puede estar vacía">
+      <mat-label>Ingrese la Contraseña</mat-label>
+      <input
+        type="password"
+        matInput
+        placeholder=""
+        ngModel
+        name="password"
+        required
+        minlength="7"
+        #passwordInput="ngModel"
+      />
+      <mat-error *ngIf="passwordInput.hasError('minlength')"
+        >La contraseña debe tener minimo 7 caracteres</mat-error
+      >
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Guardar</button>
+  </form>
+</mat-card>
+</section>

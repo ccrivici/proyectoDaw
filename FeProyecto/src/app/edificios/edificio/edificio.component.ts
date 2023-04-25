@@ -19,7 +19,7 @@ export class EdificioComponent {
 
   idUbicacion!: string;
   ubicacion!: any;
-  desplegarColumnasPuerto = ["nombre", "items", "añadir","mantenimientos","ubicacion"];
+  desplegarColumnasPuerto = ["nombre", "items", "añadir", "mantenimientos", "ubicacion"];
 
   dataSource = new MatTableDataSource<Item>();
   private ubicacionesSubscription!: Subscription;
@@ -38,7 +38,7 @@ export class EdificioComponent {
   }
   timeout: any = null;
 
-  constructor(private itemsService: ItemsService, private ubicacionesService: UbicacionesService, private router: Router,private edificioService: EdificioService) { }
+  constructor(private itemsService: ItemsService, private ubicacionesService: UbicacionesService, private router: Router, private edificioService: EdificioService) { }
 
   ngOnInit(): void {
 
@@ -49,7 +49,7 @@ export class EdificioComponent {
     });
 
   }
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.ubicacionesSubscription.unsubscribe();
   }
 
@@ -77,6 +77,7 @@ export class EdificioComponent {
   obtenerId() {
     const valores = window.location.search;
     const urlParams = new URLSearchParams(valores);
+    this.idUbicacion = urlParams.get('id') + "";
     return urlParams.get('id') + "";
   }
 
@@ -94,13 +95,10 @@ export class EdificioComponent {
 
         //aqui obtenemos los libros pasando como filtro la constante creada antes
         $this.edificioService.obtenerEdificios($this.edificiosPorPagina, $this.paginaActual, $this.sort, $this.sortDirection, filterValueLocal);
-
-
       }
     }, 1000);
-
   }
-  eventoPaginador(event: PageEvent):void {
+  eventoPaginador(event: PageEvent): void {
     this.edificiosPorPagina = event.pageSize;
     this.paginaActual = event.pageIndex + 1;
     this.edificioService.obtenerEdificios(this.edificiosPorPagina, this.paginaActual, this.sort, this.sortDirection, this.filterValue);
@@ -111,8 +109,5 @@ export class EdificioComponent {
     this.sortDirection = event.direction;
     //obtenemos la lista de libros pero con el event.active capturamos la columna que tiene que ser ordenada y la direccion
     this.edificioService.obtenerEdificios(this.edificiosPorPagina, this.paginaActual, event.active, event.direction, this.filterValue);
-
   }
-
-
 }

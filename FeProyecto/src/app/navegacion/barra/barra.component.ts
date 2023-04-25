@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-barra',
@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./barra.component.css']
 })
 export class BarraComponent {
+
+  @Output() menuToggle = new EventEmitter<void>();
+
+  onMenuToggleDispatch(){
+    this.menuToggle.emit();
+  }
 
 }

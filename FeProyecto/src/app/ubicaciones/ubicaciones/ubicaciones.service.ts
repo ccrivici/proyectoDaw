@@ -49,11 +49,32 @@ export class UbicacionesService{
     return this.ubicacionSubjectDef;
   }
   //update items
-  updateUbicacion(id:String, ubicacion:Ubicacion,item:Item){
-    ubicacion.items.push(item);
+  updateUbicacion(id:String, ubicacion:Ubicacion,item:Item,idItem:string){
+    //var itemsRes = itemsAct.filter(item=> item.id != idItem);
+    var modificado = false;
+    ubicacion.items.forEach(element => {
+      if (element.id == idItem){
+        console.log(`id item: ${element.id} buscando: ${idItem}`)
+        element.id = idItem;
+        element.denominacion = item.denominacion;
+        element.ubicacion = item.ubicacion;
+        element.conjuntoEquipo = item.conjuntoEquipo;
+        element.equipo = item.equipo;
+        element.marcaModelo= item.marcaModelo;
+        element.periocidad = item.periocidad;
+        element.categoria = item.categoria;
+        modificado = true;
+      }
+    });
+    if (modificado == false){
+      ubicacion.items.push(item)
+    }
     this.http.put<Ubicacion>(this.baseUrl + `api/ubicacion/${id}`,ubicacion).subscribe((data) => {
         console.log(data)
     });
+  }
+  deleteItemFromUbicacion(id:String, ubicacion:Ubicacion,item:Item){
+
   }
 
   obtenerUbicacionesList(){

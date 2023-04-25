@@ -1,0 +1,52 @@
+<section fxLayoutAlign="center">
+  <mat-card>
+    <form
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap="10px"
+      #f="ngForm"
+      (ngSubmit)="loginUsuario(f)"
+    >
+      <mat-form-field>
+        <mat-label>Ingrese un E-Mail</mat-label>
+        <input
+          type="email"
+          matInput
+          placeholder="exampleMail@gmail.com"
+          name="email"
+          ngModel
+          required
+          email
+          required
+          #emailInput="ngModel"
+        />
+        <mat-error *ngIf="emailInput.hasError('required')"
+        >El E-mail no puede estar en blanco</mat-error
+      >
+      <mat-error *ngIf="!emailInput.hasError('required')"
+        >El E-mail es invalido, debe ser formato E-mail válido</mat-error
+      >
+      </mat-form-field>
+      <mat-form-field hintLabel="La contraseña no puede estar vacía y debe tener minimo 7 caracteres">
+        <mat-label>Ingrese la Contraseña</mat-label>
+        <input
+          type="password"
+          matInput
+          placeholder=""
+          ngModel
+          name="password"
+          required
+          minlength="7"
+          #passwordInput="ngModel"
+        />
+        <mat-error *ngIf="passwordInput.hasError('minlength')"
+          >La contraseña debe tener minimo 7 caracteres</mat-error
+        >
+        <mat-error *ngIf="passwordInput.hasError('required')"
+        >La contraseña no puede estar en blanco</mat-error
+      >
+      </mat-form-field>
+      <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Log In</button>
+    </form>
+  </mat-card>
+</section>

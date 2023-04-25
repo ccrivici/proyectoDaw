@@ -20,10 +20,12 @@ import { EdificioComponent } from './edificios/edificio/edificio.component';
 import { GenerarUbicacionComponent } from './ubicaciones/generar-ubicacion/generar-ubicacion.component';
 import { UbicacionesService } from './ubicaciones/ubicaciones/ubicaciones.service';
 import { PuertoService } from './puertos/puerto/puerto.service';
-/*
-continuar formulario registar item y añadir Ubicacion
+import { RegistrarComponent } from './seguridad/registrar/registrar.component';
+import { LoginComponent } from './seguridad/login/login.component';
 
-*/
+import { MenuListaComponent } from './navegacion/barra/menu-lista/menu-lista.component';
+import { SeguridadService } from './seguridad/seguridad.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +36,10 @@ continuar formulario registar item y añadir Ubicacion
     MantenimientosComponent,
     PuertoComponent,
     EdificioComponent,
-    GenerarUbicacionComponent
+    GenerarUbicacionComponent,
+    RegistrarComponent,
+    LoginComponent,
+    MenuListaComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +53,7 @@ continuar formulario registar item y añadir Ubicacion
     MatFormFieldModule,
     ReactiveFormsModule
   ],
-  providers: [UbicacionesService,PuertoService],
+  providers: [UbicacionesService,PuertoService,SeguridadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

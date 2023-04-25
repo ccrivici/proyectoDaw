@@ -1,10 +1,9 @@
 .ubicacion{
-  padding-right: 250px;
+  padding-right: 225px;
 }
 a{
   text-decoration: none;
-  color: white;
-
+  color: #fff;
 }
 a:hover,
 a:active{
@@ -21,6 +20,34 @@ a:active{
   padding: 0;
   margin: 0;
 }
+
+.contenedor {
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+  align-items: left;
+}
+
+.contenedor li {
+  min-width: 80px; /* ajustar el ancho mínimo según sea necesario */
+  vertical-align: middle;
+}
+
 mat-toolbar{
-  height:120px;
+  height:80px;
+}
+
+.navegacion-menu li {
+  text-decoration: underline;
+  text-decoration-color: white;
+  padding: 5px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+button {
+  border: none;
+  color: #fff;
+  text-decoration: none;
+  vertical-align: middle;
 }

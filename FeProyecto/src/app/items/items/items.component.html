@@ -32,7 +32,7 @@
   </ng-container>
   <ng-container matColumnDef="modificar">
     <mat-header-cell *matHeaderCellDef> modificar item</mat-header-cell>
-    <mat-cell *matCellDef="let element" ><a href="registrar?id={{element.id}}"><mat-icon>update</mat-icon></a></mat-cell>
+    <mat-cell *matCellDef="let element" ><a href="registrar?id={{element.id}}&ubicacionId={{this.idUbicacion}}"><mat-icon>update</mat-icon></a></mat-cell>
   </ng-container>
   <ng-container matColumnDef="eliminar">
     <mat-header-cell *matHeaderCellDef> eliminar item</mat-header-cell>
