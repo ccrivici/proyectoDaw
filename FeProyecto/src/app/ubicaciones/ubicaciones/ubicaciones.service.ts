@@ -52,6 +52,7 @@ export class UbicacionesService{
   updateUbicacion(id:String, ubicacion:Ubicacion,item:Item,idItem:string){
     //var itemsRes = itemsAct.filter(item=> item.id != idItem);
     var modificado = false;
+
     ubicacion.items.forEach(element => {
       if (element.id == idItem){
         console.log(`id item: ${element.id} buscando: ${idItem}`)
@@ -73,7 +74,18 @@ export class UbicacionesService{
         console.log(data)
     });
   }
-  deleteItemFromUbicacion(id:String, ubicacion:Ubicacion,item:Item){
+  deleteItemFromUbicacion(ubicacion:Ubicacion,itemId:string){
+    var contador = 0;
+    ubicacion.items.forEach(element =>{
+      if (element.id == itemId){
+        ubicacion.items.splice(contador,1);
+      }
+      contador++;
+    })
+
+    this.http.put<Ubicacion>(this.baseUrl + `api/ubicacion/${ubicacion.id}`,ubicacion).subscribe((data) => {
+      console.log(data)
+  });
 
   }
 

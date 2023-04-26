@@ -10,11 +10,9 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   private ubicacionesSubscription!: Subscription;
-  ubicacionesData : Ubicacion[] = [];
+  ubicacionesData: Ubicacion[] = [];
   constructor(private ubicacionesService: UbicacionesService) {
   }
-
-
   ngOnInit(): void {
     this.ubicacionesService.obtenerUbicacionesList();
 
@@ -23,5 +21,4 @@ export class AppComponent implements OnInit {
     });
   }
   title = 'Front-Proyecto';
-
 }

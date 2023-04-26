@@ -4,7 +4,7 @@
   <mat-form-field >
     <mat-label>Selecione denominacion</mat-label>
     <mat-select formControlName="denominacion"  name="denominacion" [(ngModel)]="selectDenominacion" [compareWith]="compareWith">
-      <mat-option *ngFor="let ubi of ubicaciones" value="ubi">
+      <mat-option *ngFor="let ubi of ubicaciones" value="{{ubi}}">
         {{ubi.nombre}}
       </mat-option>
   </mat-select>

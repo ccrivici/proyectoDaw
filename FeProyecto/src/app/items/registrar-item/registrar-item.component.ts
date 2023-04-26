@@ -87,6 +87,11 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
       this.itemService.guardarItem(item).subscribe((dato: any) => {
         //this.ubicacionId = this.selectDenominacion.id;
         //this.ubicacionNombre = this.selectDenominacion.nombre;
+        console.log(`Select denominacion ${this.selectDenominacion}
+        id: ${this.selectDenominacion.id},
+        nombre: ${this.selectDenominacion.nombre}
+
+        `)
         this.itemDef = dato;
         console.log(`id del dato ${dato.id}
           marca del dato: ${dato.marcaModelo}
@@ -218,6 +223,6 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
   obtenerUbicacionId() {
     const valores = window.location.search;
     const urlParams = new URLSearchParams(valores);
-    this.ubicacionId = urlParams.get('ubicacionId') + "";
+    this.ubicacionId = urlParams.get('Ubicacionid') + "";
   }
 }

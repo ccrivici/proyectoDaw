@@ -1,13 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, timeout } from 'rxjs';
 import { Item } from 'src/app/items/items/item.model';
 import { ItemsService } from 'src/app/items/items/items.service';
 import { Ubicacion } from 'src/app/ubicaciones/ubicaciones/ubicacion.model';
 import { UbicacionesService } from 'src/app/ubicaciones/ubicaciones/ubicaciones.service';
 import { PaginationUbicaciones } from './pagination-ubicaciones.model';
 import { PuertoService } from './puerto.service';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-puerto',
@@ -38,6 +39,7 @@ export class PuertoComponent implements OnInit, OnDestroy {
   dataSourcePuertos = new MatTableDataSource<Ubicacion>();
   puertasos: Ubicacion[] = [];
   private ubicacionesSubscription!: Subscription;
+  timeout:any = null;
 
   constructor(private itemsService: ItemsService, private ubicacionesService: UbicacionesService, private router: Router,private puertoService :PuertoService) { }
 
@@ -47,7 +49,6 @@ export class PuertoComponent implements OnInit, OnDestroy {
     //this.mostrarItems(this.idUbicacion);
     /*
         this.ubicacionesService.obtenerUbicacionesList();
-
         this.ubicacionesSubscription = this.ubicacionesService.obtenerActualListener().subscribe((ubicaciones: Ubicacion[]) => {
           this.dataSourcePuertos = new MatTableDataSource<Ubicacion>(ubicaciones);
         });
@@ -90,5 +91,36 @@ export class PuertoComponent implements OnInit, OnDestroy {
     const valores = window.location.search;
     const urlParams = new URLSearchParams(valores);
     return urlParams.get('id') + "";
+  }
+  //métodos para paginar
+  eventoPaginador(event: PageEvent): void {
+    this.puertosPorPagina = event.pageSize;
+    this.paginaActual = event.pageIndex + 1;
+    this.puertoService.obtenerPuertos(this.puertosPorPagina, this.paginaActual, this.sort, this.sortDirection, this.filterValue);
+  }
+
+  ordenarColumna(event: any) {
+    this.sort = event.active;
+    this.sortDirection = event.direction;
+    //obtenemos la lista de libros pero con el event.active capturamos la columna que tiene que ser ordenada y la direccion
+    this.puertoService.obtenerPuertos(this.puertosPorPagina, this.paginaActual, event.active, event.direction, this.filterValue);
+  }
+
+  hacerFiltro(event: any) {
+    clearTimeout(this.timeout);
+    var $this = this;
+    //esta función se ejectua cuando el usuario deje de escribir por mas de un segundo
+    this.timeout = setTimeout(() => {
+      if (event.keycode !== 13) {
+        const filterValueLocal = {
+          propiedad: 'nombre',
+          valor: event.target.value
+        };
+        $this.filterValue = filterValueLocal;
+
+        //aqui obtenemos los libros pasando como filtro la constante creada antes
+        $this.puertoService.obtenerPuertos($this.puertosPorPagina, $this.paginaActual, $this.sort, $this.sortDirection, filterValueLocal);
+      }
+    }, 1000);
   }
 }

@@ -1,0 +1,7 @@
+C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Seguridad\obj\Debug\net7.0\Servicios.api.Seguridad.csproj.AssemblyReference.cache
+C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Seguridad\obj\Debug\net7.0\Servicios.api.Seguridad.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Seguridad\obj\Debug\net7.0\Servicios.api.Seguridad.AssemblyInfoInputs.cache
+C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Seguridad\obj\Debug\net7.0\Servicios.api.Seguridad.AssemblyInfo.cs
+C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Seguridad\obj\Debug\net7.0\Servicios.api.Seguridad.csproj.CoreCompileInputs.cache
+C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Seguridad\obj\Debug\net7.0\Servicios.api.Seguridad.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Seguridad\obj\Debug\net7.0\Servicios.api.Seguridad.MvcApplicationPartsAssemblyInfo.cache

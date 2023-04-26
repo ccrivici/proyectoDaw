@@ -10,6 +10,7 @@ import { RegistrarComponent } from './seguridad/registrar/registrar.component';
 import { LoginComponent } from './seguridad/login/login.component';
 const routes: Routes = [
   { path: 'items', component: ItemsComponent },
+  { path: 'items/UbicacionId', component: ItemsComponent },
   { path: 'registrar', component: RegistrarItemComponent },
   { path: 'ubicaciones', component: UbicacionesComponent },
   { path: 'edificios', component: EdificioComponent },

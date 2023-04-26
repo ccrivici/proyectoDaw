@@ -11,10 +11,10 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./mantenimientos.component.css']
 })
 export class MantenimientosComponent implements OnInit {
-private mantenimientoSubscription!:Subscription
-mantenimientoData:Mantenimiento[]=[];
-desplegarColumnas=[""];
-dataSource = new MatTableDataSource<Mantenimiento>();
+  private mantenimientoSubscription!: Subscription
+  mantenimientoData: Mantenimiento[] = [];
+  desplegarColumnas = [""];
+  dataSource = new MatTableDataSource<Mantenimiento>();
 
 
   //paginacion
@@ -24,17 +24,17 @@ dataSource = new MatTableDataSource<Mantenimiento>();
   paginaActual = 1;
   sort = 'descripcion';
   sortDirection = 'asc';
-  filterValue:any = null;
+  filterValue: any = null;
 
 
-  constructor(private mantenimientoService:MantenimientoService) {}
+  constructor(private mantenimientoService: MantenimientoService) { }
 
   ngOnInit(): void {
     this.mantenimientoService.obtenerMantenimientos(this.mantenimientosPorPagina, this.paginaActual, this.sort, this.sortDirection, this.filterValue);
-    this.mantenimientoSubscription = this.mantenimientoService.obtenerActualListener().subscribe((pagination: PaginationMantenimientos) =>{
+    this.mantenimientoSubscription = this.mantenimientoService.obtenerActualListener().subscribe((pagination: PaginationMantenimientos) => {
       this.dataSource = new MatTableDataSource<Mantenimiento>(pagination.data);
       this.totalMantenimientos = pagination.totalRows
-    },error=>{
+    }, error => {
       console.log(error)
     });
   }

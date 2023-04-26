@@ -1,26 +1,30 @@
-
-<mat-table [dataSource]="dataSourcePuertos">
+<div fxLayoutAlign="center center">
+  <mat-form-field fxFlex="60%">
+    <input matInput type="text" (keyup)="hacerFiltro($event)" placeholder="Introduzca texto">
+  </mat-form-field>
+</div>
+<mat-table [dataSource]="dataSourcePuertos" matSort (matSortChange)="ordenarColumna($event)">
   <ng-container matColumnDef="nombre">
-    <mat-header-cell *matHeaderCellDef r>nombre</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>nombre</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.nombre }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="items">
-    <mat-header-cell *matHeaderCellDef >Ver items</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Ver items</mat-header-cell>
     <mat-cell *matCellDef="let element"><a href="/items?Ubicacionid={{element.id}}">ver items</a></mat-cell>
   </ng-container>
   <ng-container matColumnDef="añadir">
-    <mat-header-cell *matHeaderCellDef >Añadir item</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Añadir item</mat-header-cell>
     <mat-cell *matCellDef="let element"><a href="/registrar?Ubicacionid={{element.id}}">Añadir item</a></mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="mantenimientos">
-    <mat-header-cell *matHeaderCellDef >ver mantenimientos</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>ver mantenimientos</mat-header-cell>
     <mat-cell *matCellDef="let element"><a href="">ver informes</a></mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="ubicacion">
-    <mat-header-cell *matHeaderCellDef >modificar ubicacion</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header>modificar ubicacion</mat-header-cell>
     <mat-cell *matCellDef="let element"><a href="/añadirUbicacion">modificar ubicacion</a></mat-cell>
   </ng-container>
 
@@ -29,9 +33,10 @@
   </mat-header-row>
 
 </mat-table>
+<mat-paginator (page)="eventoPaginador($event)" #paginacion [pageSize]="puertosPorPagina" [pageSizeOptions]="paginaCombo" [length]="totalPuertos">
+</mat-paginator>
 
-
-<div *ngIf="mostrar == false">
+<!-- <div *ngIf="mostrar == false">
   <mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="denominacion">
       <mat-header-cell *matHeaderCellDef> Denominacion</mat-header-cell>
@@ -75,7 +80,7 @@
     <mat-header-row *matHeaderRowDef="desplegarColumnas"></mat-header-row>
     <mat-row *matRowDef="let row; columns: desplegarColumnas"></mat-row>
   </mat-table>
-</div>
+</div> -->
 
 
 

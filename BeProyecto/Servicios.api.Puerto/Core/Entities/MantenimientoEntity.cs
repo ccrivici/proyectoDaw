@@ -26,4 +26,5 @@ namespace Servicios.api.Puerto.Core.Entities
         [BsonElement("fecha")]
         public DateOnly? fecha { get; set; }
     }
+    
 }

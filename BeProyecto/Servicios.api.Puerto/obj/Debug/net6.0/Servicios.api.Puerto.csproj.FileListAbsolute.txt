@@ -166,6 +166,18 @@ C:\Users\carlos.crivicich\Desktop\BeProyecto\Servicios.api.Puerto\bin\Debug\net6
 C:\Users\carlos.crivicich\Desktop\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\carlos.crivicich\Desktop\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\carlos.crivicich\Desktop\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\Humanizer.dll
+C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\Microsoft.Build.dll
+C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\MongoDB.Bson.dll
+C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\System.Composition.Convention.dll
+C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\System.Composition.Hosting.dll
+C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\System.Composition.TypedParts.dll
+C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\ZstdSharp.dll
+C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\de\Microsoft.CodeAnalysis.VisualBasic.resources.dll
+C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\ko\Microsoft.CodeAnalysis.VisualBasic.Workspaces.resources.dll
+C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\obj\Debug\net6.0\Servicios.api.Puerto.AssemblyInfo.cs
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\appsettings.json
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\Servicios.api.Puerto.exe
@@ -180,9 +192,7 @@ C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\MsBuildPipeLogger.Logger.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\Buildalyzer.Workspaces.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\DnsClient.dll
-C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\Humanizer.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
-C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\Microsoft.Build.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\Microsoft.Build.Framework.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\Microsoft.Build.Tasks.Core.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\Microsoft.Build.Utilities.Core.dll
@@ -205,9 +215,7 @@ C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
-C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\Microsoft.OpenApi.dll
-C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\MongoDB.Bson.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\MongoDB.Driver.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\MongoDB.Driver.Core.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\MongoDB.Libmongocrypt.dll
@@ -224,13 +232,9 @@ C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\System.CodeDom.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\System.Composition.AttributedModel.dll
-C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\System.Composition.Convention.dll
-C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\System.Composition.Hosting.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\System.Composition.Runtime.dll
-C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\System.Composition.TypedParts.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\System.Text.Encodings.Web.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\System.Text.Json.dll
-C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\ZstdSharp.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\cs\Microsoft.CodeAnalysis.resources.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\de\Microsoft.CodeAnalysis.resources.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\es\Microsoft.CodeAnalysis.resources.dll
@@ -244,7 +248,6 @@ C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\tr\Microsoft.CodeAnalysis.resources.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
-C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
@@ -271,7 +274,6 @@ C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\cs\Microsoft.CodeAnalysis.VisualBasic.resources.dll
-C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\de\Microsoft.CodeAnalysis.VisualBasic.resources.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\es\Microsoft.CodeAnalysis.VisualBasic.resources.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\fr\Microsoft.CodeAnalysis.VisualBasic.resources.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\it\Microsoft.CodeAnalysis.VisualBasic.resources.dll
@@ -289,7 +291,6 @@ C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\fr\Microsoft.CodeAnalysis.VisualBasic.Workspaces.resources.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\it\Microsoft.CodeAnalysis.VisualBasic.Workspaces.resources.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\ja\Microsoft.CodeAnalysis.VisualBasic.Workspaces.resources.dll
-C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\ko\Microsoft.CodeAnalysis.VisualBasic.Workspaces.resources.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\pl\Microsoft.CodeAnalysis.VisualBasic.Workspaces.resources.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\pt-BR\Microsoft.CodeAnalysis.VisualBasic.Workspaces.resources.dll
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\bin\Debug\net6.0\ru\Microsoft.CodeAnalysis.VisualBasic.Workspaces.resources.dll
@@ -316,7 +317,6 @@ C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\obj\Debug\net6.0\Servicios.api.Puerto.csproj.AssemblyReference.cache
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\obj\Debug\net6.0\Servicios.api.Puerto.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\obj\Debug\net6.0\Servicios.api.Puerto.AssemblyInfoInputs.cache
-C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\obj\Debug\net6.0\Servicios.api.Puerto.AssemblyInfo.cs
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\obj\Debug\net6.0\Servicios.api.Puerto.csproj.CoreCompileInputs.cache
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\obj\Debug\net6.0\Servicios.api.Puerto.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\carlos.crivicich\Desktop\proyecto\proyectoDaw\BeProyecto\Servicios.api.Puerto\obj\Debug\net6.0\Servicios.api.Puerto.MvcApplicationPartsAssemblyInfo.cache
