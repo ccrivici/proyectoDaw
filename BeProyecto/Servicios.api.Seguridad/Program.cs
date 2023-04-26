@@ -75,10 +75,29 @@ builder.Services.AddCors(opt =>
 
 var app = builder.Build();
 
+
+using (var contexto = app.Services.CreateScope())
+{
+    var services = contexto.ServiceProvider;
+    //logica para llamar a la inserción
+    try
+    {//instanciamos el user manager de Usuario y el contexto
+        var userManager = services.GetRequiredService<UserManager<Usuario>>();
+        var _contextoEF = services.GetRequiredService<SeguridadContexto>();
+        SeguridadData.InsertarUsuario(_contextoEF, userManager).Wait(); ;
+    }
+    catch (Exception e)
+    {
+        var logging = services.GetRequiredService<ILogger<Program>>();
+        logging.LogError(e, "Error al registrar");
+    }
+}
+
+
 // Configure the HTTP request pipeline.
 
 app.UseAuthorization();
-
+app.UseCors("CorsRule");
 app.MapControllers();
 
 app.Run();
