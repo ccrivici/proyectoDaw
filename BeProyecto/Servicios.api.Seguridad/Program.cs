@@ -24,7 +24,7 @@ builder.Services.AddControllers();
 builder.Services.AddControllers().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<Register>());
 
 builder.Services.AddDbContext<SeguridadContexto>(options =>
-options.UseSqlServer(builder.Configuration.GetConnectionString("conexionDB")));
+options.UseSqlServer(builder.Configuration.GetConnectionString("ConexionDB")));
 /**
  * el core identity se encarga de la seguridad
  * entityFrameworkCore se encarga de hacer el vinculo entre la persistencia de c# y la bbdd sql server

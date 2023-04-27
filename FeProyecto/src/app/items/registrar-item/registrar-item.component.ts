@@ -85,8 +85,6 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
       }
       //AÑADIR ITEM
       this.itemService.guardarItem(item).subscribe((dato: any) => {
-        //this.ubicacionId = this.selectDenominacion.id;
-        //this.ubicacionNombre = this.selectDenominacion.nombre;
         console.log(`Select denominacion ${this.selectDenominacion}
         id: ${this.selectDenominacion.id},
         nombre: ${this.selectDenominacion.nombre}
@@ -176,7 +174,6 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
   esEditar() {
     if (this.id !== "null")
       console.log("id a editar dd: " + this.id)
-    this.editar = true;
     this.accion = "Editar";
     this.itemService.obtenerItemById(this.id).subscribe((dato: Item) => {
       this.itemGuardado = dato;

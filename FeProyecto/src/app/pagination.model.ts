@@ -1,5 +1,5 @@
 import { Item } from "./items/items/item.model";
-import { Mantenimiento } from "./mantenimientos/mantenimiento.model";
+import { Mantenimiento } from "./mantenimientos/mantenimientos/mantenimiento.model";
 import { Ubicacion } from "./ubicaciones/ubicaciones/ubicacion.model";
 
 export interface Pagination{

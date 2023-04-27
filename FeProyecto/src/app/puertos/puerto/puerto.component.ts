@@ -35,7 +35,7 @@ export class PuertoComponent implements OnInit, OnDestroy {
   //variable para mostrar items o mantenimientos
   mostrar = true;
   //desplegarColumnasPuerto=["Nombre","Tipo","Ver Items", "Ver Mantenimientos"];
-  desplegarColumnasPuerto = ["nombre", "items","añadir", "mantenimientos","ubicacion"];
+  desplegarColumnasPuerto = ["nombre", "items","añadir", "añadirMantenimiento","mantenimientos","ubicacion"];
   dataSourcePuertos = new MatTableDataSource<Ubicacion>();
   puertasos: Ubicacion[] = [];
   private ubicacionesSubscription!: Subscription;

@@ -22,7 +22,7 @@ import { UbicacionesService } from './ubicaciones/ubicaciones/ubicaciones.servic
 import { PuertoService } from './puertos/puerto/puerto.service';
 import { RegistrarComponent } from './seguridad/registrar/registrar.component';
 import { LoginComponent } from './seguridad/login/login.component';
-
+import { RegistrarMantenimientoComponent } from './mantenimientos/registrar-mantenimiento/registrar-mantenimiento.component';
 import { MenuListaComponent } from './navegacion/barra/menu-lista/menu-lista.component';
 import { SeguridadService } from './seguridad/seguridad.service';
 
@@ -39,7 +39,8 @@ import { SeguridadService } from './seguridad/seguridad.service';
     GenerarUbicacionComponent,
     RegistrarComponent,
     LoginComponent,
-    MenuListaComponent
+    MenuListaComponent,
+    RegistrarMantenimientoComponent
   ],
   imports: [
     BrowserModule,

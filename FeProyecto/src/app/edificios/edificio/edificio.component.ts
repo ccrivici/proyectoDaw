@@ -19,7 +19,7 @@ export class EdificioComponent {
 
   idUbicacion!: string;
   ubicacion!: any;
-  desplegarColumnasPuerto = ["nombre", "items", "añadir", "mantenimientos", "ubicacion"];
+  desplegarColumnasEdificio = ["nombre", "items", "añadir", "añadirMantenimiento","mantenimientos", "ubicacion"];
 
   dataSource = new MatTableDataSource<Item>();
   private ubicacionesSubscription!: Subscription;

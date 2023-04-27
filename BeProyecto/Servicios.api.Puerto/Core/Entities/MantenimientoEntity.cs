@@ -19,12 +19,16 @@ namespace Servicios.api.Puerto.Core.Entities
 
         [BsonElement("ubicacion_id")]
         public string? Ubicacion_id { get; set; }
+        [BsonElement("periocidad")]
+        public string? Periocidad { get; set; }
+        [BsonElement("item_id")]
+        public string? Item_id { get; set; }
 
         [BsonElement("imagenes")]
         public List<string>? Imagenes { get; set; }
 
         [BsonElement("fecha")]
-        public DateOnly? fecha { get; set; }
+        public DateTime? fecha { get; set; }
     }
     
 }

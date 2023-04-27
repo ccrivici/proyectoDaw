@@ -20,7 +20,11 @@
 
   <ng-container matColumnDef="mantenimientos">
     <mat-header-cell *matHeaderCellDef mat-sort-header>ver mantenimientos</mat-header-cell>
-    <mat-cell *matCellDef="let element"><a href="">ver informes</a></mat-cell>
+    <mat-cell *matCellDef="let element"><a href="/mantenimientos?Ubicacionid={{element.id}}">ver informes</a></mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="añadirMantenimiento">
+    <mat-header-cell *matHeaderCellDef  mat-sort-header>Añadir mantenimiento</mat-header-cell>
+    <mat-cell *matCellDef="let element"><a href="/registrarMantenimiento?Ubicacionid={{element.id}}">Añadir mantenimiento</a></mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="ubicacion">

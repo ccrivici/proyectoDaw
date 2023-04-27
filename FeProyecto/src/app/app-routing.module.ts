@@ -8,6 +8,8 @@ import { UbicacionesComponent } from './ubicaciones/ubicaciones/ubicaciones.comp
 import { GenerarUbicacionComponent } from './ubicaciones/generar-ubicacion/generar-ubicacion.component';
 import { RegistrarComponent } from './seguridad/registrar/registrar.component';
 import { LoginComponent } from './seguridad/login/login.component';
+import { MantenimientosComponent } from './mantenimientos/mantenimientos/mantenimientos.component';
+import { RegistrarMantenimientoComponent } from './mantenimientos/registrar-mantenimiento/registrar-mantenimiento.component';
 const routes: Routes = [
   { path: 'items', component: ItemsComponent },
   { path: 'items/UbicacionId', component: ItemsComponent },
@@ -18,6 +20,8 @@ const routes: Routes = [
   { path: 'añadirUbicacion', component: GenerarUbicacionComponent },
   { path: 'login', component: LoginComponent},
   { path: 'registrarse', component: RegistrarComponent},
+  { path: 'mantenimientos', component: MantenimientosComponent},
+  { path: 'registrarMantenimiento', component: RegistrarMantenimientoComponent},
 
 ];
 

@@ -22,10 +22,11 @@ namespace Servicios.api.Puerto.Controllers
             return Ok(await _mantenimientoRepository.GetAll());
         }
         [HttpPost]
-        public async Task Post(MantenimientoEntity mantenimiento)
+        public async Task<OkObjectResult> Post(MantenimientoEntity mantenimiento)
         {
-            mantenimiento.fecha = new DateOnly(2020,1,1);
+           
             await _mantenimientoRepository.InsertDocument(mantenimiento);
+            return Ok(mantenimiento);
         }
 
         [HttpGet("{id}")]

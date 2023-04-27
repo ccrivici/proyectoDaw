@@ -2,13 +2,14 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, Subject } from "rxjs";
 import { environment } from "src/environments/environment.development";
-import { Mantenimiento } from "../mantenimiento.model";
+import { Mantenimiento } from "./mantenimiento.model";
 import { PaginationMantenimientos } from "./pagination-mantenimientos";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MantenimientoService {
+
   baseUrl = environment.baseUrl;
 
   private mantenimientoList: Mantenimiento[] = [];
@@ -19,7 +20,8 @@ export class MantenimientoService {
 
   constructor(private http: HttpClient) { }
 
-  obtenerMantenimientos(mantenimientoPorPagina:number, paginaActual:number, sort:string,sortDirection:string,filterValue:any){
+
+  obtenerMantenimientosPag(mantenimientoPorPagina:number, paginaActual:number, sort:string,sortDirection:string,filterValue:any){
     const request = {
       PageSize:mantenimientoPorPagina,
       page:paginaActual,
@@ -32,6 +34,14 @@ export class MantenimientoService {
       this.mantenimientoPaginationSubject.next(this.mantenimientoPagination);
     });
   }
+  guardarMantenimiento(mantenimiento:Mantenimiento){
+    return this.http.post(this.baseUrl+'api/mantenimiento',mantenimiento);
+
+  }
+  obtenerMantenimientoById(id:string){
+    return this.http.get<Mantenimiento>(this.baseUrl + `api/mantenimiento/${id}`);
+
+  }
   obtenerActualListener() {
     return this.mantenimientoPaginationSubject.asObservable();
   }
@@ -41,5 +51,6 @@ export class MantenimientoService {
   deleteMantenimiento(id: string): Observable<any> {
     return this.http.delete(this.baseUrl + `api/mantenimiento/${id}`);
   }
+
 
 }

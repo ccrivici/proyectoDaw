@@ -12,7 +12,7 @@ using Servicios.api.Seguridad.Core.Persistence;
 namespace Servicios.api.Seguridad.Migrations
 {
     [DbContext(typeof(SeguridadContexto))]
-    [Migration("20230426114933_MigracionSeguridadInicial")]
+    [Migration("20230427064635_MigracionSeguridadInicial")]
     partial class MigracionSeguridadInicial
     {
         /// <inheritdoc />
@@ -166,6 +166,10 @@ namespace Servicios.api.Seguridad.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("Apellido")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -182,6 +186,10 @@ namespace Servicios.api.Seguridad.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)

@@ -6,6 +6,7 @@ import { Subject } from "rxjs";
 import { Pagination } from "src/app/pagination.model";
 import { PaginationUbicaciones } from "./pagination-ubicaciones.model";
 import { Item } from "src/app/items/items/item.model";
+import { Mantenimiento } from "src/app/mantenimientos/mantenimientos/mantenimiento.model";
 
 
 @Injectable({
@@ -50,7 +51,6 @@ export class UbicacionesService{
   }
   //update items
   updateUbicacion(id:String, ubicacion:Ubicacion,item:Item,idItem:string){
-    //var itemsRes = itemsAct.filter(item=> item.id != idItem);
     var modificado = false;
 
     ubicacion.items.forEach(element => {
@@ -74,6 +74,32 @@ export class UbicacionesService{
         console.log(data)
     });
   }
+  updateMantenimiento(id:String, ubicacion:Ubicacion,mantenimiento:Mantenimiento,idMantenimiento:string){
+    var modificado = false;
+
+    ubicacion.mantenimientos.forEach(element => {
+      if (element.id == idMantenimiento){
+        console.log(`id item: ${element.id} buscando: ${idMantenimiento}`)
+        element.id = idMantenimiento;
+        element.descripcion = mantenimiento.descripcion;
+        element.estado = mantenimiento.estado;
+        element.corregido = mantenimiento.corregido;
+        element.observaciones = mantenimiento.observaciones;
+        element.imagenes= mantenimiento.imagenes;
+        element.periocidad = mantenimiento.periocidad;
+        element.fecha = mantenimiento.fecha;
+        element.item_id = mantenimiento.item_id;
+        element.ubicacion_id = mantenimiento.ubicacion_id;
+        modificado = true;
+      }
+    });
+    if (modificado == false){
+      ubicacion.mantenimientos.push(mantenimiento)
+    }
+    this.http.put<Ubicacion>(this.baseUrl + `api/ubicacion/${id}`,ubicacion).subscribe((data) => {
+        console.log(data)
+    });
+  }
   deleteItemFromUbicacion(ubicacion:Ubicacion,itemId:string){
     var contador = 0;
     ubicacion.items.forEach(element =>{
@@ -87,6 +113,20 @@ export class UbicacionesService{
       console.log(data)
   });
 
+  }
+
+  deleteMantenimientoFromUbicacion(ubicacion:Ubicacion,mantenimientoId:string){
+    var contador = 0;
+    ubicacion.mantenimientos.forEach(element =>{
+      if (element.id == mantenimientoId){
+        ubicacion.mantenimientos.splice(contador,1);
+      }
+      contador++;
+    })
+
+    this.http.put<Ubicacion>(this.baseUrl + `api/ubicacion/${ubicacion.id}`,ubicacion).subscribe((data) => {
+      console.log(data)
+  });
   }
 
   obtenerUbicacionesList(){

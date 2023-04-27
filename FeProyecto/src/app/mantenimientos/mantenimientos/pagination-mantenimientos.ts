@@ -1,4 +1,4 @@
-import { Mantenimiento } from "../mantenimiento.model";
+import { Mantenimiento } from "./mantenimiento.model";
 
 
 export interface PaginationMantenimientos{

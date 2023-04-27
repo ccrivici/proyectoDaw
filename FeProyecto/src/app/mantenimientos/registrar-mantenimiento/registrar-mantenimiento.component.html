@@ -1,0 +1,58 @@
+<section fxLayoutAlign="center">
+  <mat-card>
+    <form [formGroup]="mantenimientoForm" (ngSubmit)="registrarEditarMantenimiento()"
+      fxLayout="column"
+      fxLayoutAlign="center center"
+      fxLayoutGap="10px"
+      #f="ngForm"
+    >
+      <mat-form-field>
+        <mat-label>Seleccione de Elemento</mat-label>
+        <mat-select formControlName="elementos" name="elementos" [(ngModel)]="selectItem">
+          <mat-option *ngFor="let item of items" value="{{item.id}}">{{item.marcaModelo}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Descripcion Mantenimiento</mat-label>
+        <input type="text" formControlName="descripcion" matInput name="descripcionMantenimiento" ngModel  required/>
+
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Seleccione el Estado</mat-label>
+        <mat-select formControlName="estado" name="estado">
+          <mat-option value="Favorable">Favorable</mat-option>
+          <mat-option value="Defecto Leve">Defecto Leve</mat-option>
+          <mat-option value="Defecto Grave">Defecto Grave</mat-option>
+          <mat-option value="Defecto Crítico">Defecto Crítico</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Periodicidad</mat-label>
+        <input matInput type="text"  formControlName="periocidad" name="periodicidad" readonly>
+      </mat-form-field>
+
+
+
+
+      <mat-form-field >
+        <mat-label>Esta corregido o no</mat-label>
+        <mat-select formControlName="corregido"  [(ngModel)]="selectCorregido" name="corregido" >
+          <mat-option value="true" >Si</mat-option>
+          <mat-option value="false" >No</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field style="width: 100%">
+        <input matInput formControlName="fecha" placeholder="Seleccionar fecha del Mantenimiento" [matDatepicker]="picker" name="fechaMantenimiento"/>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Observaciones</mat-label>
+        <input type="text" formControlName="observaciones" matInput name="observacionMantenimiento" ngModel />
+      </mat-form-field>
+      <button type="submit" mat-raised-button color="primary" >Añadir</button>
+    </form>
+  </mat-card>
+</section>

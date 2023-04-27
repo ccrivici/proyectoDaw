@@ -20,7 +20,6 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 export class ItemsComponent implements OnInit, OnDestroy{
   desplegarColumnas = ["denominacion",'ubicacion', 'conjuntoEquipo', 'equipo', 'marcaModelo', 'periocidad', 'categoria','modificar','eliminar'];
   dataSource = new MatTableDataSource<Item>();
-  private itemsSubscription!: Subscription;
   idUbicacion!:any;
   ubicacion!:any;
   ubicacionId!: string;
@@ -29,7 +28,7 @@ export class ItemsComponent implements OnInit, OnDestroy{
   constructor(private itemsService: ItemsService,private ubicacionesService:UbicacionesService,private router:Router,private route :ActivatedRoute) {}
 
   ngOnDestroy(): void {
-    //this.itemsSubscription.unsubscribe();
+
   }
   ngOnInit(): void {
     var idDef = this.route.snapshot.paramMap.get('UbicacionId');

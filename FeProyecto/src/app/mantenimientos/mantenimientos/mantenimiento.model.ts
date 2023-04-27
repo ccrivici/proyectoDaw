@@ -5,6 +5,8 @@ export interface Mantenimiento{
   corregido:boolean;
   observaciones:string;
   imagenes: string[];
-  fecha?: Date;
+  periocidad: string;
+  fecha?: Date | undefined;
+  item_id:string;
   ubicacion_id:string;
 }
