@@ -18,23 +18,23 @@ export class ItemsService{
   constructor(private http: HttpClient) {}
 
   obtenerItems() {
-    this.http.get<Item[]>(this.baseUrl + 'api/item').subscribe((data) => {
+    this.http.get<Item[]>(this.baseUrl + '/item').subscribe((data) => {
       this.itemsLista = data;
       this.itemsSubject.next([...this.itemsLista]);
     });
   }
   obtenerItemById(id:string){
-    return this.http.get<Item>(this.baseUrl + `api/item/${id}`);
+    return this.http.get<Item>(this.baseUrl + `/item/${id}`);
 
   }
   obtenerActualListener() {
     return this.itemsSubject.asObservable();
   }
   updateItem(id:string,item: Item):Observable<any>{
-    return this.http.put(this.baseUrl+`api/item/${id}`,item);
+    return this.http.put(this.baseUrl+`/item/${id}`,item);
   }
   guardarItem(item:Item){
-    return this.http.post(this.baseUrl+'api/item',item);
+    return this.http.post(this.baseUrl+'/item',item);
       //permite actualizar y devolver la lista de items actualizada al grid de items
 
       this.itemsSubject.next(this.itemsLista);
@@ -54,6 +54,6 @@ export class ItemsService{
     return this.itemsSubject.asObservable();
   }
   deleteItem(id: string):Observable<any>{
-    return this.http.delete(this.baseUrl+`api/item/${id}`);
+    return this.http.delete(this.baseUrl+`/item/${id}`);
   }
 }

@@ -18,7 +18,7 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
   selectCorregido!: string;
 
   selected = "true"
-
+  selectedItem:any ='';
 
 
   ubicacion!: Ubicacion;
@@ -63,7 +63,7 @@ corregido:string |undefined = undefined;
         corregido: this.mantenimientoForm.get('corregido')?.value,
         observaciones: this.mantenimientoForm.get('observaciones')?.value,
         imagenes: [""],
-        periocidad: this.mantenimientoForm.get('periocidad')?.value,
+        periocidad:this.mantenimientoForm.get('periocidad')?.value,
         fecha: this.mantenimientoForm.get('fecha')?.value,
         item_id: this.mantenimientoForm.get('elementos')?.value,
         ubicacion_id: this.ubicacionId
@@ -72,6 +72,15 @@ corregido:string |undefined = undefined;
       this.selectCorregido == "true" ? MANTENIMIENTO.corregido = true : MANTENIMIENTO.corregido = false;
       console.log("ide del item mantenido: " + MANTENIMIENTO.item_id)
       console.log("fecha: "+ MANTENIMIENTO.fecha)
+
+      //OBTENER ITEM DEL MANTENIMIENTO para asignarle la periocidad
+      this.itemsService.obtenerItemById(MANTENIMIENTO.item_id).subscribe(item =>{
+        console.log("periocidad: "+item.periocidad)
+        this.itemDef = item;
+      })
+
+      //MANTENIMIENTO.periocidad = this.itemDef.periocidad;
+
       //AÑADIR MANTENIMIENTO
       this.mantenimientoService.guardarMantenimiento(MANTENIMIENTO).subscribe((dato: any) => {
         console.log(`
@@ -83,6 +92,12 @@ corregido:string |undefined = undefined;
           descr del mantenimiento: ${dato.descripcion}
         `)
         MANTENIMIENTO.id = dato.id;
+        //AÑADIR PERIOCIDAD
+        this.mantenimientoDef.periocidad = this.itemDef.periocidad;
+
+        this.mantenimientoService.updateMantenimiento(MANTENIMIENTO.id,this.mantenimientoDef).subscribe(dato=>{
+
+        })
 
         this.ubicacionesService.obtenerUbicacion(this.ubicacionId).subscribe((ubicacion: Ubicacion) => {
           this.ubicacion = ubicacion;
@@ -112,10 +127,13 @@ corregido:string |undefined = undefined;
         item_id: this.mantenimientoForm.get('elementos')?.value,
         ubicacion_id: this.ubicacionId
       }
-      /* var year = (Number) (MANTENIMIENTO.fecha?.getFullYear());
-      var month =(Number) (MANTENIMIENTO.fecha?.getMonth());
+      /* var year = (MANTENIMIENTO.fecha?.getFullYear());
+      var month = (MANTENIMIENTO.fecha?.getMonth());
       var day= MANTENIMIENTO.fecha?.getDate();
-      MANTENIMIENTO.fecha = new Date(year,month,day) */
+
+      //MANTENIMIENTO.fecha = new Date(year,month,day)
+      console.log("fecha: "+new Date(year,month,day)) */
+
       this.selectCorregido == "true" ? MANTENIMIENTO.corregido = true : MANTENIMIENTO.corregido = false;
 
       this.mantenimientoService.updateMantenimiento(this.id, MANTENIMIENTO).subscribe(data => {
@@ -135,7 +153,14 @@ corregido:string |undefined = undefined;
 
   }
 
+  onSelected(item:Item){
+    console.log("item: "+item.id)
+    this.selectItem = item;
+    this.mantenimientoForm.patchValue({
+      periocidad: item.periocidad,
 
+    })
+  }
 
 
 
@@ -171,10 +196,6 @@ corregido:string |undefined = undefined;
 
   }
 
-
-
-
-
   esEditar() {
     console.log("id a editar de: " + this.id)
     this.accion = "Editar";
@@ -185,19 +206,20 @@ corregido:string |undefined = undefined;
       estado: ${this.mantenimientoGuardado.estado}
       observaciones: ${this.mantenimientoGuardado.observaciones}
         `);
-
-        (this.mantenimientoGuardado.corregido == true)? this.corregido= "Si" : this.corregido= "No" ;
+        //comprobamso si el item a mantener está coregido o no y lo asignamos al formulario
+        (this.mantenimientoGuardado.corregido == true)? this.corregido= "true" : this.corregido= "false" ;
         console.log("estado de correccion: "+this.mantenimientoGuardado.corregido+ " corregido: "+this.corregido)
 
       this.itemsService.obtenerItemById(this.mantenimientoGuardado.item_id).subscribe(item => {
         console.log("item del item a modificar manetnimiento  "+item.id)
+        this.itemDef = item;
         this.items[0] = item;
         this.mantenimientoForm.patchValue({
           elementos: item.id,
-          periocidad: this.mantenimientoGuardado.periocidad,
+          periocidad: item.periocidad,
           descripcion: this.mantenimientoGuardado.descripcion,
           estado: this.mantenimientoGuardado.estado,
-          corregido: this.mantenimientoGuardado.corregido,
+          corregido: this.corregido,
           fecha: this.mantenimientoGuardado.fecha,
           observaciones: this.mantenimientoGuardado.observaciones,
         })

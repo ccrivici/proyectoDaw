@@ -21,7 +21,7 @@ export class EdificioService{
       sortDirection,
       filterValue
     }
-    this.http.post<PaginationUbicaciones>(this.baseUrl + 'api/ubicacion/pagination', request).subscribe((data) => {
+    this.http.post<PaginationUbicaciones>(this.baseUrl + '/ubicacion/pagination', request).subscribe((data) => {
       this.edificiosPagination = data;
       this.edificioSubjectPagination.next(this.edificiosPagination);
     });

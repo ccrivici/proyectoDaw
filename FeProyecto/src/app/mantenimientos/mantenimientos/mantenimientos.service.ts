@@ -35,21 +35,21 @@ export class MantenimientoService {
     });
   }
   guardarMantenimiento(mantenimiento:Mantenimiento){
-    return this.http.post(this.baseUrl+'api/mantenimiento',mantenimiento);
+    return this.http.post(this.baseUrl+'/mantenimiento',mantenimiento);
 
   }
   obtenerMantenimientoById(id:string){
-    return this.http.get<Mantenimiento>(this.baseUrl + `api/mantenimiento/${id}`);
+    return this.http.get<Mantenimiento>(this.baseUrl + `/mantenimiento/${id}`);
 
   }
   obtenerActualListener() {
     return this.mantenimientoPaginationSubject.asObservable();
   }
   updateMantenimiento(id: string, mantenimiento: Mantenimiento): Observable<any> {
-    return this.http.put(this.baseUrl + `api/mantenimiento/${id}`, mantenimiento);
+    return this.http.put(this.baseUrl + `/mantenimiento/${id}`, mantenimiento);
   }
   deleteMantenimiento(id: string): Observable<any> {
-    return this.http.delete(this.baseUrl + `api/mantenimiento/${id}`);
+    return this.http.delete(this.baseUrl + `/mantenimiento/${id}`);
   }
 
 

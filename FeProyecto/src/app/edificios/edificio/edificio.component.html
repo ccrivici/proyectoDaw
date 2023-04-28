@@ -26,6 +26,10 @@
     <mat-header-cell *matHeaderCellDef  mat-sort-header>Añadir mantenimiento</mat-header-cell>
     <mat-cell *matCellDef="let element"><a href="/registrarMantenimiento?Ubicacionid={{element.id}}">Añadir mantenimiento</a></mat-cell>
   </ng-container>
+  <ng-container matColumnDef="generarPdf">
+    <mat-header-cell *matHeaderCellDef  mat-sort-header>Generar Pdf mantenimientos</mat-header-cell>
+    <mat-cell *matCellDef="let element"><a (click)="generarPdf(element.id)">Añadir mantenimiento</a></mat-cell>
+  </ng-container>
 
   <ng-container matColumnDef="ubicacion">
     <mat-header-cell *matHeaderCellDef  mat-sort-header>modificar ubicacion</mat-header-cell>

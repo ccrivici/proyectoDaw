@@ -16,7 +16,7 @@ import { Ubicacion } from 'src/app/ubicaciones/ubicaciones/ubicacion.model';
 export class MantenimientosComponent implements OnInit {
   private mantenimientoSubscription!: Subscription
   mantenimientoData: Mantenimiento[] = [];
-  desplegarColumnas = ["descripcion","estado","corregido","observaciones","fecha","imagenes","modificar","eliminar"];
+  desplegarColumnas = ["descripcion","estado","corregido","observaciones","periocidad","fecha","imagenes","modificar","eliminar"];
   dataSource!: Mantenimiento[];
 
   //paginacion

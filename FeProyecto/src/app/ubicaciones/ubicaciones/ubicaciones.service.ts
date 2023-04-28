@@ -30,7 +30,7 @@ export class UbicacionesService{
       sortDirection,
       filterValue
     }
-    this.http.post<PaginationUbicaciones[]>(this.baseUrl + 'api/ubicacion/pagination',request).subscribe((data) => {
+    this.http.post<PaginationUbicaciones[]>(this.baseUrl + '/ubicacion/pagination',request).subscribe((data) => {
       this.ubicacionesPagination = data;
       this.ubicacionSubjectPagination.next(this.ubicacionesPagination);
     });
@@ -43,7 +43,7 @@ export class UbicacionesService{
   }
   //obtener ubicacion por id!!!!
   obtenerUbicacion(id:string){
-   return this.http.get<Ubicacion>(this.baseUrl + `api/ubicacion/${id}`);
+   return this.http.get<Ubicacion>(this.baseUrl + `/ubicacion/${id}`);
 
   }
   obtenerActualListenerDef(){
@@ -70,7 +70,7 @@ export class UbicacionesService{
     if (modificado == false){
       ubicacion.items.push(item)
     }
-    this.http.put<Ubicacion>(this.baseUrl + `api/ubicacion/${id}`,ubicacion).subscribe((data) => {
+    this.http.put<Ubicacion>(this.baseUrl + `/ubicacion/${id}`,ubicacion).subscribe((data) => {
         console.log(data)
     });
   }
@@ -96,7 +96,7 @@ export class UbicacionesService{
     if (modificado == false){
       ubicacion.mantenimientos.push(mantenimiento)
     }
-    this.http.put<Ubicacion>(this.baseUrl + `api/ubicacion/${id}`,ubicacion).subscribe((data) => {
+    this.http.put<Ubicacion>(this.baseUrl + `/ubicacion/${id}`,ubicacion).subscribe((data) => {
         console.log(data)
     });
   }
@@ -109,7 +109,7 @@ export class UbicacionesService{
       contador++;
     })
 
-    this.http.put<Ubicacion>(this.baseUrl + `api/ubicacion/${ubicacion.id}`,ubicacion).subscribe((data) => {
+    this.http.put<Ubicacion>(this.baseUrl + `/ubicacion/${ubicacion.id}`,ubicacion).subscribe((data) => {
       console.log(data)
   });
 
@@ -124,13 +124,13 @@ export class UbicacionesService{
       contador++;
     })
 
-    this.http.put<Ubicacion>(this.baseUrl + `api/ubicacion/${ubicacion.id}`,ubicacion).subscribe((data) => {
+    this.http.put<Ubicacion>(this.baseUrl + `/ubicacion/${ubicacion.id}`,ubicacion).subscribe((data) => {
       console.log(data)
   });
   }
 
   obtenerUbicacionesList(){
-    return this.http.get<Ubicacion[]>(this.baseUrl + 'api/ubicacion');
+    return this.http.get<Ubicacion[]>(this.baseUrl + '/ubicacion');
   }
 
   /*obtenerUbicacionesList(){

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { SeguridadService } from '../seguridad.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -9,9 +10,10 @@ import { SeguridadService } from '../seguridad.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private seguridadService: SeguridadService) { }
+  constructor(private seguridadService: SeguridadService,private http:HttpClient) { }
 
   ngOnInit(): void {
+
   }
 
   loginUsuario(form: NgForm){

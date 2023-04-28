@@ -10,23 +10,29 @@ import { RegistrarComponent } from './seguridad/registrar/registrar.component';
 import { LoginComponent } from './seguridad/login/login.component';
 import { MantenimientosComponent } from './mantenimientos/mantenimientos/mantenimientos.component';
 import { RegistrarMantenimientoComponent } from './mantenimientos/registrar-mantenimiento/registrar-mantenimiento.component';
+import { SeguridadRouter } from './seguridad/seguridad.router';
+import { InicioComponent } from './inicio/inicio/inicio.component';
+import { PdfComponent } from './pdf/pdf.component';
 const routes: Routes = [
-  { path: 'items', component: ItemsComponent },
-  { path: 'items/UbicacionId', component: ItemsComponent },
-  { path: 'registrar', component: RegistrarItemComponent },
-  { path: 'ubicaciones', component: UbicacionesComponent },
-  { path: 'edificios', component: EdificioComponent },
-  { path: 'puertos', component: PuertoComponent },
+  { path: 'items', component: ItemsComponent, canActivate: [SeguridadRouter] },
+  { path: 'items/UbicacionId', component: ItemsComponent, canActivate: [SeguridadRouter] },
+  { path: 'registrar', component: RegistrarItemComponent, canActivate: [SeguridadRouter] },
+  { path: 'ubicaciones', component: UbicacionesComponent , canActivate: [SeguridadRouter]},
+  { path: 'edificios', component: EdificioComponent, canActivate: [SeguridadRouter] },
+  { path: 'puertos', component: PuertoComponent, canActivate: [SeguridadRouter] },
   { path: 'añadirUbicacion', component: GenerarUbicacionComponent },
   { path: 'login', component: LoginComponent},
   { path: 'registrarse', component: RegistrarComponent},
-  { path: 'mantenimientos', component: MantenimientosComponent},
-  { path: 'registrarMantenimiento', component: RegistrarMantenimientoComponent},
+  { path: 'mantenimientos', component: MantenimientosComponent, canActivate: [SeguridadRouter]},
+  { path: 'registrarMantenimiento', component: RegistrarMantenimientoComponent, canActivate: [SeguridadRouter]},
+  { path: '', component: InicioComponent, canActivate: [SeguridadRouter] },
+  { path: 'pdf', component: PdfComponent},
 
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers:[SeguridadRouter]
 })
 export class AppRoutingModule { }

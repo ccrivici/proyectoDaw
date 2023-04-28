@@ -16,13 +16,22 @@ export class RegistrarComponent implements OnInit {
 
   registrarUsuario(form : NgForm){
     console.log(form);
+    console.log(`
+      email: ${form.value.email},
+      password: ${form.value.password},
+      nombre: ${form.value.nombre},
+      apellidos: ${form.value.apellidos},
+      username: ${form.value.usuario}
+
+    `)
     this.seguridadService.registrarUsuario({
       email: form.value.email,
       password: form.value.password,
       nombre: form.value.nombre,
-      apellidos: form.value.apellidos,
-      username: form.value.username,
-      usuarioID: ''
+      apellido: form.value.apellido,
+      username: form.value.usuario,
+      usuarioID: '',
+      token:''
     })
   }
 

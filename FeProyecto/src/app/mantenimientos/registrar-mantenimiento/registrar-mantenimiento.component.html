@@ -8,7 +8,7 @@
     >
       <mat-form-field>
         <mat-label>Seleccione de Elemento</mat-label>
-        <mat-select formControlName="elementos" name="elementos" [(ngModel)]="selectItem">
+        <mat-select formControlName="elementos" (onChange)="onSelected(item)" name="elementos" [(ngModel)]="selectItem">
           <mat-option *ngFor="let item of items" value="{{item.id}}">{{item.marcaModelo}}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -52,6 +52,7 @@
         <mat-label>Observaciones</mat-label>
         <input type="text" formControlName="observaciones" matInput name="observacionMantenimiento" ngModel />
       </mat-form-field>
+
       <button type="submit" mat-raised-button color="primary" >Añadir</button>
     </form>
   </mat-card>

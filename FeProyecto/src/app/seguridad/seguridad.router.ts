@@ -6,19 +6,16 @@ import { Observable } from "rxjs";
 @Injectable()
 export class SeguridadRouter implements CanActivate{
 
-  /**
-   *
-   */
-  constructor(private seguridadService: SeguridadService, private router: Router) {
+  constructor(private seguridadService: SeguridadService, private router: Router) {}
 
-  }
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+
     if (this.seguridadService.onSesion()) {
       return true;
     }else{
-      this.router.navigate(['/login'])
+      this.router.navigate(['/login']);
+      return false;
     }
-    throw new Error("Method not implemented.");
   }
   }
 

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wXQtTZRb4cmtJY8/IvzdeUzbP4jruPi/BRnQLUw7ehYLayvdshWkqG85dVt5OCMvQqbMDoBiFLSOapbu3OjGuw==",
+  "dgSpecHash": "d2DkuRae44vS1WN8Ud8G4zZnMCZpPW4fC9rqE708Dt6J3OwiLDyRIlJk10u16xiipEjGlZPYZg9WcaoFym88mQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\carlos.crivicich\\Desktop\\proyecto\\BeProyecto\\Servicios.api.Puerto\\Servicios.api.Puerto.csproj",
+  "projectFilePath": "C:\\Users\\carlos.crivicich\\Desktop\\proyecto\\proyectoDaw\\BeProyecto\\Servicios.api.Puerto\\Servicios.api.Puerto.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\carlos.crivicich\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\carlos.crivicich\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",

@@ -18,6 +18,10 @@
     <mat-header-cell *matHeaderCellDef> observaciones</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.observaciones }}</mat-cell>
   </ng-container>
+  <ng-container matColumnDef="periocidad">
+    <mat-header-cell *matHeaderCellDef> Periocidad</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ element.periocidad }}</mat-cell>
+  </ng-container>
   <ng-container matColumnDef="fecha">
     <mat-header-cell *matHeaderCellDef> fecha</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.fecha }}</mat-cell>

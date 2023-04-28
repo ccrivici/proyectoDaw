@@ -28,7 +28,7 @@ export class PuertoService {
       sortDirection,
       filterValue
     }
-    this.http.post<PaginationUbicaciones>(this.baseUrl + 'api/ubicacion/pagination', request).subscribe((data) => {
+    this.http.post<PaginationUbicaciones>(this.baseUrl + '/ubicacion/pagination', request).subscribe((data) => {
       this.puertosPagination = data;
       this.puertoSubjectPagination.next(this.puertosPagination);
     });

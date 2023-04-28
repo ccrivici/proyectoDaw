@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { BarraComponent } from './navegacion/barra/barra.component';
-import {  HttpClientModule } from '@angular/common/http';
+import {  HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ItemsComponent } from './items/items/items.component';
 import { MatInputModule } from '@angular/material/input';
@@ -25,6 +25,9 @@ import { LoginComponent } from './seguridad/login/login.component';
 import { RegistrarMantenimientoComponent } from './mantenimientos/registrar-mantenimiento/registrar-mantenimiento.component';
 import { MenuListaComponent } from './navegacion/barra/menu-lista/menu-lista.component';
 import { SeguridadService } from './seguridad/seguridad.service';
+import { SeguridadInterceptor } from './seguridad/seguridad-interceptor';
+import { InicioComponent } from './inicio/inicio/inicio.component';
+import { PdfComponent } from './pdf/pdf.component';
 
 @NgModule({
   declarations: [
@@ -40,8 +43,10 @@ import { SeguridadService } from './seguridad/seguridad.service';
     RegistrarComponent,
     LoginComponent,
     MenuListaComponent,
-    RegistrarMantenimientoComponent
-  ],
+    RegistrarMantenimientoComponent,
+    InicioComponent,
+    PdfComponent
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -54,7 +59,7 @@ import { SeguridadService } from './seguridad/seguridad.service';
     MatFormFieldModule,
     ReactiveFormsModule
   ],
-  providers: [UbicacionesService,PuertoService,SeguridadService],
+  providers: [UbicacionesService,PuertoService,SeguridadService, { provide: HTTP_INTERCEPTORS, useClass: SeguridadInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

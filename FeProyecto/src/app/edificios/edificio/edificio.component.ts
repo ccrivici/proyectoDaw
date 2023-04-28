@@ -9,6 +9,7 @@ import { EdificioService } from './edificio.service';
 import { Subscription } from 'rxjs';
 import { PaginationUbicaciones } from 'src/app/ubicaciones/ubicaciones/pagination-ubicaciones.model';
 import { PageEvent } from '@angular/material/paginator';
+import { PdfComponent } from 'src/app/pdf/pdf.component';
 
 @Component({
   selector: 'app-edificio',
@@ -109,5 +110,9 @@ export class EdificioComponent {
     this.sortDirection = event.direction;
     //obtenemos la lista de libros pero con el event.active capturamos la columna que tiene que ser ordenada y la direccion
     this.edificioService.obtenerEdificios(this.edificiosPorPagina, this.paginaActual, event.active, event.direction, this.filterValue);
+  }
+
+  generarPdf(ubiId){
+
   }
 }
