@@ -19,17 +19,17 @@
   </ng-container>
 
   <ng-container matColumnDef="mantenimientos">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>ver mantenimientos</mat-header-cell>
-    <mat-cell *matCellDef="let element"><a href="/mantenimientos?Ubicacionid={{element.id}}">ver informes</a></mat-cell>
+    <mat-header-cell *matHeaderCellDef  mat-sort-header>ver mantenimientos</mat-header-cell>
+    <mat-cell *matCellDef="let element"><a href="/mantenimientos?Ubicacionid={{element.id}}">ver mantenimiento</a></mat-cell>
   </ng-container>
   <ng-container matColumnDef="añadirMantenimiento">
     <mat-header-cell *matHeaderCellDef  mat-sort-header>Añadir mantenimiento</mat-header-cell>
     <mat-cell *matCellDef="let element"><a href="/registrarMantenimiento?Ubicacionid={{element.id}}">Añadir mantenimiento</a></mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="ubicacion">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>modificar ubicacion</mat-header-cell>
-    <mat-cell *matCellDef="let element"><a href="/añadirUbicacion">modificar ubicacion</a></mat-cell>
+  <ng-container matColumnDef="generarPdf">
+    <mat-header-cell *matHeaderCellDef  mat-sort-header>Generar Pdf mantenimientos</mat-header-cell>
+    <mat-cell *matCellDef="let element"><a (click)="crearPdf(element.id)">Generar Pdf</a></mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="desplegarColumnasPuerto">
@@ -39,54 +39,3 @@
 </mat-table>
 <mat-paginator (page)="eventoPaginador($event)" #paginacion [pageSize]="puertosPorPagina" [pageSizeOptions]="paginaCombo" [length]="totalPuertos">
 </mat-paginator>
-
-<!-- <div *ngIf="mostrar == false">
-  <mat-table [dataSource]="dataSource">
-    <ng-container matColumnDef="denominacion">
-      <mat-header-cell *matHeaderCellDef> Denominacion</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.denominacion }}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="ubicacion">
-      <mat-header-cell *matHeaderCellDef> Ubicacion</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.ubicacion }}</mat-cell>
-    </ng-container>
-
-    <ng-container matColumnDef="conjuntoEquipo">
-      <mat-header-cell *matHeaderCellDef> conjuntoEquipo</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.conjuntoEquipo }}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="equipo">
-      <mat-header-cell *matHeaderCellDef> Equipo</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.equipo }}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="marcaModelo">
-      <mat-header-cell *matHeaderCellDef> marcaModelo</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.marcaModelo }}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="periocidad">
-      <mat-header-cell *matHeaderCellDef> periocidad</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.periocidad }}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="categoria">
-      <mat-header-cell *matHeaderCellDef> categoria</mat-header-cell>
-      <mat-cell *matCellDef="let element">{{ element.categoria }}</mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="modificar">
-      <mat-header-cell *matHeaderCellDef> modificar item</mat-header-cell>
-      <mat-cell *matCellDef="let element" ><a href="registrar?id={{element.id}}"><mat-icon>update</mat-icon></a></mat-cell>
-    </ng-container>
-    <ng-container matColumnDef="eliminar">
-      <mat-header-cell *matHeaderCellDef> eliminar item</mat-header-cell>
-      <mat-cell *matCellDef="let element"><a (click)="eliminar(element.id)"><mat-icon>delete</mat-icon></a></mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="desplegarColumnas"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: desplegarColumnas"></mat-row>
-  </mat-table>
-</div> -->
-
-
-
-
-

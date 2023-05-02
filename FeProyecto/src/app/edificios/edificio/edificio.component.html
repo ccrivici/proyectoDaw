@@ -28,7 +28,7 @@
   </ng-container>
   <ng-container matColumnDef="generarPdf">
     <mat-header-cell *matHeaderCellDef  mat-sort-header>Generar Pdf mantenimientos</mat-header-cell>
-    <mat-cell *matCellDef="let element"><a (click)="generarPdf(element.id)">Añadir mantenimiento</a></mat-cell>
+    <mat-cell *matCellDef="let element"><a (click)="crearPdf(element.id)">Generar Pdf</a></mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="ubicacion">

@@ -76,8 +76,8 @@ export class PdfComponent implements OnInit {
           this.tabla2(this.mantenimientos, ['descripcion', 'periocidad', 'estado', 'corregido', 'observaciones','fecha'])
       ]
     }
-
     const pdf = pdfMake.createPdf(pdfDefinition);
+
     pdf.open();
   }
 

@@ -52,5 +52,4 @@ export class MantenimientoService {
     return this.http.delete(this.baseUrl + `/mantenimiento/${id}`);
   }
 
-
 }

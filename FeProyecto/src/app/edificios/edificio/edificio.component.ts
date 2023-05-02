@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Item } from 'src/app/items/items/item.model';
@@ -6,21 +6,26 @@ import { ItemsService } from 'src/app/items/items/items.service';
 import { Ubicacion } from 'src/app/ubicaciones/ubicaciones/ubicacion.model';
 import { UbicacionesService } from 'src/app/ubicaciones/ubicaciones/ubicaciones.service';
 import { EdificioService } from './edificio.service';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { PaginationUbicaciones } from 'src/app/ubicaciones/ubicaciones/pagination-ubicaciones.model';
-import { PageEvent } from '@angular/material/paginator';
-import { PdfComponent } from 'src/app/pdf/pdf.component';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-edificio',
   templateUrl: './edificio.component.html',
   styleUrls: ['./edificio.component.css']
 })
-export class EdificioComponent {
+export class EdificioComponent implements AfterViewInit {
 
   idUbicacion!: string;
   ubicacion!: any;
-  desplegarColumnasEdificio = ["nombre", "items", "añadir", "añadirMantenimiento","mantenimientos", "ubicacion"];
+  desplegarColumnasEdificio = ["nombre", "items", "añadir", "añadirMantenimiento", "mantenimientos", "generarPdf"];
+  @ViewChild(MatPaginator) paginacion!: MatPaginator;
+  @ViewChild(MatSort) ordenamiento!: MatSort;
 
   dataSource = new MatTableDataSource<Item>();
   private ubicacionesSubscription!: Subscription;
@@ -39,19 +44,27 @@ export class EdificioComponent {
   }
   timeout: any = null;
 
+  //variable para guardar ubicacion en la que guardar el pdf
+  ubicacionDef: any
+  mantenimientos: any[] = [];
+
   constructor(private itemsService: ItemsService, private ubicacionesService: UbicacionesService, private router: Router, private edificioService: EdificioService) { }
 
   ngOnInit(): void {
-
     this.idUbicacion = this.obtenerId();
     this.edificioService.obtenerEdificios(this.edificiosPorPagina, this.paginaActual, this.sort, this.sortDirection, this.filterValue);
     this.ubicacionesSubscription = this.edificioService.obtenerActualListenerPag().subscribe((pagination: PaginationUbicaciones) => {
       this.dataSourceEdificios = new MatTableDataSource<Ubicacion>(pagination.data);
+      this.totalEdificios = pagination.totalRows
     });
-
   }
+
   ngOnDestroy() {
     this.ubicacionesSubscription.unsubscribe();
+  }
+  ngAfterViewInit() {
+    this.dataSource.sort = this.ordenamiento;
+    this.dataSourceEdificios.paginator = this.paginacion;
   }
 
   mostrarItems(id: string) {
@@ -75,6 +88,7 @@ export class EdificioComponent {
   editItem(id: string) {
     this.router.navigate(['registrar?id={{id}}']);
   }
+
   obtenerId() {
     const valores = window.location.search;
     const urlParams = new URLSearchParams(valores);
@@ -112,7 +126,62 @@ export class EdificioComponent {
     this.edificioService.obtenerEdificios(this.edificiosPorPagina, this.paginaActual, event.active, event.direction, this.filterValue);
   }
 
-  generarPdf(ubiId){
+  //métodos para generar el pdf
+  construirTabla2(datos, columnas) {
+    var body = [];
+    body.push(columnas);
 
+    datos.forEach(function (row) {
+      var dataRow = [];
+      columnas.forEach(function (column) {
+        dataRow.push(row[column] + "");
+      });
+      body.push(dataRow)
+    });
+    return body;
   }
+  tabla2(datos, columnas) {
+    return {
+      table: {
+        headerRows: 1,
+        body: this.construirTabla2(datos, columnas)
+      }
+    }
+  }
+  parse(date: Date) {
+    var fecha = new Date(date)
+    return fecha.toLocaleDateString("es-ES")
+  }
+  crearPdf(ubiId) {
+    //obtener mantenimientos de la ubicacion
+    this.ubicacionesService.obtenerUbicacion(ubiId).subscribe((ubicacion: Ubicacion) => {
+
+      var cont = 0;
+      ubicacion.mantenimientos.forEach(element => {
+        this.mantenimientos[cont] = {
+          descripcion: element.descripcion,
+          periocidad: element.periocidad,
+          estado: element.estado,
+          corregido: element.corregido,
+          observaciones: element.observaciones,
+          fecha: this.parse(element.fecha),
+        }
+        cont++;
+      })
+
+      const pdfDefinition: any = {
+        content: [
+          {
+            text: `Informes de mantenimiento del ${ubicacion.nombre}
+              `, style: 'header'
+          },
+          this.tabla2(this.mantenimientos, ['descripcion', 'periocidad', 'estado', 'corregido', 'observaciones', 'fecha'])
+        ]
+      }
+      const pdf = pdfMake.createPdf(pdfDefinition);
+      this.mantenimientos = [];
+      pdf.open();
+    });
+  }
+
 }

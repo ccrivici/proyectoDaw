@@ -135,7 +135,8 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
         });
         console.log("id ubicacion a añadir: " + this.ubicacionId + " nombre ubi: " + this.ubicacionNombre + " item a añadir: " + item.id)
         console.log("actualizado bien")
-      this.router.navigate(['/']);
+        //redirigir
+
     }
   }
   obtenerUbicacion(id: string) {

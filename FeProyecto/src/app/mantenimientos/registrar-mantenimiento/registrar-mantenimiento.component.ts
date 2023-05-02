@@ -8,10 +8,18 @@ import { Mantenimiento } from '../mantenimientos/mantenimiento.model';
 import { Item } from 'src/app/items/items/item.model';
 import { ItemsService } from 'src/app/items/items/items.service';
 
+
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+
+
+
+
+
 @Component({
   selector: 'app-registrar-mantenimiento',
   templateUrl: './registrar-mantenimiento.component.html',
-  styleUrls: ['./registrar-mantenimiento.component.css']
+  styleUrls: ['./registrar-mantenimiento.component.css'],
+
 })
 export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
   selectItem!: Item;
@@ -37,8 +45,6 @@ item!:Item;
 mantPrueba!:Mantenimiento;
 corregido:string |undefined = undefined;
 
-
-
   constructor(private mantenimientoService: MantenimientoService, private ubicacionesService: UbicacionesService, private fb: FormBuilder, private router: Router, private itemsService:ItemsService) {
     this.mantenimientoForm = this.fb.group({
       elementos: ['', Validators.required],
@@ -50,7 +56,6 @@ corregido:string |undefined = undefined;
       fecha: ['', Validators.required],
       observaciones: ['', Validators.required],
       // imagenes:['',Validators.required],
-
     })
   }
   registrarEditarMantenimiento() {
@@ -127,12 +132,22 @@ corregido:string |undefined = undefined;
         item_id: this.mantenimientoForm.get('elementos')?.value,
         ubicacion_id: this.ubicacionId
       }
-      /* var year = (MANTENIMIENTO.fecha?.getFullYear());
-      var month = (MANTENIMIENTO.fecha?.getMonth());
-      var day= MANTENIMIENTO.fecha?.getDate();
+      //borrar
+     console.log("fechaaa : "+typeof(MANTENIMIENTO.fecha))
 
-      //MANTENIMIENTO.fecha = new Date(year,month,day)
-      console.log("fecha: "+new Date(year,month,day)) */
+     var options = {year:'numeric',month:'long',day:'numeric'};
+      var stringDate = MANTENIMIENTO.fecha.toString();
+     console.log("fecha string: "+stringDate);
+     var fechaDef="";
+     for (let i = 0; i < stringDate.length; i++) {
+      if (stringDate.charAt(i) != 'T'){
+          fechaDef +=stringDate.charAt(i);
+      }else{
+        break;
+      }
+
+     }
+      //end
 
       this.selectCorregido == "true" ? MANTENIMIENTO.corregido = true : MANTENIMIENTO.corregido = false;
 
@@ -150,7 +165,6 @@ corregido:string |undefined = undefined;
       console.log("id ubicacion a modificar: " + this.ubicacionId + " nombre mantenimiento a modificar: " +MANTENIMIENTO.item_id+ "id item a modificar "+MANTENIMIENTO.id )
       console.log("actualizado bien")
     }
-
   }
 
   onSelected(item:Item){
@@ -158,10 +172,8 @@ corregido:string |undefined = undefined;
     this.selectItem = item;
     this.mantenimientoForm.patchValue({
       periocidad: item.periocidad,
-
     })
   }
-
 
 
   ngOnInit(): void {

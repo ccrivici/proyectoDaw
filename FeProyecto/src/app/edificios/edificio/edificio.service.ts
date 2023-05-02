@@ -11,7 +11,7 @@ export class EdificioService{
   baseUrl = environment.baseUrl;
   edificiosPagination!: PaginationUbicaciones;
   edificioSubjectPagination = new Subject<PaginationUbicaciones>();
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   obtenerEdificios(edificiosPorPagina: number, paginaActual: number, sort: string, sortDirection: string, filterValue: any) {
     const request = {

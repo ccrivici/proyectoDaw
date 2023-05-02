@@ -49,7 +49,10 @@ export class UbicacionesService{
   obtenerActualListenerDef(){
     return this.ubicacionSubjectDef;
   }
-  //update items
+  /*
+  * Este método se encarga de
+  *
+  */
   updateUbicacion(id:String, ubicacion:Ubicacion,item:Item,idItem:string){
     var modificado = false;
 

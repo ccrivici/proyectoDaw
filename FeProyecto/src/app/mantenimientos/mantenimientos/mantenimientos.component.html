@@ -12,19 +12,19 @@
 
   <ng-container matColumnDef="corregido">
     <mat-header-cell *matHeaderCellDef> corregido</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.corregido }}</mat-cell>
+    <mat-cell *matCellDef="let element">{{ element.corregido}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="observaciones">
     <mat-header-cell *matHeaderCellDef> observaciones</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.observaciones }}</mat-cell>
+    <mat-cell *matCellDef="let element">{{ element.observaciones}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="periocidad">
     <mat-header-cell *matHeaderCellDef> Periocidad</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.periocidad }}</mat-cell>
+    <mat-cell *matCellDef="let element">{{ element.periocidad}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="fecha">
     <mat-header-cell *matHeaderCellDef> fecha</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.fecha }}</mat-cell>
+    <mat-cell *matCellDef="let element">{{parse(element.fecha)}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="imagenes">
     <mat-header-cell *matHeaderCellDef> imagenes</mat-header-cell>
@@ -42,3 +42,6 @@
   <mat-header-row *matHeaderRowDef="desplegarColumnas"></mat-header-row>
   <mat-row *matRowDef="let row; columns: desplegarColumnas"></mat-row>
 </mat-table>
+
+<!-- <mat-paginator (page)="eventoPaginador($event)" #paginacion [pageSize]="edificiosPorPagina" [pageSizeOptions]="paginaCombo" [length]="totalEdificios">
+</mat-paginator> -->

@@ -6,7 +6,7 @@ export interface Mantenimiento{
   observaciones:string;
   imagenes: string[];
   periocidad: string;
-  fecha?: Date | undefined;
+  fecha?: any;
   item_id:string;
   ubicacion_id:string;
 }

@@ -15,7 +15,7 @@ import { InicioComponent } from './inicio/inicio/inicio.component';
 import { PdfComponent } from './pdf/pdf.component';
 const routes: Routes = [
   { path: 'items', component: ItemsComponent, canActivate: [SeguridadRouter] },
-  { path: 'items/UbicacionId', component: ItemsComponent, canActivate: [SeguridadRouter] },
+  { path: 'items/:ubicacionId', component: ItemsComponent, canActivate: [SeguridadRouter] },
   { path: 'registrar', component: RegistrarItemComponent, canActivate: [SeguridadRouter] },
   { path: 'ubicaciones', component: UbicacionesComponent , canActivate: [SeguridadRouter]},
   { path: 'edificios', component: EdificioComponent, canActivate: [SeguridadRouter] },

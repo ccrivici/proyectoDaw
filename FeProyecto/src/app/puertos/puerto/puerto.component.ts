@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Subscription, timeout } from 'rxjs';
+import { Subject, Subscription, timeout } from 'rxjs';
 import { Item } from 'src/app/items/items/item.model';
 import { ItemsService } from 'src/app/items/items/items.service';
 import { Ubicacion } from 'src/app/ubicaciones/ubicaciones/ubicacion.model';
@@ -9,6 +9,9 @@ import { UbicacionesService } from 'src/app/ubicaciones/ubicaciones/ubicaciones.
 import { PaginationUbicaciones } from './pagination-ubicaciones.model';
 import { PuertoService } from './puerto.service';
 import { PageEvent } from '@angular/material/paginator';
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-puerto',
@@ -18,8 +21,8 @@ import { PageEvent } from '@angular/material/paginator';
 export class PuertoComponent implements OnInit, OnDestroy {
   idUbicacion!: string;
   ubicacion!: any;
-  desplegarColumnas = ["denominacion", 'ubicacion', 'conjuntoEquipo', 'equipo', 'marcaModelo', 'periocidad', 'categoria', 'modificar', 'eliminar'];
-  dataSource = new MatTableDataSource<Item>();
+/*   desplegarColumnas = ["denominacion", 'ubicacion', 'conjuntoEquipo', 'equipo', 'marcaModelo', 'periocidad', 'categoria', 'modificar', 'eliminar'];
+ */  dataSource = new MatTableDataSource<Item>();
   puertosData: Ubicacion[] = [];
   //paginacion
   totalPuertos = 0;
@@ -35,29 +38,29 @@ export class PuertoComponent implements OnInit, OnDestroy {
   //variable para mostrar items o mantenimientos
   mostrar = true;
   //desplegarColumnasPuerto=["Nombre","Tipo","Ver Items", "Ver Mantenimientos"];
-  desplegarColumnasPuerto = ["nombre", "items","añadir", "añadirMantenimiento","mantenimientos","ubicacion"];
+  desplegarColumnasPuerto = ["nombre", "items","añadir", "añadirMantenimiento","mantenimientos","generarPdf"];
   dataSourcePuertos = new MatTableDataSource<Ubicacion>();
   puertasos: Ubicacion[] = [];
   private ubicacionesSubscription!: Subscription;
   timeout:any = null;
+
+
+    //variable para guardar ubicacion en la que guardar el pdf
+    ubicacionDef: any
+    mantenimientos: any[] = [];
+
 
   constructor(private itemsService: ItemsService, private ubicacionesService: UbicacionesService, private router: Router,private puertoService :PuertoService) { }
 
   ngOnInit(): void {
 
     this.idUbicacion = this.obtenerId();
-    //this.mostrarItems(this.idUbicacion);
-    /*
-        this.ubicacionesService.obtenerUbicacionesList();
-        this.ubicacionesSubscription = this.ubicacionesService.obtenerActualListener().subscribe((ubicaciones: Ubicacion[]) => {
-          this.dataSourcePuertos = new MatTableDataSource<Ubicacion>(ubicaciones);
-        });
-    */
 
     this.puertoService.obtenerPuertos(this.puertosPorPagina, this.paginaActual, this.sort, this.sortDirection, this.filterValue);
     this.ubicacionesSubscription = this.puertoService.obtenerActualListenerPag().subscribe((pagination: PaginationUbicaciones) => {
       this.dataSourcePuertos = new MatTableDataSource<Ubicacion>(pagination.data);
       this.puertasos = pagination.data;
+      this.totalPuertos = pagination.totalRows;
     });
 
   }
@@ -122,5 +125,67 @@ export class PuertoComponent implements OnInit, OnDestroy {
         $this.puertoService.obtenerPuertos($this.puertosPorPagina, $this.paginaActual, $this.sort, $this.sortDirection, filterValueLocal);
       }
     }, 1000);
+  }
+
+  parse(date:Date){
+    var fecha = new Date(date)
+    return fecha.toLocaleDateString("es-ES")
+  }
+
+  //métodos para generar el pdf
+  construirTabla2(datos, columnas) {
+    var body = [];
+    body.push(columnas);
+
+    datos.forEach(function (row) {
+      var dataRow = [];
+      columnas.forEach(function (column) {
+        dataRow.push(row[column] + "");
+      });
+      body.push(dataRow)
+    });
+    return body;
+  }
+  tabla2(datos, columnas) {
+    return {
+      table: {
+        headerRows: 1,
+        body: this.construirTabla2(datos, columnas)
+      }
+    }
+  }
+
+  crearPdf(ubiId) {
+    //obtener mantenimientos de la ubicacion
+    console.log(`ubi id: ${ubiId}`)
+    this.ubicacionesService.obtenerUbicacion(ubiId).subscribe((ubicacion: Ubicacion) => {
+
+      var cont = 0;
+      ubicacion.mantenimientos.forEach(element => {
+        this.mantenimientos[cont] = {
+          descripcion: element.descripcion,
+          periocidad: element.periocidad,
+          estado: element.estado,
+          corregido: element.corregido,
+          observaciones: element.observaciones,
+          fecha: this.parse(element.fecha),
+        }
+        cont++;
+      })
+
+      const pdfDefinition: any = {
+        content: [
+          {
+            text: `Informes de mantenimiento del ${ubicacion.nombre}
+
+              `, style: 'header'
+          },
+          this.tabla2(this.mantenimientos, ['descripcion', 'periocidad', 'estado', 'corregido', 'observaciones', 'fecha'])
+        ]
+      }
+      const pdf = pdfMake.createPdf(pdfDefinition);
+      this.mantenimientos = [];
+      pdf.open();
+    });
   }
 }

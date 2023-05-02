@@ -26,8 +26,8 @@
           "Port": "8591"
         }
       ],
-      "UpstreamPathTemplate": "/items/{id}",
-      "UpstreamHttpMethod": [ "GET", "UPDATE", "DELETE" ],
+      "UpstreamPathTemplate": "/item/{id}",
+      "UpstreamHttpMethod": [ "GET", "UPDATE", "DELETE","PUT" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -61,7 +61,7 @@
         }
       ],
       "UpstreamPathTemplate": "/mantenimiento/{id}",
-      "UpstreamHttpMethod": [ "GET", "UPDATE", "DELETE" ],
+      "UpstreamHttpMethod": [ "GET", "UPDATE", "DELETE", "PUT" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
@@ -95,7 +95,7 @@
         }
       ],
       "UpstreamPathTemplate": "/ubicacion/{id}",
-      "UpstreamHttpMethod": [ "GET", "UPDATE", "DELETE" ],
+      "UpstreamHttpMethod": [ "GET", "UPDATE", "DELETE","PUT" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
