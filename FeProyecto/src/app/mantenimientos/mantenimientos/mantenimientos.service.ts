@@ -12,35 +12,30 @@ export class MantenimientoService {
 
   baseUrl = environment.baseUrl;
 
-  private mantenimientoList: Mantenimiento[] = [];
-  private mantenimientoSubject = new Subject<Mantenimiento[]>();
-
   mantenimientoPaginationSubject = new Subject<PaginationMantenimientos>();
   mantenimientoPagination!: PaginationMantenimientos;
 
   constructor(private http: HttpClient) { }
 
 
-  obtenerMantenimientosPag(mantenimientoPorPagina:number, paginaActual:number, sort:string,sortDirection:string,filterValue:any){
+  obtenerMantenimientosPag(mantenimientoPorPagina: number, paginaActual: number, sort: string, sortDirection: string, filterValue: any) {
     const request = {
-      PageSize:mantenimientoPorPagina,
-      page:paginaActual,
+      PageSize: mantenimientoPorPagina,
+      page: paginaActual,
       sort,
       sortDirection,
       filterValue
     }
-    this.http.post<PaginationMantenimientos>(this.baseUrl+'mantenimiento/Pagination',request).subscribe((data)=>{
+    this.http.post<PaginationMantenimientos>(this.baseUrl + '/mantenimiento/Pagination', request).subscribe((data) => {
       this.mantenimientoPagination = data;
       this.mantenimientoPaginationSubject.next(this.mantenimientoPagination);
     });
   }
-  guardarMantenimiento(mantenimiento:Mantenimiento){
-    return this.http.post(this.baseUrl+'/mantenimiento',mantenimiento);
-
+  guardarMantenimiento(mantenimiento: Mantenimiento) {
+    return this.http.post(this.baseUrl + '/mantenimiento', mantenimiento);
   }
-  obtenerMantenimientoById(id:string){
+  obtenerMantenimientoById(id: string) {
     return this.http.get<Mantenimiento>(this.baseUrl + `/mantenimiento/${id}`);
-
   }
   obtenerActualListener() {
     return this.mantenimientoPaginationSubject.asObservable();
@@ -51,5 +46,4 @@ export class MantenimientoService {
   deleteMantenimiento(id: string): Observable<any> {
     return this.http.delete(this.baseUrl + `/mantenimiento/${id}`);
   }
-
 }

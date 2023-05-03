@@ -1,41 +1,46 @@
-
-<mat-table [dataSource]="dataSource">
+<div fxLayout="column" fxLayoutAlign="center center">
+  <mat-form-field style="margin-top: 10px">
+    <input matInput type="text" (keyup)="hacerFiltro($event)" placeholder="Texto de Búsqueda"  />
+  </mat-form-field>
+</div>
+<mat-table [dataSource]="dataSource" matSort
+(matSortChange)="ordenarColumna($event)">
   <ng-container matColumnDef="descripcion">
-    <mat-header-cell *matHeaderCellDef> descripcion</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef  mat-sort-header> descripcion</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.descripcion }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="estado">
-    <mat-header-cell *matHeaderCellDef> estado</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef  mat-sort-header> estado</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.estado }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="corregido">
-    <mat-header-cell *matHeaderCellDef> corregido</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef  mat-sort-header> corregido</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.corregido}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="observaciones">
-    <mat-header-cell *matHeaderCellDef> observaciones</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef  mat-sort-header> observaciones</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.observaciones}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="periocidad">
-    <mat-header-cell *matHeaderCellDef> Periocidad</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef  mat-sort-header> Periocidad</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.periocidad}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="fecha">
-    <mat-header-cell *matHeaderCellDef> fecha</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef  mat-sort-header> fecha</mat-header-cell>
     <mat-cell *matCellDef="let element">{{parse(element.fecha)}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="imagenes">
-    <mat-header-cell *matHeaderCellDef> imagenes</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef  mat-sort-header> imagenes</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.imagenes }}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="modificar">
-    <mat-header-cell *matHeaderCellDef> modificar informe</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef  mat-sort-header> modificar informe</mat-header-cell>
     <mat-cell *matCellDef="let element" ><a href="registrarMantenimiento?id={{element.id}}&Ubicacionid={{this.idUbicacion}}"><mat-icon>update</mat-icon></a></mat-cell>
   </ng-container>
   <ng-container matColumnDef="eliminar">
-    <mat-header-cell *matHeaderCellDef> eliminar informe</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef  mat-sort-header> eliminar informe</mat-header-cell>
     <mat-cell *matCellDef="let element"><button (click)="eliminar(element.id)"><mat-icon>delete</mat-icon></button></mat-cell>
   </ng-container>
 
@@ -43,5 +48,5 @@
   <mat-row *matRowDef="let row; columns: desplegarColumnas"></mat-row>
 </mat-table>
 
-<!-- <mat-paginator (page)="eventoPaginador($event)" #paginacion [pageSize]="edificiosPorPagina" [pageSizeOptions]="paginaCombo" [length]="totalEdificios">
-</mat-paginator> -->
+<mat-paginator (page)="eventoPaginador($event)" #paginacion [pageSize]="mantenimientosPorPagina" [pageSizeOptions]="paginaCombo" [length]="totalMantenimientos">
+</mat-paginator>

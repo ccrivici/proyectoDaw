@@ -1,4 +1,3 @@
-import { Ubicacion } from "src/app/ubicaciones/ubicaciones/ubicacion.model";
 
 export interface Item{
   id:string;

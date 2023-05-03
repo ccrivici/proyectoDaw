@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'registrarse', component: RegistrarComponent},
   { path: 'mantenimientos', component: MantenimientosComponent, canActivate: [SeguridadRouter]},
   { path: 'registrarMantenimiento', component: RegistrarMantenimientoComponent, canActivate: [SeguridadRouter]},
-  { path: '', component: InicioComponent, canActivate: [SeguridadRouter] },
+  { path: '', component: InicioComponent },
   { path: 'pdf', component: PdfComponent},
 
 ];

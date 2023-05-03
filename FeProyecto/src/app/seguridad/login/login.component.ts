@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { SeguridadService } from '../seguridad.service';
 import { HttpClient } from '@angular/common/http';
@@ -8,19 +8,14 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  constructor(private seguridadService: SeguridadService,private http:HttpClient) { }
+  constructor(private seguridadService: SeguridadService, private http: HttpClient) { }
 
-  ngOnInit(): void {
-
-  }
-
-  loginUsuario(form: NgForm){
+  loginUsuario(form: NgForm) {
     this.seguridadService.login({
       email: form.value.email,
       password: form.value.password
     })
   }
-
 }

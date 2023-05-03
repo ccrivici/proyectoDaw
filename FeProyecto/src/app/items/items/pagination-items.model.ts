@@ -8,6 +8,9 @@ export interface PaginationItems{
   sortDirection:string;
   pagesQuantity:number;
   data: Item[];
-  filterValue:{};
+  filterValue:{
+    propiedad?:string,
+    valor?:string
+  };
   totalRows:number;
 }

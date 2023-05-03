@@ -1,45 +1,59 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <mat-form-field style="margin-top: 10px">
+    <input matInput type="text" (keyup)="hacerFiltro($event)" placeholder="Texto de Búsqueda"  />
+  </mat-form-field>
+</div>
 
-<mat-table [dataSource]="dataSource">
+<mat-table [dataSource]="dataSource"  matSort
+(matSortChange)="ordenarColumna($event)">
   <ng-container matColumnDef="denominacion">
-    <mat-header-cell *matHeaderCellDef> Denominacion</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Denominacion</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.denominacion }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="ubicacion">
-    <mat-header-cell *matHeaderCellDef> Ubicacion</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Ubicacion</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.ubicacion }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="conjuntoEquipo">
-    <mat-header-cell *matHeaderCellDef> conjuntoEquipo</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> conjuntoEquipo</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.conjuntoEquipo }}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="equipo">
-    <mat-header-cell *matHeaderCellDef> Equipo</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Equipo</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.equipo }}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="marcaModelo">
-    <mat-header-cell *matHeaderCellDef> marcaModelo</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> marcaModelo</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.marcaModelo }}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="periocidad">
-    <mat-header-cell *matHeaderCellDef> periocidad</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> periocidad</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.periocidad }}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="categoria">
-    <mat-header-cell *matHeaderCellDef> categoria</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> categoria</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.categoria }}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="modificar">
-    <mat-header-cell *matHeaderCellDef> modificar item</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> modificar item</mat-header-cell>
     <mat-cell *matCellDef="let element" ><a href="registrar?id={{element.id}}&Ubicacionid={{this.idUbicacion}}"><mat-icon>update</mat-icon></a></mat-cell>
   </ng-container>
   <ng-container matColumnDef="eliminar">
-    <mat-header-cell *matHeaderCellDef> eliminar item</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> eliminar item</mat-header-cell>
     <mat-cell *matCellDef="let element"><button (click)="eliminar(element.id)"><mat-icon>delete</mat-icon></button></mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="desplegarColumnas"></mat-header-row>
   <mat-row *matRowDef="let row; columns: desplegarColumnas"></mat-row>
 </mat-table>
+<mat-paginator
+    (page)="eventoPaginador($event)"
+    #paginacion
+    [pageSize]="itemsPorPagina"
+    [pageSizeOptions]="paginaCombo"
+    [length]="totalItems"
+  >
+  </mat-paginator>
 

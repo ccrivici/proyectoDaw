@@ -7,16 +7,13 @@ import { environment } from "src/environments/environment.development";
 
 
 @Injectable({
-  providedIn:'root'
+  providedIn: 'root'
 })
 export class PuertoService {
-  private puertosList: Ubicacion[] = [];
   baseUrl = environment.baseUrl;
   puertoSubjectPagination = new Subject<PaginationUbicaciones>();
   puertoSubject = new Subject<Ubicacion[]>();
   puertosPagination!: PaginationUbicaciones;
-  puertoSubjectDef = new Subject<Ubicacion>();
-  puertoFiltrado!: Ubicacion;
 
   constructor(private http: HttpClient) { }
 

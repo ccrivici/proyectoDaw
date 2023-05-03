@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MantenimientoService } from './mantenimientos.service';
 import { Subscription } from 'rxjs';
-import { PaginationMantenimientos } from './pagination-mantenimientos';
 import { Mantenimiento } from './mantenimiento.model';
-import { MatTableDataSource } from '@angular/material/table';
 import { UbicacionesService } from 'src/app/ubicaciones/ubicaciones/ubicaciones.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Ubicacion } from 'src/app/ubicaciones/ubicaciones/ubicacion.model';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { DateAdapter } from '@angular/material/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { PaginationMantenimientos } from './pagination-mantenimientos';
+import { PageEvent } from '@angular/material/paginator';
 
 
 
@@ -20,7 +21,7 @@ export class MantenimientosComponent implements OnInit {
   private mantenimientoSubscription!: Subscription
   mantenimientoData: Mantenimiento[] = [];
   desplegarColumnas = ["descripcion","estado","corregido","observaciones","periocidad","fecha","imagenes","modificar","eliminar"];
-  dataSource!: Mantenimiento[];
+  dataSource;
 
 
   //paginacion
@@ -40,32 +41,47 @@ export class MantenimientosComponent implements OnInit {
   private readonly adapter: DateAdapter<Date>) {}
 
   ngOnInit(): void {
+    //Pagination
 
     this.obtenerId();
+
+    this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe(response=>{
+
+    this.filterValue= {
+      propiedad: "ubicacion_id",
+      valor: this.idUbicacion
+    }
+
+    this.mantenimientoService.obtenerMantenimientosPag(this.mantenimientosPorPagina, this.paginaActual, this.sort, this.sortDirection, this.filterValue);
+    this.mantenimientoSubscription = this.mantenimientoService.obtenerActualListener().subscribe((pagination: PaginationMantenimientos) => {
+      this.dataSource = new MatTableDataSource<Mantenimiento>(pagination.data);
+      this.totalMantenimientos = pagination.totalRows
+    });
+
+
+
     this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe(response=>{
       this.ubicacion = response;
       if (this.ubicacion != undefined){
         this.dataSource = this.ubicacion.mantenimientos;
       }
-      console.log("aaa"+this.ubicacion.nombre)
     },e=>{
       console.log("error: "+e);
     })
-  }
+  })
+}
   parse(date:Date){
     var fecha = new Date(date)
     return fecha.toLocaleDateString("es-ES")
-
   }
 
+
   eliminar(id:string){
-    console.log("eliminar item de la ubicacion "+this.ubicacion.nombre)
     //eliminamos el elemento
     this.mantenimientoService.deleteMantenimiento(id).subscribe(data =>{
       this.ubicacionesService.deleteMantenimientoFromUbicacion(this.ubicacion,id);
     });
     //actualizamos la lista de items de la ubicacion
-
   }
   obtenerId(){
     const valores = window.location.search;
@@ -77,34 +93,33 @@ export class MantenimientosComponent implements OnInit {
 
   //MÉTODOS PARA PAGINAR
 
-  /* hacerFiltro(event: any) {
+  hacerFiltro(event: any) {
     clearTimeout(this.timeout);
     var $this = this;
     //esta función se ejectua cuando el usuario deje de escribir por mas de un segundo
     this.timeout = setTimeout(() => {
       if (event.keycode !== 13) {
         const filterValueLocal = {
-          propiedad: 'nombre',
+          propiedad: 'descripcion',
           valor: event.target.value
         };
         $this.filterValue = filterValueLocal;
 
         //aqui obtenemos los libros pasando como filtro la constante creada antes
-        $this.edificioService.obtenerEdificios($this.edificiosPorPagina, $this.paginaActual, $this.sort, $this.sortDirection, filterValueLocal);
+        $this.mantenimientoService.obtenerMantenimientosPag($this.mantenimientosPorPagina, $this.paginaActual, $this.sort, $this.sortDirection, filterValueLocal);
       }
     }, 1000);
   }
   eventoPaginador(event: PageEvent): void {
     this.mantenimientosPorPagina = event.pageSize;
     this.paginaActual = event.pageIndex + 1;
-    this.edificioService.obtenerEdificios(this.edificiosPorPagina, this.paginaActual, this.sort, this.sortDirection, this.filterValue);
+    this.mantenimientoService.obtenerMantenimientosPag(this.mantenimientosPorPagina, this.paginaActual, this.sort, this.sortDirection, this.filterValue);
   }
 
   ordenarColumna(event: any) {
     this.sort = event.active;
     this.sortDirection = event.direction;
     //obtenemos la lista de libros pero con el event.active capturamos la columna que tiene que ser ordenada y la direccion
-    this.edificioService.obtenerEdificios(this.edificiosPorPagina, this.paginaActual, event.active, event.direction, this.filterValue);
-  } */
-
+    this.mantenimientoService.obtenerMantenimientosPag(this.mantenimientosPorPagina, this.paginaActual, event.active, event.direction, this.filterValue);
+  }
 }

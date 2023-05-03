@@ -14,38 +14,30 @@
       />
     </a>
   </div>
-  <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
-    <ul fxLayout="row" fxLayoutGap="10px" class="navegacion-menu">
-      <div class="contenedor">
+    <ul fxFlex fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="flex-center" class="navegacion-menu">
+
         <li>
           <button mat-icon-button routerLink="/puertos">
-            <mat-icon>anchor</mat-icon></button
-          ><a routerLink="/puertos">Puertos</a>
+            <mat-icon>anchor</mat-icon></button><a routerLink="/puertos">Puertos</a>
         </li>
         <li>
           <button mat-icon-button routerLink="/edificios">
-            <mat-icon>apartment</mat-icon></button
-          ><a class="ubicacion" routerLink="/edificios">Edificios</a>
+            <mat-icon>apartment</mat-icon></button><a routerLink="/edificios">Edificios</a>
         </li>
-      </div>
-      <div class="contenedor">
-        <li><button mat-icon-button routerLink="/">
+
+      <div fxFlex fxLayoutAlign="flex-end" >
+
+        <li><button mat-icon-button routerLink="/inicio">
           <mat-icon>home</mat-icon></button><a routerLink="/">Home</a></li>
-        <li><button mat-icon-button routerLink="/registrar">
-          <mat-icon>
-            library_add
-           </mat-icon></button><a routerLink="/registrar">Registrar item</a></li>
-        <li><button mat-icon-button routerLink="/items">
-          <mat-icon>
-              pageview
-           </mat-icon></button><a routerLink="/items">Ver items</a></li>
-      </div>
+
+
       <li>
         <button mat-icon-button (click)="onMenuToggleDispatch()">
           <mat-icon>manage_accounts</mat-icon>
         </button>
         <a (click)="onMenuToggleDispatch()">User</a>
       </li>
+    </div>
     </ul>
-  </div>
+
 </mat-toolbar>

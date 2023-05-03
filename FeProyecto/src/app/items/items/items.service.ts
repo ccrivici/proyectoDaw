@@ -3,6 +3,7 @@ import { environment } from "src/environments/environment.development";
 import { Item } from "./item.model";
 import { Observable, Subject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
+import { PaginationItems } from "./pagination-items.model";
 
 @Injectable({
   providedIn:'root'
@@ -12,10 +13,27 @@ export class ItemsService{
 
   private itemsLista: Item[] = [];
   private itemsSubject = new Subject<Item[]>();
-  private itemSubjectById = new Subject<Item>();
   itemById!:Item;
-
+  private itemsPagination!: PaginationItems;
+  private itemsSubjectPagination=new Subject<PaginationItems>();
   constructor(private http: HttpClient) {}
+
+  obtenerItemsPag(totalItems:number, paginaActual:number, sort:string,sortDirection:string,filterValue:any){
+    const request = {
+      PageSize:totalItems,
+      page:paginaActual,
+      sort,
+      sortDirection,
+      filterValue
+    }
+    this.http.post<PaginationItems>(this.baseUrl + '/item/pagination',request).subscribe((data) => {
+      this.itemsPagination = data;
+      this.itemsSubjectPagination.next(this.itemsPagination);
+    });
+  }
+  obtenerActualListenerPag() {
+    return this.itemsSubjectPagination.asObservable();
+  }
 
   obtenerItems() {
     this.http.get<Item[]>(this.baseUrl + '/item').subscribe((data) => {
@@ -25,7 +43,6 @@ export class ItemsService{
   }
   obtenerItemById(id:string){
     return this.http.get<Item>(this.baseUrl + `/item/${id}`);
-
   }
   obtenerActualListener() {
     return this.itemsSubject.asObservable();
@@ -35,21 +52,7 @@ export class ItemsService{
   }
   guardarItem(item:Item){
     return this.http.post(this.baseUrl+'/item',item);
-      //permite actualizar y devolver la lista de items actualizada al grid de items
-
-      this.itemsSubject.next(this.itemsLista);
-      //return response;
-
   }
-
-  /* guardarItem(item:Item){
-    this.http.post(this.baseUrl+'api/item',item).subscribe((response)=>{
-      //permite actualizar y devolver la lista de items actualizada al grid de items
-      console.log("respuesta: "+response.)
-      this.itemsSubject.next(this.itemsLista);
-      //return response;
-    });
-  } */
   guardarLibroListener(){
     return this.itemsSubject.asObservable();
   }

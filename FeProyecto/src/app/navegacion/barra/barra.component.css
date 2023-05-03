@@ -1,6 +1,7 @@
 .ubicacion{
   padding-right: 225px;
 }
+
 a{
   text-decoration: none;
   color: #fff;
@@ -9,12 +10,7 @@ a:hover,
 a:active{
   color: #DBCDE6;
 }
-.navegacion-menu{
-  list-style: none;
-  padding: 0;
-  margin: 0;
 
-}
 .navegacion-menu{
   list-style: none;
   padding: 0;
@@ -22,10 +18,7 @@ a:active{
 }
 
 .contenedor {
-  display: flex;
-  justify-content: left;
-  flex-wrap: wrap;
-  align-items: left;
+  width: 100%;
 }
 
 .contenedor li {
@@ -34,7 +27,7 @@ a:active{
 }
 
 mat-toolbar{
-  height:80px;
+  height:100%;
 }
 
 .navegacion-menu li {
@@ -51,3 +44,26 @@ button {
   text-decoration: none;
   vertical-align: middle;
 }
+
+@media only screen and (max-width: 1000px) {
+  .logo_container img {
+    display: none;
+  }
+
+}
+
+@media only screen and (max-width:1350px){
+  .navegacion-menu li a {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+
+  .navegacion-menu li {
+    display: inline-block;
+  }
+
+}
+
+
