@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "ms8ibf21u4iASYRwX77hYyYm3qI59nByB2zDWG2OBds=",
+  "Source": "Servicios.api.Gateway",
+  "BasePath": "_content/Servicios.api.Gateway",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

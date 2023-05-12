@@ -7,10 +7,9 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class BarraComponent {
 
-  @Output() menuToggle = new EventEmitter<void>();
+  @Output() menuToggle = new EventEmitter;
 
   onMenuToggleDispatch(){
     this.menuToggle.emit();
   }
-
 }

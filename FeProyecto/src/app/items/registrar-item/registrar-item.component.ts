@@ -5,7 +5,7 @@ import { UbicacionesService } from 'src/app/ubicaciones/ubicaciones/ubicaciones.
 import { Ubicacion } from 'src/app/ubicaciones/ubicaciones/ubicacion.model';
 import { Subscription } from 'rxjs';
 import { Item } from '../items/item.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-registrar-item',
@@ -50,7 +50,7 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
 
   itemDef!: Item;
 
-  constructor(private itemService: ItemsService, private ubicacionesService: UbicacionesService, private fb: FormBuilder,private router :Router) {
+  constructor(private itemService: ItemsService, private ubicacionesService: UbicacionesService, private fb: FormBuilder,private router :Router,private rutaActiva: ActivatedRoute) {
     this.itemForm = this.fb.group({
       denominacion: ['', Validators.required],
       ubicacion: ['', Validators.required],
@@ -85,6 +85,7 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
           this.ubicacionesService.updateUbicacion(this.ubicacionId, ubicacion, this.itemDef, item.id)
         });
       });
+      this.router.navigate(['/items', this.ubicacionId]);
     } else {
       //modificamos item
 
@@ -112,8 +113,9 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
         console.log("id ubicacion a añadir: " + this.ubicacionId + " nombre ubi: " + this.ubicacionNombre + " item a añadir: " + item.id)
         console.log("actualizado bien")
         //redirigir
-        this.router.navigate(['/items']);
-    }
+
+      }
+      this.router.navigate(['/items', this.ubicacionId]);
   }
   obtenerUbicacion(id: string) {
     this.ubicacionesService.obtenerUbicacion(id).subscribe((ubicacion: Ubicacion) => {
@@ -126,9 +128,11 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
     console.log(`DATOS INICIALES:
     id elemento: ${this.id}
     id ubicacion: ${this.ubicacionId}`)
-    if (this.id != "null" && this.ubicacionId != "null") {
+    if (this.id != undefined && this.ubicacionId != undefined) {
+      console.log("editmaos")
       this.esEditar();
-    } else if (this.ubicacionId != "null" && this.id == "null") {
+    } else if (this.ubicacionId != undefined && this.id == undefined) {
+      console.log("añadimos")
       this.ubicacionesService.obtenerUbicacion(this.ubicacionId).subscribe(ubicacion => {
         this.ubicaciones[0] = ubicacion;
         this.itemForm.patchValue({
@@ -180,9 +184,8 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
   }
   //obtiene el id  y el id de la ubicacion de la url
   obtenerId() {
-    const valores = window.location.search;
-    const urlParams = new URLSearchParams(valores);
-    this.id = urlParams.get('id') + "";
-    this.ubicacionId = urlParams.get('Ubicacionid') + "";
+    this.ubicacionId=  this.rutaActiva.snapshot.params['ubicacionId'];
+    console.log(`id ubicacion: ${this.ubicacionId}`);
+    this.id = this.rutaActiva.snapshot.params['id'];
   }
 }

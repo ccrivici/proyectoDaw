@@ -3,35 +3,35 @@
     <input matInput type="text" (keyup)="hacerFiltro($event)" placeholder="Introduzca texto">
   </mat-form-field>
 </div>
-<mat-table [dataSource]="dataSourcePuertos" matSort (matSortChange)="ordenarColumna($event)">
+<mat-table [dataSource]="dataSourcePuertos" matSort (matSortChange)="ordenarColumna($event)" class="responsive-table">
   <ng-container matColumnDef="nombre">
     <mat-header-cell *matHeaderCellDef mat-sort-header>nombre</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.nombre }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="items">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Ver items</mat-header-cell>
-    <mat-cell *matCellDef="let element"><a href="/items?Ubicacionid={{element.id}}"><mat-icon> list_alt</mat-icon></a></mat-cell>
+    <mat-header-cell *matHeaderCellDef >Ver items</mat-header-cell>
+    <mat-cell *matCellDef="let element"><a [routerLink]="['/items', element.id]"><mat-icon> view_list</mat-icon></a></mat-cell>
   </ng-container>
   <ng-container matColumnDef="añadir">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Añadir item</mat-header-cell>
-    <mat-cell *matCellDef="let element"><a href="/registrar?Ubicacionid={{element.id}}"><mat-icon> add_circle </mat-icon></a></mat-cell>
+    <mat-header-cell *matHeaderCellDef >Añadir item</mat-header-cell>
+    <mat-cell *matCellDef="let element"><a [routerLink]="['/registrar', element.id]"><mat-icon> add_circle </mat-icon></a></mat-cell>
   </ng-container>
 
 
   <ng-container matColumnDef="mantenimientos">
-    <mat-header-cell *matHeaderCellDef  mat-sort-header>ver mantenimientos</mat-header-cell>
-    <mat-cell *matCellDef="let element"><a href="/mantenimientos?Ubicacionid={{element.id}}">  <mat-icon> find_in_page </mat-icon>
+    <mat-header-cell *matHeaderCellDef >ver mantenimientos</mat-header-cell>
+    <mat-cell *matCellDef="let element"><a [routerLink]="['/mantenimientos', element.id]">  <mat-icon> find_in_page </mat-icon>
     </a></mat-cell>
   </ng-container>
   <ng-container matColumnDef="añadirMantenimiento">
-    <mat-header-cell *matHeaderCellDef  mat-sort-header>Añadir mantenimiento</mat-header-cell>
-    <mat-cell *matCellDef="let element"><a href="/registrarMantenimiento?Ubicacionid={{element.id}}">  <mat-icon> edit_document</mat-icon>
+    <mat-header-cell *matHeaderCellDef >Añadir mantenimiento</mat-header-cell>
+    <mat-cell *matCellDef="let element"><a [routerLink]="['/registrarMantenimiento', element.id]">  <mat-icon> edit_document</mat-icon>
     </a></mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="generarPdf">
-    <mat-header-cell *matHeaderCellDef  mat-sort-header>Generar Pdf mantenimientos</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef >Generar Pdf mantenimientos</mat-header-cell>
     <mat-cell *matCellDef="let element"><a (click)="crearPdf(element.id)"><mat-icon>picture_as_pdf</mat-icon></a></mat-cell>
   </ng-container>
 

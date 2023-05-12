@@ -1,6 +1,3 @@
-.ubicacion{
-  padding-right: 225px;
-}
 
 a{
   text-decoration: none;
@@ -52,7 +49,7 @@ button {
 
 }
 
-@media only screen and (max-width:1350px){
+@media only screen and (max-width:1270px){
   .navegacion-menu li a {
     display: none;
   }

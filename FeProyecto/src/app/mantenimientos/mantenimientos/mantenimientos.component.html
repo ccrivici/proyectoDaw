@@ -37,11 +37,11 @@
   </ng-container>
   <ng-container matColumnDef="modificar">
     <mat-header-cell *matHeaderCellDef  mat-sort-header> modificar informe</mat-header-cell>
-    <mat-cell *matCellDef="let element" ><a href="registrarMantenimiento?id={{element.id}}&Ubicacionid={{this.idUbicacion}}"><mat-icon>update</mat-icon></a></mat-cell>
+    <mat-cell *matCellDef="let element" ><a  [routerLink]="['/registrarMantenimiento', element.id,idUbicacion]"><mat-icon>update</mat-icon></a></mat-cell>
   </ng-container>
   <ng-container matColumnDef="eliminar">
     <mat-header-cell *matHeaderCellDef  mat-sort-header> eliminar informe</mat-header-cell>
-    <mat-cell *matCellDef="let element"><button (click)="eliminar(element.id)"><mat-icon>delete</mat-icon></button></mat-cell>
+    <mat-cell *matCellDef="let element"><button class="eliminar-button" (click)="eliminar(element.id)"><mat-icon>delete_forever</mat-icon></button></mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="desplegarColumnas"></mat-header-row>

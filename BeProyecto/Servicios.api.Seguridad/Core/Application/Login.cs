@@ -30,7 +30,7 @@ namespace Servicios.api.Seguridad.Core.Application
     //clase de reglas de negocio
     public class UsuarioLoginHandler : IRequestHandler<UsuarioLoginCommand, UsuarioDto>
     {
-        //inyectamos los objetos necesarios para ahcer la transaccion en la bbdd
+        //inyectamos los objetos necesarios para hacer la transaccion en la bbdd
         private readonly SeguridadContexto _context;
         private readonly UserManager<Usuario> _userManager;
         private readonly IMapper _mapper;

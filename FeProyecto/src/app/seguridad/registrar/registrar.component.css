@@ -9,7 +9,12 @@ mat-card{
 }
 
 button[type="submit"] {
-  margin-top: 20px;
+  margin-top: 40px;
+  height: 40px;
+}
+
+button[type="submit"]:enabled{
+  background-color: #4b9fe1;
 }
 
 form {
@@ -18,8 +23,3 @@ form {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-
-
-
-
-

@@ -9,6 +9,8 @@ import { DateAdapter } from '@angular/material/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { PaginationMantenimientos } from './pagination-mantenimientos';
 import { PageEvent } from '@angular/material/paginator';
+import { ConfirmDialogComponent } from 'src/app/dialog/confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 
@@ -37,8 +39,8 @@ export class MantenimientosComponent implements OnInit {
   ubicacion!: Ubicacion;
   timeout: any = null;
 
-  constructor(private mantenimientoService: MantenimientoService,private ubicacionesService:UbicacionesService,private router:Router,private route :ActivatedRoute,
-  private readonly adapter: DateAdapter<Date>) {}
+  constructor(private mantenimientoService: MantenimientoService,private ubicacionesService:UbicacionesService,private router:Router,private rutaActiva: ActivatedRoute,
+  private readonly adapter: DateAdapter<Date>, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     //Pagination
@@ -74,20 +76,34 @@ export class MantenimientosComponent implements OnInit {
     var fecha = new Date(date)
     return fecha.toLocaleDateString("es-ES")
   }
-
-
   eliminar(id:string){
     //eliminamos el elemento
-    this.mantenimientoService.deleteMantenimiento(id).subscribe(data =>{
-      this.ubicacionesService.deleteMantenimientoFromUbicacion(this.ubicacion,id);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        message: '¿Está seguro de que desea eliminar este registro?',
+        buttonText: {
+          ok: 'Eliminar',
+          cancel: 'Cancelar',
+        },
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        // Aquí elimina el registro utilizando el ID
+        this.mantenimientoService.deleteMantenimiento(id).subscribe(data =>{
+          this.ubicacionesService.deleteMantenimientoFromUbicacion(this.ubicacion,id);
+        });
+      }
+      window.location.reload();
     });
     //actualizamos la lista de items de la ubicacion
   }
-  obtenerId(){
-    const valores = window.location.search;
-    const urlParams = new URLSearchParams(valores);
-    this.id = urlParams.get('id')+"";
-    this.idUbicacion = urlParams.get('Ubicacionid')+"";
+  //obtiene el id  y el id de la ubicacion de la url
+  obtenerId() {
+    this.idUbicacion=  this.rutaActiva.snapshot.params['ubicacionId'];
+    console.log(`id ubicacion: ${this.idUbicacion}`);
+    this.id = this.rutaActiva.snapshot.params['id'];
   }
 
 

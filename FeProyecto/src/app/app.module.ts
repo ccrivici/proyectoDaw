@@ -30,6 +30,7 @@ import { InicioComponent } from './inicio/inicio/inicio.component';
 import { PdfComponent } from './pdf/pdf.component';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core'
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.component';
 
 export const DateFormats = {
   parse: {
@@ -61,7 +62,8 @@ export const DateFormats = {
     MenuListaComponent,
     RegistrarMantenimientoComponent,
     InicioComponent,
-    PdfComponent
+    PdfComponent,
+    ConfirmDialogComponent
    ],
   imports: [
     BrowserModule,

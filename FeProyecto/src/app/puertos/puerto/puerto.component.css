@@ -24,6 +24,9 @@ mat-header-cell {
   text-overflow: ellipsis;
 }
 
+mat-header-cell.mat-column-generarPdf {
+  min-width: 200px;
+}
 .table-container {
   width: 100%;
   overflow-x: auto;
@@ -45,50 +48,4 @@ a {
   color: #2b7cd8;
   text-decoration: none;
 }
-mat-table {
-  width: 100%;
-  table-layout: auto;
-}
 
-mat-cell {
-  justify-content: center;
-  width: auto;
-  table-layout: auto;
-  text-align: center;
-}
-
-mat-header-cell {
-  justify-content: center;
-  width: auto;
-  table-layout: auto;
-}
-
-mat-cell,
-mat-header-cell {
-  min-width: 150px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.table-container {
-  width: 100%;
-  overflow-x: auto;
-}
-
-.responsive-table {
-  overflow-x: auto;
-  display: block;
-  width: 100%;
-}
-
-@media (max-width: 599px) {
-  .responsive-table {
-    display: flex;
-    flex-direction: column;
-  }
-}
-a {
-  color: #2b7cd8;
-  text-decoration: none;
-}

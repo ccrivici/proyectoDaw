@@ -14,7 +14,6 @@ namespace Servicios.api.Seguridad.Core.Application
 {
     public class Register
     {
-
         public class UsuarioRegisterCommand : IRequest<UsuarioDto>
         {
             public string Nombre { get; set; }

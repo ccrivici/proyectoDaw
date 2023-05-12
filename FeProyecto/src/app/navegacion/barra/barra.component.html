@@ -14,22 +14,32 @@
       />
     </a>
   </div>
-    <ul fxFlex fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="flex-center" class="navegacion-menu">
+  <ul
+    fxFlex
+    fxLayout="row"
+    fxLayoutGap="10px"
+    fxLayoutAlign="flex-center"
+    class="navegacion-menu"
+  >
+    <div fxFlex fxLayoutAlign="flex">
+      <li>
+        <button mat-icon-button routerLink="/puertos">
+          <mat-icon>anchor</mat-icon></button
+        ><a routerLink="/puertos">Puertos</a>
+      </li>
+      <li>
+        <button mat-icon-button routerLink="/edificios">
+          <mat-icon>apartment</mat-icon></button
+        ><a routerLink="/edificios">Edificios</a>
+      </li>
+    </div>
 
-        <li>
-          <button mat-icon-button routerLink="/puertos">
-            <mat-icon>anchor</mat-icon></button><a routerLink="/puertos">Puertos</a>
-        </li>
-        <li>
-          <button mat-icon-button routerLink="/edificios">
-            <mat-icon>apartment</mat-icon></button><a routerLink="/edificios">Edificios</a>
-        </li>
-
-      <div fxFlex fxLayoutAlign="flex-end" >
-
-        <li><button mat-icon-button routerLink="/inicio">
-          <mat-icon>home</mat-icon></button><a routerLink="/">Home</a></li>
-
+    <div fxFlex fxLayoutAlign="flex-end">
+      <li>
+        <button mat-icon-button routerLink="/">
+          <mat-icon>home</mat-icon></button
+        ><a routerLink="/">Home</a>
+      </li>
 
       <li>
         <button mat-icon-button (click)="onMenuToggleDispatch()">
@@ -38,6 +48,5 @@
         <a (click)="onMenuToggleDispatch()">User</a>
       </li>
     </div>
-    </ul>
-
+  </ul>
 </mat-toolbar>

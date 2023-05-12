@@ -41,9 +41,13 @@
     </mat-form-field>
 
     <!--Campo Input Contraseña-->
-    <mat-form-field hintLabel="La contraseña no puede estar vacía">
+    <mat-form-field hintLabel="La contraseña debe tener minimo 7 caracteres, una mayúscula y una caracter especial ($%!..)">
       <mat-label>Ingrese la Contraseña</mat-label>
-      <input type="password" matInput placeholder="" ngModel name="password" requiredminlength="7"/>
+      <input type="password" matInput placeholder="" ngModel name="password" required minlength="7" #pwdInput="ngModel" pattern="^(?=.*[A-Z])(?=.*[$!%*?&])[a-zA-Z\d$!%*?&]{1,}$"/>
+      <mat-error *ngIf="pwdInput.hasError('pattern')">La contraseña debe tener al menos una letra mayúscula y un caracter especial ($, !, %, *, ?, &)</mat-error>
+      <mat-error *ngIf="pwdInput.hasError('required')">La contraseña no puede estar en blanco</mat-error>
+      <mat-error *ngIf="pwdInput.hasError('minlength')">La contraseña debe tener más de 7 caracteres</mat-error>
+
     </mat-form-field>
     <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Guardar</button>
   </form>

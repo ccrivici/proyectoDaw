@@ -20,7 +20,7 @@ export class RegistrarComponent implements OnInit {
       email: ${form.value.email},
       password: ${form.value.password},
       nombre: ${form.value.nombre},
-      apellidos: ${form.value.apellidos},
+      apellidos: ${form.value.apellido},
       username: ${form.value.usuario}
 
     `)
