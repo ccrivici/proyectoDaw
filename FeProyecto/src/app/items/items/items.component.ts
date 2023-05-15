@@ -6,9 +6,11 @@ import { Item } from './item.model';
 import { ItemsService } from './items.service';
 import { Subscription } from 'rxjs';
 import { PaginationItems } from './pagination-items.model';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/dialog/confirm-dialog/confirm-dialog.component';
+import { Ubicacion } from 'src/app/ubicaciones/ubicaciones/ubicacion.model';
+import { CustomPaginator } from 'src/app/paginator';
 
 @Injectable({
   providedIn:'root'
@@ -18,6 +20,9 @@ import { ConfirmDialogComponent } from 'src/app/dialog/confirm-dialog/confirm-di
   selector: 'app-items',
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.css'],
+  providers: [
+    { provide: MatPaginatorIntl, useValue: CustomPaginator("Items por página") }
+  ]
 })
 export class ItemsComponent implements OnInit, OnDestroy {
   desplegarColumnas = [
@@ -34,7 +39,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
   dataSource;
   idUbicacion!: any;
   ubicacion!: any;
-  ubicacionId!: string;
   id!: string;
 
   //paginacion
@@ -91,6 +95,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
         this.itemsSubscription = this.itemsService
           .obtenerActualListenerPag()
           .subscribe((pagination: PaginationItems) => {
+            pagination.data.filter(item => item.denominacion == response.nombre)
             this.dataSource = new MatTableDataSource<Item>(pagination.data);
             this.totalItems = pagination.totalRows;
           });
@@ -115,12 +120,22 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
-        // Aquí elimina el registro utilizando el ID
-        this.itemsService.deleteItem(id).subscribe(() => {
-          this.ubicacionesService.deleteItemFromUbicacion(this.ubicacion, id);
-        });
-      }
-      window.location.reload();
+        console.log(`
+        id ubi subs: ${this.ubicacion.id}
+        id ubi: ${this.idUbicacion}
+        item a borrar: ${id}
+        `)
+      this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe((ubicacion:Ubicacion)=>{
+        console.log(`uicacion a modi: ${ubicacion}
+        `)
+          // Aquí elimina el registro utilizando el ID
+          this.itemsService.deleteItem(id).subscribe(() => {
+            this.ubicacionesService.deleteItemFromUbicacion(ubicacion, id);
+          });
+
+      })
+    }
+
     });
 
   }
@@ -143,22 +158,34 @@ export class ItemsComponent implements OnInit, OnDestroy {
     var $this = this;
     //esta función se ejectua cuando el usuario deje de escribir por mas de un segundo
     this.timeout = setTimeout(() => {
+      this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe((response:Ubicacion) => {
+
       if (event.keycode !== 13) {
-        const filterValueLocal = {
+        var filterValueLocal = {
           propiedad: 'marcaModelo',
           valor: event.target.value,
         };
-        $this.filterValue = filterValueLocal;
+          if (event.target.value === ""){
+            console.log("filtro vacio: "+this.idUbicacion)
+            filterValueLocal = {
+              propiedad: 'denominacion',
+              valor: response.nombre
+            };
+          }
+          $this.filterValue = filterValueLocal;
 
-        //aqui obtenemos los libros pasando como filtro la constante creada antes
-        $this.itemsService.obtenerItemsPag(
-          $this.itemsPorPagina,
-          $this.paginaActual,
-          $this.sort,
-          $this.sortDirection,
-          filterValueLocal
-        );
+          //aqui obtenemos los libros pasando como filtro la constante creada antes
+          $this.itemsService.obtenerItemsPag(
+            $this.itemsPorPagina,
+            $this.paginaActual,
+            $this.sort,
+            $this.sortDirection,
+            filterValueLocal
+          );
+
+
       }
+    });
     }, 1000);
   }
   eventoPaginador(event: PageEvent): void {
@@ -184,5 +211,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
       event.direction,
       this.filterValue
     );
+  }
+  goBack() {
+    window.history.back();
   }
 }

@@ -1,8 +1,14 @@
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
 using Servicios.api.Puerto.Core;
 using Servicios.api.Puerto.Repository;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder (args);
 
+/*WebHost.CreateDefaultBuilder(args)
+    .UseStartup<IStartup>()
+    .UseUrls("http://*:8591");
+*/
 // Add services to the container.
 
 builder.Services.AddControllers();

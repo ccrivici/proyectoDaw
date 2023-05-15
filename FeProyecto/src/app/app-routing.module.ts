@@ -30,7 +30,7 @@ const routes: Routes = [
   { path: 'registrarMantenimiento', component: RegistrarMantenimientoComponent, canActivate: [SeguridadRouter]},
   { path: 'registrarMantenimiento/:ubicacionId', component: RegistrarMantenimientoComponent, canActivate: [SeguridadRouter]},
   { path: 'registrarMantenimiento/:id/:ubicacionId', component: RegistrarMantenimientoComponent, canActivate: [SeguridadRouter]},
-  { path: '', component: InicioComponent },
+  { path: 'inicio', component: InicioComponent },
   { path: 'pdf', component: PdfComponent},
 
 ];

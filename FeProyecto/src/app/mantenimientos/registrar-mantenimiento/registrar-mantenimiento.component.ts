@@ -7,7 +7,9 @@ import { Mantenimiento } from '../mantenimientos/mantenimiento.model';
 import { Item } from 'src/app/items/items/item.model';
 import { ItemsService } from 'src/app/items/items/items.service';
 import { ActivatedRoute, Router } from '@angular/router';
-
+import * as moment from 'moment';
+import 'moment/locale/es';
+declare var require: any;
 @Component({
   selector: 'app-registrar-mantenimiento',
   templateUrl: './registrar-mantenimiento.component.html',
@@ -39,16 +41,16 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
     private mantenimientoService: MantenimientoService,
     private ubicacionesService: UbicacionesService,
     private fb: FormBuilder,
-    private itemsService: ItemsService,private rutaActiva: ActivatedRoute,private router: Router
+    private itemsService: ItemsService, private rutaActiva: ActivatedRoute, private router: Router
   ) {
     this.mantenimientoForm = this.fb.group({
       elementos: ['', Validators.required],
       descripcion: ['', Validators.required],
       estado: ['', Validators.required],
       corregido: ['', Validators.required],
+      periocidad: ['', Validators.required],
       fechaMantenimiento: ['', Validators.required],
-      observaciones: ['', Validators.required],
-      // imagenes:['',Validators.required],
+      observaciones: [''],
     });
   }
 
@@ -67,7 +69,7 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
         observaciones: this.mantenimientoForm.get('observaciones')?.value,
         imagenes: [''],
         periocidad: '',
-        fecha: this.mantenimientoForm.get('fecha')?.value,
+        fecha: this.mantenimientoForm.get('fechaMantenimiento')?.value,
         item_id: this.mantenimientoForm.get('elementos')?.value,
         ubicacion_id: this.ubicacionId,
       };
@@ -81,86 +83,117 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
         .obtenerItemById(MANTENIMIENTO.item_id)
         .subscribe((item) => {
           this.itemDef = item;
-        });
-
-      //MANTENIMIENTO.periocidad = this.itemDef.periocidad;
-
-      //AÑADIR MANTENIMIENTO
-      this.mantenimientoService
-        .guardarMantenimiento(MANTENIMIENTO)
-        .subscribe((dato: any) => {
-          this.mantenimientoDef = dato;
-          MANTENIMIENTO.id = dato.id;
-          //AÑADIR PERIOCIDAD
-          this.mantenimientoDef.periocidad = this.itemDef.periocidad;
-
+          MANTENIMIENTO.periocidad = item.periocidad
+          //AÑADIR MANTENIMIENTO
           this.mantenimientoService
-            .updateMantenimiento(MANTENIMIENTO.id, this.mantenimientoDef)
-            .subscribe(() => {});
+            .guardarMantenimiento(MANTENIMIENTO)
+            .subscribe((dato: any) => {
+              this.mantenimientoDef = dato;
+              MANTENIMIENTO.id = dato.id;
+              //AÑADIR PERIOCIDAD
+              console.log(`periocidad del item: ${this.itemDef.periocidad}`)
+              /* this.mantenimientoDef.periocidad = this.itemDef.periocidad; */
 
-          this.ubicacionesService
-            .obtenerUbicacion(this.ubicacionId)
-            .subscribe((ubicacion: Ubicacion) => {
-              this.ubicacion = ubicacion;
-              this.ubicacionesService.updateMantenimiento(
-                this.ubicacionId,
-                ubicacion,
-                this.mantenimientoDef,
-                MANTENIMIENTO.id
-              );
+              this.mantenimientoService
+                .updateMantenimiento(MANTENIMIENTO.id, this.mantenimientoDef)
+                .subscribe(() => { });
+
+              this.ubicacionesService
+                .obtenerUbicacion(this.ubicacionId)
+                .subscribe((ubicacion: Ubicacion) => {
+                  this.ubicacion = ubicacion;
+                  this.ubicacionesService.updateMantenimiento(
+                    this.ubicacionId,
+                    ubicacion,
+                    this.mantenimientoDef,
+                    MANTENIMIENTO.id
+                  );
+                });
             });
         });
-        this.router.navigate(['/mantenimientos', this.ubicacionId]);
+
     } else {
       //modificamos item
+      this.mantenimientoService.obtenerMantenimientoById(this.id).subscribe((mant: Mantenimiento) => {
+        const MANTENIMIENTO: Mantenimiento = {
+          id: this.id,
+          descripcion: this.mantenimientoForm.get('descripcion')?.value,
+          estado: this.mantenimientoForm.get('estado')?.value,
+          corregido: this.mantenimientoForm.get('corregido')?.value,
+          observaciones: this.mantenimientoForm.get('observaciones')?.value,
+          imagenes: [''],
+          periocidad: mant.periocidad,
+          fecha: this.mantenimientoForm.get('fechaMantenimiento')?.value,
+          item_id: this.mantenimientoForm.get('elementos')?.value,
+          ubicacion_id: this.ubicacionId,
+        };
 
-      const MANTENIMIENTO: Mantenimiento = {
-        id: this.id,
-        descripcion: this.mantenimientoForm.get('descripcion')?.value,
-        estado: this.mantenimientoForm.get('estado')?.value,
-        corregido: this.mantenimientoForm.get('corregido')?.value,
-        observaciones: this.mantenimientoForm.get('observaciones')?.value,
-        imagenes: [''],
-        periocidad: "",
-        fecha: this.mantenimientoForm.get('fechaMantenimiento')?.value,
-        item_id: this.mantenimientoForm.get('elementos')?.value,
-        ubicacion_id: this.ubicacionId,
-      };
+        this.selectCorregido == 'true' ? (MANTENIMIENTO.corregido = true) : (MANTENIMIENTO.corregido = false);
 
-      this.selectCorregido == 'true'? (MANTENIMIENTO.corregido = true): (MANTENIMIENTO.corregido = false);
+        this.mantenimientoService.updateMantenimiento(this.id, MANTENIMIENTO).subscribe(() => { });
 
-      this.mantenimientoService.updateMantenimiento(this.id, MANTENIMIENTO).subscribe(() => {});
+        this.ubicacionesService
+          .obtenerUbicacion(this.ubicacionId)
+          .subscribe((ubicacion: Ubicacion) => {
+            this.ubicacion = ubicacion;
+            this.ubicacionesService.updateMantenimiento(
+              this.ubicacionId,
+              ubicacion,
+              MANTENIMIENTO,
+              MANTENIMIENTO.id
+            );
+          });
 
-      this.ubicacionesService
-        .obtenerUbicacion(this.ubicacionId)
-        .subscribe((ubicacion: Ubicacion) => {
-          this.ubicacion = ubicacion;
-          this.ubicacionesService.updateMantenimiento(
-            this.ubicacionId,
-            ubicacion,
-            MANTENIMIENTO,
-            MANTENIMIENTO.id
-          );
-        });
+      })
     }
-    this.router.navigate(['/mantenimientos', this.ubicacionId]);
+    setTimeout(() => {
+      this.router.navigate(['/mantenimientos', this.ubicacionId]);
+    }, 1000)
   }
-
-
-
-  onSelected(item: Item) {
-    this.selectItem = item;
-    this.mantenimientoForm.patchValue({
-      periocidad: item.periocidad,
+/*
+*Este método hace uso de la libreria Moment para sugerir la fecha del mantenimiento según la periocidad asignada al ítem
+*
+*/
+  fechaSugerida(periocidad:string){
+    const moment = require('moment');
+    var date = moment();
+    date.format()
+      switch (periocidad) {
+       case "diaria":
+         date.add(1,"days");
+         break;
+       case "semanal":
+         date.add(7,"days");
+         break;
+       case "mensual":
+         date.add(1,"months");
+         break;
+       case "trimestral":
+         date.add(3,"months");
+          break;
+     }
+     console.log("fecha2: "+this.parse(date))
+     date = this.parse(date);
+     (<HTMLInputElement>document.getElementsByName('fechaMantenimiento')[0]).placeholder = `Fecha sugerida: ${date}`;
+  }
+/*
+*Este método se ejecuta al seleccionar un ítem para hacerle un mantenimiento
+*/
+  onSelected(ob: any) {
+    let idForm = ob.value;
+    this.itemsService.obtenerItemById(idForm).subscribe((item: Item) => {
+      this.mantenimientoForm.patchValue({
+        periocidad: item.periocidad,
+      });
+      this.fechaSugerida(item.periocidad);
     });
   }
 
   ngOnInit(): void {
     this.obtenerId();
     this.obtenerUbicacionId();
-    //aqui
     this.mantenimientoForm.get('corregido').setValue('true');
-
+    console.log("elemento: " + this.mantenimientoForm.get('elementos'))
     if (this.id != undefined && this.ubicacionId != undefined) {
       this.esEditar();
     } else if (this.ubicacionId != undefined && this.id == undefined) {
@@ -171,8 +204,11 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
         });
     }
   }
-  ngOnDestroy(): void {}
-
+  ngOnDestroy(): void { }
+  parse(date: Date) {
+    var fecha = new Date(date)
+    return fecha.toLocaleDateString("es-ES")
+  }
   esEditar() {
     this.accion = 'Editar';
     this.mantenimientoService
@@ -180,21 +216,22 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
       .subscribe((dato: Mantenimiento) => {
         this.mantenimientoGuardado = dato;
         //comprobamos si el item a mantener está coregido o no y lo asignamos al formulario
-        this.mantenimientoGuardado.corregido == true? (this.corregido = 'true'): (this.corregido = 'false');
+        this.mantenimientoGuardado.corregido == true ? (this.corregido = 'true') : (this.corregido = 'false');
 
-        this.itemsService.obtenerItemById(this.mantenimientoGuardado.item_id).subscribe((item) => {
-            this.itemDef = item;
-            this.items[0] = item;
-            this.mantenimientoForm.patchValue({
-              elementos: item.id,
-              /* periocidad: item.periocidad, */
-              descripcion: this.mantenimientoGuardado.descripcion,
-              estado: this.mantenimientoGuardado.estado,
-              corregido: this.corregido,
-              fecha: this.mantenimientoGuardado.fecha,
-              observaciones: this.mantenimientoGuardado.observaciones,
-            });
+        this.itemsService.obtenerItemById(this.mantenimientoGuardado.item_id).subscribe((item: Item) => {
+          this.itemDef = item;
+          this.items[0] = item;
+          this.mantenimientoForm.patchValue({
+            elementos: item.id,
+            periocidad: item.periocidad,
+            descripcion: this.mantenimientoGuardado.descripcion,
+            estado: this.mantenimientoGuardado.estado,
+            corregido: this.corregido,
+            fechaMantenimiento: this.mantenimientoGuardado.fecha,
+            observaciones: this.mantenimientoGuardado.observaciones,
           });
+          this.fechaSugerida(item.periocidad);
+        });
       });
   }
 
@@ -205,14 +242,12 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
         this.ubicacion = ubicacion;
       });
   }
-   //obtiene el id
-   obtenerId() {
+  //obtiene el id
+  obtenerId() {
     this.id = this.rutaActiva.snapshot.params['id'];
-    console.log(`id item: ${this.id}`);
   }
-   //obtiene el id de la ubicacion de la url
-   obtenerUbicacionId() {
-    this.ubicacionId=  this.rutaActiva.snapshot.params['ubicacionId'];
-    console.log(`id ubicacion: ${this.ubicacionId}`);
+  //obtiene el id de la ubicacion de la url
+  obtenerUbicacionId() {
+    this.ubicacionId = this.rutaActiva.snapshot.params['ubicacionId'];
   }
 }

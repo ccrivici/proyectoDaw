@@ -17,7 +17,7 @@
   {{ accion }} Item
 </h3>
   <mat-form-field>
-    <mat-label>Selecione denominacion</mat-label>
+    <mat-label>Denominacion</mat-label>
     <mat-select
       formControlName="denominacion"
       name="denominacion"
@@ -31,7 +31,7 @@
   </mat-form-field>
   <!-- INGRESAR UBICACION -->
   <mat-form-field>
-    <mat-label>Ingrese Ubicacion</mat-label>
+    <mat-label>Ubicacion</mat-label>
     <input
       matInput
       placeholder="Elija ubicacion"
@@ -42,7 +42,7 @@
   </mat-form-field>
   <!-- SELECCIONAR CONJUNTO DE EQUIPOS -->
   <mat-form-field>
-    <mat-label>Seleccione conjunto de equipos</mat-label>
+    <mat-label>Conjunto de equipos</mat-label>
     <mat-select
       formControlName="conjuntoEquipo"
       name="conjuntoEquipo"
@@ -63,7 +63,7 @@
   <mat-form-field
     *ngIf="selectconjuntoEquipo == 'totem de identificacion doble'"
   >
-    <mat-label>Seleccione tipo de equipo1</mat-label>
+    <mat-label>Tipo de equipo1</mat-label>
     <mat-select formControlName="equipo" name="equipo">
       <mat-option value="panel pc">panel pc</mat-option>
       <mat-option value="lector de tarjetas Mifare"
@@ -76,7 +76,7 @@
 
   <!-- TOTEM DE CAMARAS -->
   <mat-form-field *ngIf="selectconjuntoEquipo == 'totem de camaras'">
-    <mat-label>Seleccione tipo cámara</mat-label>
+    <mat-label>Tipo cámara</mat-label>
     <mat-select formControlName="equipo" name="equipo">
       <mat-option value="camara lectura matriculas"
         >camara lectura matriculas</mat-option
@@ -86,7 +86,7 @@
   </mat-form-field>
   <!-- TORNIQUETE DE PERSONAS -->
   <mat-form-field *ngIf="selectconjuntoEquipo == 'torniquete de peatones'">
-    <mat-label>Seleccione tipo de elemento del torniquete</mat-label>
+    <mat-label>Tipo de elemento del torniquete</mat-label>
     <mat-select formControlName="equipo" name="equipo">
       <mat-option value="dispositivo I/O">dispositivo I/O</mat-option>
       <mat-option value="lector de tarjetas Mifare"
@@ -97,7 +97,7 @@
   </mat-form-field>
   <!-- PUESTO DE VIGILANCIA -->
   <mat-form-field *ngIf="selectconjuntoEquipo == 'puesto de vigilancia'">
-    <mat-label>Seleccione equipo del puesto de vigilancia</mat-label>
+    <mat-label>Equipo del puesto de vigilancia</mat-label>
     <mat-select formControlName="equipo" name="equipo">
       <mat-option value="servidor">servidor</mat-option>
       <mat-option value="sai">sai</mat-option>
@@ -117,7 +117,7 @@
   </mat-form-field>
   <!-- MARCA/MODELO -->
   <mat-form-field>
-    <mat-label>Ingrese Marca/Modelo</mat-label>
+    <mat-label> Marca/Modelo</mat-label>
     <input
       matInput
       placeholder="Ingrese la marca y el modelo"
@@ -128,7 +128,7 @@
   </mat-form-field>
   <!-- PERIOCIDAD -->
   <mat-form-field>
-    <mat-label>Seleccione la periocidad</mat-label>
+   <mat-label>Periocidad</mat-label>
     <mat-select
       formControlName="periocidad"
       [(ngModel)]="selectPeriocidad"
@@ -142,7 +142,7 @@
   </mat-form-field>
   <!-- CATEGORIA -->
   <mat-form-field>
-    <mat-label>Seleccione Categoria</mat-label>
+    <mat-label>Categoria</mat-label>
     <mat-select
       formControlName="categoria"
       [(ngModel)]="selectCategoria"

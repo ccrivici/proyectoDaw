@@ -8,7 +8,7 @@ import { SeguridadService } from 'src/app/seguridad/seguridad.service';
   styleUrls: ['./menu-lista.component.css']
 })
 export class MenuListaComponent implements OnInit, OnDestroy {
-  @Output() menuToggle = new EventEmitter;
+  @Output() menuToggle = new EventEmitter<void>();
   estadoUsuario!: boolean;
   usuarioSubscription!: Subscription;
 

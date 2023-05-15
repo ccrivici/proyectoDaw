@@ -1,5 +1,5 @@
 <mat-nav-list>
-  <a mat-list-item routerLink="/" (click)="onCerrarMenu()">
+  <a mat-list-item routerLink="/inicio" (click)="onCerrarMenu()">
     <mat-icon>home</mat-icon>
     <span class="navigation-list-label">Inicio</span>
   </a>
@@ -9,7 +9,7 @@
   >
   <a mat-list-item routerLink="/login" (click)="onCerrarMenu()" *ngIf="!estadoUsuario">
     <mat-icon>login</mat-icon>
-    <span class="navigation-list-label">Login</span></a
+    <span class="navigation-list-label">Acceso</span></a
   >
   <mat-list-item>
     <button mat-icon-button (click)="terminarSesionMenu()" *ngIf="estadoUsuario">

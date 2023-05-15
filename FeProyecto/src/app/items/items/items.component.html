@@ -1,9 +1,39 @@
-<div fxLayout="column" fxLayoutAlign="center center">
-  <mat-form-field style="margin-top: 10px">
-    <input matInput type="text" (keyup)="hacerFiltro($event)" placeholder="Texto de Búsqueda"  />
-  </mat-form-field>
-</div>
+<div fxLayoutAlign style="padding-top: 2vh;">
+  <div class="content" fxLayout="row" fxFlexFill>
+    <mat-form-field fxFlex="55%" style="margin-top:10px">
+      <input matInput type="text" (keyup)="hacerFiltro($event)" placeholder="Buscar ítem">
+    </mat-form-field>
+    <!-- AÑADIR ITEM -->
+    <button fxFlex ="15%"  style="height: 54px; min-height: 100%; min-width: 100%; width: 100%; margin-top:10px;margin-left:80px"
+          mat-raised-button
+          type="submit"
+          value="{{ id }}">
+          <a [routerLink]="['/registrar', this.idUbicacion]">
+            Añadir Item<mat-icon style="padding-left: 5px">
+              add_circle</mat-icon></a>
+    </button>
+    <!-- AÑADIR MANTENIMIENTO -->
+    <button fxFlex ="15%"  style="height: 54px; min-height: 100%; min-width: 100%; width: 100%; margin-left: 40px; margin-top:10px"
+          mat-raised-button
+          type="submit"
+          value="{{ id }}">
+          <a [routerLink]="['/registrarMantenimiento', this.idUbicacion]">
+            Añadir Mantenimiento<mat-icon style="padding-left: 5px">
+              edit_document</mat-icon></a>
+    </button>
+    <!-- VOLVER -->
+    <button  fxFlex ="8%"  style="height: 54px; min-height: 100%; min-width: 100%; width: 100%; margin-left: 40px; margin-top:10px"
+    mat-raised-button
+    type="submit"
+    value="{{ id }}">
+    <a (click)="goBack()">
+      Volver<mat-icon style="padding-left: 5px">
+        arrow_back</mat-icon></a>
+    </button>
 
+
+  </div>
+</div>
 <mat-table [dataSource]="dataSource"  matSort
 (matSortChange)="ordenarColumna($event)">
   <ng-container matColumnDef="denominacion">

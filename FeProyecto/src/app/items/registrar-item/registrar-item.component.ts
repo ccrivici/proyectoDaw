@@ -86,6 +86,7 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
         });
       });
       this.router.navigate(['/items', this.ubicacionId]);
+
     } else {
       //modificamos item
 
@@ -177,10 +178,6 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy(): void {
-    /* if (this.ubicacionSubscription != undefined) {
-
-      this.ubicacionSubscription.unsubscribe();
-    } */
   }
   //obtiene el id  y el id de la ubicacion de la url
   obtenerId() {

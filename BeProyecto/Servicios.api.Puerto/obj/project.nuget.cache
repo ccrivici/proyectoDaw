@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "d2DkuRae44vS1WN8Ud8G4zZnMCZpPW4fC9rqE708Dt6J3OwiLDyRIlJk10u16xiipEjGlZPYZg9WcaoFym88mQ==",
+  "dgSpecHash": "oYSBN4ztJSH9cQIaQSpQuqN24BG1jDnDPtAtY7JeoAH7bLoHfq0QmU+vOrM7FAeAuXmoiNnpS9v9DmEMY1aEBA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\carlos.crivicich\\Desktop\\proyecto\\proyectoDaw\\BeProyecto\\Servicios.api.Puerto\\Servicios.api.Puerto.csproj",
+  "projectFilePath": "C:\\Users\\carlos.crivicich\\Desktop\\composeTest\\prueba2\\BeProyecto\\Servicios.api.Puerto\\Servicios.api.Puerto.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\carlos.crivicich\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\carlos.crivicich\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",
@@ -44,6 +44,7 @@
     "C:\\Users\\carlos.crivicich\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "C:\\Users\\carlos.crivicich\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\carlos.crivicich\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\carlos.crivicich\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.2\\microsoft.visualstudio.azure.containers.tools.targets.1.17.2.nupkg.sha512",
     "C:\\Users\\carlos.crivicich\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\carlos.crivicich\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\carlos.crivicich\\.nuget\\packages\\mongodb.bson\\2.19.1\\mongodb.bson.2.19.1.nupkg.sha512",

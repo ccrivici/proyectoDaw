@@ -1,0 +1,8 @@
+db.Items.find()
+use PuertoMongoDB
+usePuertoMongoDB
+db.items.find()
+db.Items.find()
+show collections
+use PuertoMongoDB
+uise PuertoMongoDB

@@ -60,7 +60,7 @@ export class SeguridadService {
       this.seguridadCambio.next(true);
       //token
       localStorage.setItem('token', response.token);
-      this.router.navigate(['/']);
+      this.router.navigate(['/inicio']);
     });
 
 

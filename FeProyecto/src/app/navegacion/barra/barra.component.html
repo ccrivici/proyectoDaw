@@ -1,19 +1,5 @@
 <mat-toolbar style="background-color: #4b9fe1">
-  <div class="logo_container">
-    <span class="logo_helper"></span>
-    <a href="https://www.puertohuelva.com/">
-      <img
-        src="https://www.puertohuelva.com/wp-content/uploads/2020/04/LOGO-PUERTO-Y-MINISTERIO-TRANSPORTE.png"
-        width="500"
-        height="80"
-        alt="Puerto de Huelva"
-        id="logo"
-        data-height-percentage="56"
-        data-actual-width="1080"
-        data-actual-height="174"
-      />
-    </a>
-  </div>
+  <div fxLayoutAlign="center" class="titulo"><a>GESTION DE MANTENIMIENTOS (APH)</a></div>
   <ul
     fxFlex
     fxLayout="row"
@@ -21,7 +7,7 @@
     fxLayoutAlign="flex-center"
     class="navegacion-menu"
   >
-    <div fxFlex fxLayoutAlign="flex">
+    <div fxFlex fxLayoutAlign="center" style="padding-left: 12vh;">
       <li>
         <button mat-icon-button routerLink="/puertos">
           <mat-icon>anchor</mat-icon></button
@@ -33,19 +19,18 @@
         ><a routerLink="/edificios">Edificios</a>
       </li>
     </div>
-
     <div fxFlex fxLayoutAlign="flex-end">
       <li>
-        <button mat-icon-button routerLink="/">
+        <button mat-icon-button routerLink="/inicio">
           <mat-icon>home</mat-icon></button
-        ><a routerLink="/">Home</a>
+        ><a routerLink="/inicio">Inicio</a>
       </li>
 
       <li>
         <button mat-icon-button (click)="onMenuToggleDispatch()">
           <mat-icon>manage_accounts</mat-icon>
         </button>
-        <a (click)="onMenuToggleDispatch()">User</a>
+        <a (click)="onMenuToggleDispatch()">Usuario</a>
       </li>
     </div>
   </ul>

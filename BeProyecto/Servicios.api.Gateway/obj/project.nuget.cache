@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Hst7f9A8WDu31CtOeMAysfz/Tn5m1B3O9WDF1S75nq28x5xOzJjSCmQrxvqBDwwQJVi4TV9/3vSccjmRjeXSkg==",
+  "dgSpecHash": "vJbkarOk7ATVj0oAMTFijdqMCOFMonHGXGOTDB4gX8iZ05i7towgs99jC8iF1lw8nssZuzb1gtmc2Gc8QPBQ9Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\carlos.crivicich\\Desktop\\proyecto\\proyectoDaw\\BeProyecto\\Servicios.api.Gateway\\Servicios.api.Gateway.csproj",
+  "projectFilePath": "C:\\Users\\carlos.crivicich\\Desktop\\composeTest\\prueba2\\BeProyecto\\Servicios.api.Gateway\\Servicios.api.Gateway.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\carlos.crivicich\\.nuget\\packages\\fluentvalidation\\10.3.6\\fluentvalidation.10.3.6.nupkg.sha512",
     "C:\\Users\\carlos.crivicich\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.16\\microsoft.aspnetcore.authentication.jwtbearer.6.0.16.nupkg.sha512",
@@ -17,6 +17,7 @@
     "C:\\Users\\carlos.crivicich\\.nuget\\packages\\microsoft.identitymodel.protocols\\6.10.0\\microsoft.identitymodel.protocols.6.10.0.nupkg.sha512",
     "C:\\Users\\carlos.crivicich\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\6.10.0\\microsoft.identitymodel.protocols.openidconnect.6.10.0.nupkg.sha512",
     "C:\\Users\\carlos.crivicich\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.10.0\\microsoft.identitymodel.tokens.6.10.0.nupkg.sha512",
+    "C:\\Users\\carlos.crivicich\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.2\\microsoft.visualstudio.azure.containers.tools.targets.1.17.2.nupkg.sha512",
     "C:\\Users\\carlos.crivicich\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\carlos.crivicich\\.nuget\\packages\\newtonsoft.json.bson\\1.0.2\\newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "C:\\Users\\carlos.crivicich\\.nuget\\packages\\ocelot\\18.0.0\\ocelot.18.0.0.nupkg.sha512",

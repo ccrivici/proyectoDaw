@@ -3,6 +3,15 @@ mat-table {
   table-layout: auto;
 }
 
+mat-table,
+mat-paginator{
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.8); /* Agrega un efecto de sombra */
+  /* o */
+  /* box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3); Agrega un efecto más elevado (raised) */
+  border-radius: 3px; /* Agrega bordes redondeados */
+  overflow: hidden; /* Evita que la sombra se muestre fuera del borde */
+}
+
 mat-cell {
   justify-content: center;
   width: auto;
@@ -16,17 +25,18 @@ mat-header-cell {
   table-layout: auto;
 }
 
+mat-header-cell.mat-column-generarPdf {
+  min-width: 200px;
+}
+
 mat-cell,
 mat-header-cell {
-  min-width: 150px;
+  min-width: 170px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-mat-header-cell.mat-column-generarPdf {
-  min-width: 200px;
-}
 .table-container {
   width: 100%;
   overflow-x: auto;
@@ -49,3 +59,7 @@ a {
   text-decoration: none;
 }
 
+a {
+  color: #2b7cd8;
+  text-decoration: none;
+}

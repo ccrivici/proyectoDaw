@@ -8,16 +8,20 @@ import { UbicacionesService } from 'src/app/ubicaciones/ubicaciones/ubicaciones.
 import { EdificioService } from './edificio.service';
 import { Subject, Subscription } from 'rxjs';
 import { PaginationUbicaciones } from 'src/app/ubicaciones/ubicaciones/pagination-ubicaciones.model';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
+import { CustomPaginator } from 'src/app/paginator';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-edificio',
   templateUrl: './edificio.component.html',
-  styleUrls: ['./edificio.component.css']
+  styleUrls: ['./edificio.component.css'],
+  providers: [
+    { provide: MatPaginatorIntl, useValue: CustomPaginator("Edificios por página") }
+  ]
 })
 export class EdificioComponent implements AfterViewInit {
 
@@ -33,7 +37,7 @@ export class EdificioComponent implements AfterViewInit {
   edificiosData: Ubicacion[] = [];
   //paginacion
   totalEdificios = 0;
-  edificiosPorPagina = 2;
+  edificiosPorPagina = 5;
   paginaCombo = [1, 2, 5, 10];
   paginaActual = 1;
   sort = 'titulo';
@@ -54,6 +58,7 @@ export class EdificioComponent implements AfterViewInit {
     this.idUbicacion = this.obtenerId();
     this.edificioService.obtenerEdificios(this.edificiosPorPagina, this.paginaActual, this.sort, this.sortDirection, this.filterValue);
     this.ubicacionesSubscription = this.edificioService.obtenerActualListenerPag().subscribe((pagination: PaginationUbicaciones) => {
+      pagination.data.filter(edificio => edificio.tipo === "edificio")
       this.dataSourceEdificios = new MatTableDataSource<Ubicacion>(pagination.data);
       this.totalEdificios = pagination.totalRows
     });
@@ -102,10 +107,16 @@ export class EdificioComponent implements AfterViewInit {
     //esta función se ejectua cuando el usuario deje de escribir por mas de un segundo
     this.timeout = setTimeout(() => {
       if (event.keycode !== 13) {
-        const filterValueLocal = {
+        var filterValueLocal = {
           propiedad: 'nombre',
           valor: event.target.value
         };
+        if ("puerto".includes(event.target.value)){
+          filterValueLocal = {
+            propiedad: 'tipo',
+            valor: "edificio"
+          };
+        }
         $this.filterValue = filterValueLocal;
 
         //aqui obtenemos los libros pasando como filtro la constante creada antes

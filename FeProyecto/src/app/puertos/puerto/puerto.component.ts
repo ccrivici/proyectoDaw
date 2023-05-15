@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subject, Subscription, timeout } from 'rxjs';
@@ -11,22 +11,26 @@ import { PuertoService } from './puerto.service';
 import { PageEvent } from '@angular/material/paginator';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
+import {MatPaginatorIntl} from '@angular/material/paginator';
+import { CustomPaginator } from 'src/app/paginator';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-puerto',
   templateUrl: './puerto.component.html',
-  styleUrls: ['./puerto.component.css']
+  styleUrls: ['./puerto.component.css'],
+  providers: [
+    { provide: MatPaginatorIntl, useValue: CustomPaginator("Puertos por página") }
+  ]
 })
 export class PuertoComponent implements OnInit, OnDestroy {
   idUbicacion!: string;
   ubicacion!: any;
-/*   desplegarColumnas = ["denominacion", 'ubicacion', 'conjuntoEquipo', 'equipo', 'marcaModelo', 'periocidad', 'categoria', 'modificar', 'eliminar'];
- */  dataSource = new MatTableDataSource<Item>();
+  dataSource = new MatTableDataSource<Item>();
   puertosData: Ubicacion[] = [];
-  //paginacion
+  //paginacion paginacion
   totalPuertos = 0;
-  puertosPorPagina = 2;
+  puertosPorPagina = 5;
   paginaCombo = [1, 2, 5, 10];
   paginaActual = 1;
   sort = 'titulo';
@@ -44,11 +48,9 @@ export class PuertoComponent implements OnInit, OnDestroy {
   private ubicacionesSubscription!: Subscription;
   timeout:any = null;
 
-
     //variable para guardar ubicacion en la que guardar el pdf
     ubicacionDef: any
     mantenimientos: any[] = [];
-
 
   constructor(private itemsService: ItemsService, private ubicacionesService: UbicacionesService, private router: Router,private puertoService :PuertoService) { }
 
@@ -58,6 +60,7 @@ export class PuertoComponent implements OnInit, OnDestroy {
 
     this.puertoService.obtenerPuertos(this.puertosPorPagina, this.paginaActual, this.sort, this.sortDirection, this.filterValue);
     this.ubicacionesSubscription = this.puertoService.obtenerActualListenerPag().subscribe((pagination: PaginationUbicaciones) => {
+      pagination.data.filter(edificio => edificio.tipo === "puerto")
       this.dataSourcePuertos = new MatTableDataSource<Ubicacion>(pagination.data);
       this.puertasos = pagination.data;
       this.totalPuertos = pagination.totalRows;
@@ -86,10 +89,10 @@ export class PuertoComponent implements OnInit, OnDestroy {
       console.log(error);
     })
   }
-
+/*
   editItem(id: string) {
     this.router.navigate(['registrar?id={{id}}']);
-  }
+  } */
   obtenerId() {
     const valores = window.location.search;
     const urlParams = new URLSearchParams(valores);
@@ -115,10 +118,16 @@ export class PuertoComponent implements OnInit, OnDestroy {
     //esta función se ejectua cuando el usuario deje de escribir por mas de un segundo
     this.timeout = setTimeout(() => {
       if (event.keycode !== 13) {
-        const filterValueLocal = {
+        var filterValueLocal = {
           propiedad: 'nombre',
           valor: event.target.value
         };
+        if ("edificio".includes(event.target.value)){
+          filterValueLocal = {
+            propiedad: 'tipo',
+            valor: "puerto"
+          };
+        }
         $this.filterValue = filterValueLocal;
 
         //aqui obtenemos los libros pasando como filtro la constante creada antes

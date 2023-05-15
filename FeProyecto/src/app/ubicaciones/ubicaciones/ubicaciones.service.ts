@@ -111,10 +111,21 @@ export class UbicacionesService{
       }
       contador++;
     })
+    contador = 0;
+    ubicacion.mantenimientos.forEach(element =>{
+        if (element.item_id == itemId){
+          ubicacion.mantenimientos.splice(contador,1);
+        }
+        contador++;
+    })
 
     this.http.put<Ubicacion>(this.baseUrl + `/ubicacion/${ubicacion.id}`,ubicacion).subscribe((data) => {
-      console.log(data)
+      console.log("cambiadoddddd: "+data)
+      setTimeout(()=>{
+         window.location.reload();
+      },1000)
   });
+
 
   }
 
@@ -128,7 +139,10 @@ export class UbicacionesService{
     })
 
     this.http.put<Ubicacion>(this.baseUrl + `/ubicacion/${ubicacion.id}`,ubicacion).subscribe((data) => {
-      console.log(data)
+      console.log("cambiadoddddd: "+data)
+      setTimeout(()=>{
+         window.location.reload();
+      },1000)
   });
   }
 

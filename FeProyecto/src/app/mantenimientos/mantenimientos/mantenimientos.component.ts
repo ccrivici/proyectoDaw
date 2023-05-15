@@ -8,16 +8,20 @@ import { Ubicacion } from 'src/app/ubicaciones/ubicaciones/ubicacion.model';
 import { DateAdapter } from '@angular/material/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { PaginationMantenimientos } from './pagination-mantenimientos';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { ConfirmDialogComponent } from 'src/app/dialog/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { CustomPaginator } from 'src/app/paginator';
 
 
 
 @Component({
   selector: 'app-mantenimientos',
   templateUrl: './mantenimientos.component.html',
-  styleUrls: ['./mantenimientos.component.css']
+  styleUrls: ['./mantenimientos.component.css'],
+  providers: [
+    { provide: MatPaginatorIntl, useValue: CustomPaginator("Mantenimientos por página") }
+  ]
 })
 export class MantenimientosComponent implements OnInit {
   private mantenimientoSubscription!: Subscription
@@ -56,10 +60,10 @@ export class MantenimientosComponent implements OnInit {
 
     this.mantenimientoService.obtenerMantenimientosPag(this.mantenimientosPorPagina, this.paginaActual, this.sort, this.sortDirection, this.filterValue);
     this.mantenimientoSubscription = this.mantenimientoService.obtenerActualListener().subscribe((pagination: PaginationMantenimientos) => {
+      pagination.data.filter(mantenimiento => mantenimiento.ubicacion_id == response.id)
       this.dataSource = new MatTableDataSource<Mantenimiento>(pagination.data);
       this.totalMantenimientos = pagination.totalRows
     });
-
 
 
     this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe(response=>{
@@ -90,12 +94,14 @@ export class MantenimientosComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
-        // Aquí elimina el registro utilizando el ID
-        this.mantenimientoService.deleteMantenimiento(id).subscribe(data =>{
-          this.ubicacionesService.deleteMantenimientoFromUbicacion(this.ubicacion,id);
-        });
+        this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe((ubicacion:Ubicacion)=>{
+          this.mantenimientoService.deleteMantenimiento(id).subscribe(data =>{
+            this.ubicacionesService.deleteMantenimientoFromUbicacion(ubicacion,id);
+          });
+        })
+
       }
-      window.location.reload();
+
     });
     //actualizamos la lista de items de la ubicacion
   }
@@ -106,7 +112,6 @@ export class MantenimientosComponent implements OnInit {
     this.id = this.rutaActiva.snapshot.params['id'];
   }
 
-
   //MÉTODOS PARA PAGINAR
 
   hacerFiltro(event: any) {
@@ -114,16 +119,26 @@ export class MantenimientosComponent implements OnInit {
     var $this = this;
     //esta función se ejectua cuando el usuario deje de escribir por mas de un segundo
     this.timeout = setTimeout(() => {
+      this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe((response:Ubicacion) => {
       if (event.keycode !== 13) {
-        const filterValueLocal = {
+        console.log("filtro lleno")
+        var filterValueLocal = {
           propiedad: 'descripcion',
           valor: event.target.value
         };
+        if (event.target.value === ""){
+          console.log("filtro vacio: "+this.idUbicacion)
+          filterValueLocal = {
+            propiedad: 'ubicacion_id',
+            valor: this.idUbicacion
+          };
+        }
         $this.filterValue = filterValueLocal;
 
         //aqui obtenemos los libros pasando como filtro la constante creada antes
         $this.mantenimientoService.obtenerMantenimientosPag($this.mantenimientosPorPagina, $this.paginaActual, $this.sort, $this.sortDirection, filterValueLocal);
       }
+    });
     }, 1000);
   }
   eventoPaginador(event: PageEvent): void {

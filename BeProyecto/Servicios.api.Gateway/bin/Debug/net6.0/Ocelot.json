@@ -5,8 +5,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "8591"
+          "Host": "api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/item",
@@ -22,8 +22,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "8591"
+          "Host": "api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/item/{id}",
@@ -39,8 +39,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "8591"
+          "Host": "api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/mantenimiento",
@@ -56,8 +56,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "8591"
+          "Host": "api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/mantenimiento/{id}",
@@ -73,8 +73,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "8591"
+          "Host": "api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/ubicacion",
@@ -90,8 +90,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "8591"
+          "Host": "api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/ubicacion/{id}",
@@ -109,8 +109,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "8591"
+          "Host": "api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/item/pagination",
@@ -127,8 +127,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "8591"
+          "Host": "api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/ubicacion/pagination",
@@ -144,8 +144,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "8591"
+          "Host": "api",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/mantenimiento/pagination",
@@ -162,8 +162,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "8592"
+          "Host": "seguridad",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/usuario",
@@ -175,8 +175,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "8592"
+          "Host": "seguridad",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/usuario/registrar",
@@ -188,8 +188,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "8592"
+          "Host": "seguridad",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/usuario/login",
