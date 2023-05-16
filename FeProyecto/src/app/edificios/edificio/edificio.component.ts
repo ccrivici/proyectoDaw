@@ -6,13 +6,13 @@ import { ItemsService } from 'src/app/items/items/items.service';
 import { Ubicacion } from 'src/app/ubicaciones/ubicaciones/ubicacion.model';
 import { UbicacionesService } from 'src/app/ubicaciones/ubicaciones/ubicaciones.service';
 import { EdificioService } from './edificio.service';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { PaginationUbicaciones } from 'src/app/ubicaciones/ubicaciones/pagination-ubicaciones.model';
 import { MatPaginator, MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
-import { CustomPaginator } from 'src/app/paginator';
+import { CustomPaginator, Utils } from 'src/app/paginator';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -47,7 +47,7 @@ export class EdificioComponent implements AfterViewInit {
     valor: "edificio"
   }
   timeout: any = null;
-
+ util:Utils;
   //variable para guardar ubicacion en la que guardar el pdf
   ubicacionDef: any
   mantenimientos: any[] = [];
@@ -55,6 +55,8 @@ export class EdificioComponent implements AfterViewInit {
   constructor(private itemsService: ItemsService, private ubicacionesService: UbicacionesService, private router: Router, private edificioService: EdificioService) { }
 
   ngOnInit(): void {
+    this.util = new Utils();
+    this.util.mostrar2("Vista de Edificios");
     this.idUbicacion = this.obtenerId();
     this.edificioService.obtenerEdificios(this.edificiosPorPagina, this.paginaActual, this.sort, this.sortDirection, this.filterValue);
     this.ubicacionesSubscription = this.edificioService.obtenerActualListenerPag().subscribe((pagination: PaginationUbicaciones) => {
@@ -75,7 +77,6 @@ export class EdificioComponent implements AfterViewInit {
   mostrarItems(id: string) {
     this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe(response => {
       this.ubicacion = response;
-      console.log("nombre: " + this.ubicacion.nombre)
       this.dataSource = this.ubicacion.items;
     }, e => {
       console.log("error: " + e);

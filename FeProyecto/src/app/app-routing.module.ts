@@ -32,6 +32,7 @@ const routes: Routes = [
   { path: 'registrarMantenimiento/:id/:ubicacionId', component: RegistrarMantenimientoComponent, canActivate: [SeguridadRouter]},
   { path: 'inicio', component: InicioComponent },
   { path: 'pdf', component: PdfComponent},
+  { path: '', redirectTo: 'inicio', pathMatch: 'full' }, // Redirige al InicioComponent al inicio
 
 ];
 

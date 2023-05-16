@@ -9,6 +9,7 @@ import { ItemsService } from 'src/app/items/items/items.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import 'moment/locale/es';
+import { Utils } from 'src/app/paginator';
 declare var require: any;
 @Component({
   selector: 'app-registrar-mantenimiento',
@@ -35,6 +36,7 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
 
   corregido: string | undefined = undefined;
   item!: Item;
+  util: any;
   //borrar?
 
   constructor(
@@ -135,6 +137,7 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
         this.ubicacionesService
           .obtenerUbicacion(this.ubicacionId)
           .subscribe((ubicacion: Ubicacion) => {
+            this.util.mostrar2(`Editar Mantenimiento - ${ubicacion.nombre}`);
             this.ubicacion = ubicacion;
             this.ubicacionesService.updateMantenimiento(
               this.ubicacionId,
@@ -190,16 +193,18 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.util = new Utils();
     this.obtenerId();
     this.obtenerUbicacionId();
     this.mantenimientoForm.get('corregido').setValue('true');
-    console.log("elemento: " + this.mantenimientoForm.get('elementos'))
     if (this.id != undefined && this.ubicacionId != undefined) {
       this.esEditar();
     } else if (this.ubicacionId != undefined && this.id == undefined) {
       this.ubicacionesService
         .obtenerUbicacion(this.ubicacionId)
         .subscribe((ubicacion) => {
+          this.util.mostrar2(`Añadir Mantenimiento - ${ubicacion.nombre}`);
+
           this.items = ubicacion.items;
         });
     }
@@ -210,6 +215,11 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
     return fecha.toLocaleDateString("es-ES")
   }
   esEditar() {
+    this.ubicacionesService
+          .obtenerUbicacion(this.ubicacionId)
+          .subscribe((ubicacion: Ubicacion) => {
+            this.util.mostrar2(`Editar Mantenimiento - ${ubicacion.nombre}`);
+          });
     this.accion = 'Editar';
     this.mantenimientoService
       .obtenerMantenimientoById(this.id)

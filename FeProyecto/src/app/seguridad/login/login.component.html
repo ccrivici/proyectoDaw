@@ -1,4 +1,4 @@
-<section fxLayoutAlign="center">
+<section class="center-container">
   <mat-card>
     <form
       fxLayout="column"
@@ -7,24 +7,64 @@
       #f="ngForm"
       (ngSubmit)="loginUsuario(f)"
     >
-    <h1>Login</h1>
+      <h1>Login</h1>
       <mat-form-field>
         <mat-label>Ingrese un E-Mail</mat-label>
-        <input type="email" matInput placeholder="exampleMail@gmail.com" name="email" ngModel required email required #emailInput="ngModel" />
+        <input
+          type="email"
+          matInput
+          placeholder="exampleMail@gmail.com"
+          name="email"
+          ngModel
+          required
+          email
+          required
+          #emailInput="ngModel"
+        />
         <mat-error *ngIf="emailInput.hasError('required')"
-        >El E-mail no puede estar en blanco</mat-error>
-      <mat-error *ngIf="!emailInput.hasError('required')"
-        >El E-mail es invalido, debe ser formato E-mail válido</mat-error
+          >El E-mail no puede estar en blanco</mat-error
+        >
+        <mat-error *ngIf="!emailInput.hasError('required')"
+          >El E-mail es invalido, debe ser formato E-mail válido</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field
+        hintLabel="La contraseña debe tener minimo 7 caracteres, una mayúscula y una caracter especial ($%!..)"
       >
-      </mat-form-field>
-      <mat-form-field hintLabel="La contraseña debe tener minimo 7 caracteres, una mayúscula y una caracter especial ($%!..)">
         <mat-label>Ingrese la Contraseña</mat-label>
-        <input type="password" matInput placeholder="" ngModel name="password" required minlength="7" #pwdInput="ngModel" pattern="^(?=.*[A-Z])(?=.*[$!%*?&])[a-zA-Z\d$!%*?&]{1,}$"/>
-        <mat-error *ngIf="pwdInput.hasError('pattern')">La contraseña debe tener al menos una letra mayúscula y un caracter especial ($, !, %, *, ?, &)</mat-error>
-        <mat-error *ngIf="pwdInput.hasError('required')">La contraseña no puede estar en blanco</mat-error>
-        <mat-error *ngIf="pwdInput.hasError('minlength')">La contraseña debe tener más de 7 caracteres</mat-error>
+        <input
+          type="password"
+          matInput
+          placeholder=""
+          ngModel
+          name="password"
+          required
+          minlength="7"
+          #pwdInput="ngModel"
+          pattern="^(?=.*[A-Z])(?=.*[$!%*?&])[a-zA-Z\d$!%*?&]{1,}$"
+        />
+        <mat-error *ngIf="pwdInput.hasError('pattern')"
+          >La contraseña debe tener al menos una letra mayúscula y un caracter
+          especial ($, !, %, *, ?, &)</mat-error
+        >
+        <mat-error *ngIf="pwdInput.hasError('required')"
+          >La contraseña no puede estar en blanco</mat-error
+        >
+        <mat-error *ngIf="pwdInput.hasError('minlength')"
+          >La contraseña debe tener más de 7 caracteres</mat-error
+        >
       </mat-form-field>
-      <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Log In</button>
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="f.invalid"
+      >
+        <a
+          ><span style="margin-right: 5px">Acceso</span
+          ><mat-icon>login</mat-icon></a
+        >
+      </button>
     </form>
   </mat-card>
 </section>

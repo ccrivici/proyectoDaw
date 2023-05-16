@@ -49,7 +49,10 @@
       <mat-error *ngIf="pwdInput.hasError('minlength')">La contraseña debe tener más de 7 caracteres</mat-error>
 
     </mat-form-field>
-    <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Guardar</button>
+    <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid"><a
+      ><span style="margin-right: 5px">Registro</span
+      ><mat-icon>how_to_reg</mat-icon></a
+    ></button>
   </form>
 </mat-card>
 </section>

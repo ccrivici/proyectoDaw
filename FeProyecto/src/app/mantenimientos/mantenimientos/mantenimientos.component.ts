@@ -11,7 +11,7 @@ import { PaginationMantenimientos } from './pagination-mantenimientos';
 import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { ConfirmDialogComponent } from 'src/app/dialog/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { CustomPaginator } from 'src/app/paginator';
+import { CustomPaginator, Utils } from 'src/app/paginator';
 
 
 
@@ -26,7 +26,7 @@ import { CustomPaginator } from 'src/app/paginator';
 export class MantenimientosComponent implements OnInit {
   private mantenimientoSubscription!: Subscription
   mantenimientoData: Mantenimiento[] = [];
-  desplegarColumnas = ["descripcion","estado","corregido","observaciones","periocidad","fecha","imagenes","modificar","eliminar"];
+  desplegarColumnas = ["descripcion","estado","corregido","observaciones","periocidad","fecha","modificar","eliminar"];
   dataSource;
 
 
@@ -42,17 +42,19 @@ export class MantenimientosComponent implements OnInit {
   idUbicacion!: string;
   ubicacion!: Ubicacion;
   timeout: any = null;
+  util: any;
 
   constructor(private mantenimientoService: MantenimientoService,private ubicacionesService:UbicacionesService,private router:Router,private rutaActiva: ActivatedRoute,
   private readonly adapter: DateAdapter<Date>, public dialog: MatDialog) {}
 
   ngOnInit(): void {
     //Pagination
+    this.util = new Utils();
 
     this.obtenerId();
 
     this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe(response=>{
-
+      this.util.mostrar2(`Vista de Mantenimientos - ${response.nombre}`);
     this.filterValue= {
       propiedad: "ubicacion_id",
       valor: this.idUbicacion
@@ -108,7 +110,6 @@ export class MantenimientosComponent implements OnInit {
   //obtiene el id  y el id de la ubicacion de la url
   obtenerId() {
     this.idUbicacion=  this.rutaActiva.snapshot.params['ubicacionId'];
-    console.log(`id ubicacion: ${this.idUbicacion}`);
     this.id = this.rutaActiva.snapshot.params['id'];
   }
 
@@ -121,13 +122,11 @@ export class MantenimientosComponent implements OnInit {
     this.timeout = setTimeout(() => {
       this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe((response:Ubicacion) => {
       if (event.keycode !== 13) {
-        console.log("filtro lleno")
         var filterValueLocal = {
           propiedad: 'descripcion',
           valor: event.target.value
         };
         if (event.target.value === ""){
-          console.log("filtro vacio: "+this.idUbicacion)
           filterValueLocal = {
             propiedad: 'ubicacion_id',
             valor: this.idUbicacion
@@ -152,5 +151,8 @@ export class MantenimientosComponent implements OnInit {
     this.sortDirection = event.direction;
     //obtenemos la lista de libros pero con el event.active capturamos la columna que tiene que ser ordenada y la direccion
     this.mantenimientoService.obtenerMantenimientosPag(this.mantenimientosPorPagina, this.paginaActual, event.active, event.direction, this.filterValue);
+  }
+  goBack() {
+    window.history.back();
   }
 }

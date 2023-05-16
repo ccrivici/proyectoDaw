@@ -12,7 +12,7 @@ import { PageEvent } from '@angular/material/paginator';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import {MatPaginatorIntl} from '@angular/material/paginator';
-import { CustomPaginator } from 'src/app/paginator';
+import { CustomPaginator, Utils } from 'src/app/paginator';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -51,13 +51,14 @@ export class PuertoComponent implements OnInit, OnDestroy {
     //variable para guardar ubicacion en la que guardar el pdf
     ubicacionDef: any
     mantenimientos: any[] = [];
+  util: Utils;
 
   constructor(private itemsService: ItemsService, private ubicacionesService: UbicacionesService, private router: Router,private puertoService :PuertoService) { }
 
   ngOnInit(): void {
-
+    this.util = new Utils();
     this.idUbicacion = this.obtenerId();
-
+    this.util.mostrar2(`Vista de Puertos`);
     this.puertoService.obtenerPuertos(this.puertosPorPagina, this.paginaActual, this.sort, this.sortDirection, this.filterValue);
     this.ubicacionesSubscription = this.puertoService.obtenerActualListenerPag().subscribe((pagination: PaginationUbicaciones) => {
       pagination.data.filter(edificio => edificio.tipo === "puerto")
@@ -89,10 +90,6 @@ export class PuertoComponent implements OnInit, OnDestroy {
       console.log(error);
     })
   }
-/*
-  editItem(id: string) {
-    this.router.navigate(['registrar?id={{id}}']);
-  } */
   obtenerId() {
     const valores = window.location.search;
     const urlParams = new URLSearchParams(valores);

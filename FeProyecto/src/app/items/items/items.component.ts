@@ -10,7 +10,7 @@ import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/dialog/confirm-dialog/confirm-dialog.component';
 import { Ubicacion } from 'src/app/ubicaciones/ubicaciones/ubicacion.model';
-import { CustomPaginator } from 'src/app/paginator';
+import { CustomPaginator, Utils } from 'src/app/paginator';
 
 @Injectable({
   providedIn:'root'
@@ -55,6 +55,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   private itemsSubscription!: Subscription;
 
   timeout: any = null;
+  util: any;
   constructor(
     public dialog: MatDialog,
     private itemsService: ItemsService,
@@ -66,14 +67,13 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {}
   ngOnInit(): void {
+    this.util = new Utils();
+
     this.obtenerId();
     this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe(
       (response) => {
         this.ubicacion = response;
-        /* if (this.ubicacion != undefined){
-        this.dataSource = this.ubicacion.items;
-      } */
-
+        this.util.mostrar2(`Vista de Items - ${response.nombre}`);
         this.filterValue = {
           propiedad: 'denominacion',
           valor: this.ubicacion.nombre,
@@ -106,7 +106,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
     );
   }
   eliminar(id: string) {
-    console.log('eliminar item de la ubicacion ' + this.ubicacion.nombre);
     //eliminamos el elemento
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       data: {
@@ -126,8 +125,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
         item a borrar: ${id}
         `)
       this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe((ubicacion:Ubicacion)=>{
-        console.log(`uicacion a modi: ${ubicacion}
-        `)
           // Aquí elimina el registro utilizando el ID
           this.itemsService.deleteItem(id).subscribe(() => {
             this.ubicacionesService.deleteItemFromUbicacion(ubicacion, id);
@@ -141,15 +138,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
   }
   obtenerId() {
     this.idUbicacion=  this.rutaActiva.snapshot.params['ubicacionId']
-    console.log(`id ubicacion: ${this.idUbicacion}`)
   }
-
-  /* obtenerId() {
-    const valores = window.location.search;
-    const urlParams = new URLSearchParams(valores);
-    this.id = urlParams.get('id') + '';
-    this.idUbicacion = urlParams.get('Ubicacionid') + '';
-  } */
 
   //METODOS PARA PAGINACION
 
@@ -166,7 +155,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
           valor: event.target.value,
         };
           if (event.target.value === ""){
-            console.log("filtro vacio: "+this.idUbicacion)
             filterValueLocal = {
               propiedad: 'denominacion',
               valor: response.nombre
@@ -182,8 +170,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
             $this.sortDirection,
             filterValueLocal
           );
-
-
       }
     });
     }, 1000);

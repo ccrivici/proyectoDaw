@@ -1,26 +1,46 @@
-<div >
-  <mat-form-field fxFlex="55%"  style="margin-top: 10px">
-    <input matInput type="text" (keyup)="hacerFiltro($event)" placeholder="Texto de Búsqueda"  />
-  </mat-form-field>
+<div fxLayoutAlign style="padding-top: 2vh;">
+  <div class="content" fxLayout="row" fxFlexFill>
+    <mat-form-field fxFlex="55%" style="margin-top:10px">
+      <input matInput type="text" (keyup)="hacerFiltro($event)" placeholder="Buscar mantenimiento">
+    </mat-form-field>
+    <!-- AÑADIR MANTENIMIENTO -->
+    <button [routerLink]="['/registrarMantenimiento', this.idUbicacion]" fxFlex ="15%"  style="height: 54px; min-height: 100%; min-width: 100%; width: 100%; margin-top:10px;margin-left:120px"
+          mat-raised-button
+          type="submit"
+          value="{{ id }}">
+          <a >
+            Añadir Mantenimiento<mat-icon style="padding-left: 5px">
+              edit_document</mat-icon></a>
+    </button>
+    <!-- VOLVER -->
+    <button (click)="goBack()" fxFlex ="15%"  style="height: 54px; min-height: 100%; min-width: 100%; width: 100%; margin-left: 40px; margin-top:10px"
+    mat-raised-button
+    type="submit"
+    value="{{id}}">
+    <a>
+      Volver<mat-icon style="padding-left: 5px">
+        arrow_back</mat-icon></a>
+    </button>
+  </div>
 </div>
 <mat-table [dataSource]="dataSource" matSort
 (matSortChange)="ordenarColumna($event)">
   <ng-container matColumnDef="descripcion">
-    <mat-header-cell *matHeaderCellDef  mat-sort-header> descripcion</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef  mat-sort-header> Descripción</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.descripcion }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="estado">
-    <mat-header-cell *matHeaderCellDef  mat-sort-header> estado</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef  mat-sort-header> Estado</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.estado }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="corregido">
-    <mat-header-cell *matHeaderCellDef  mat-sort-header> corregido</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef  mat-sort-header> Corregido</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.corregido}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="observaciones">
-    <mat-header-cell *matHeaderCellDef  mat-sort-header> observaciones</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef  mat-sort-header> Observaciones</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.observaciones}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="periocidad">
@@ -28,20 +48,16 @@
     <mat-cell *matCellDef="let element">{{ element.periocidad}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="fecha">
-    <mat-header-cell *matHeaderCellDef  mat-sort-header> fecha</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef  mat-sort-header> Fecha</mat-header-cell>
     <mat-cell *matCellDef="let element">{{parse(element.fecha)}}</mat-cell>
   </ng-container>
-  <ng-container matColumnDef="imagenes">
-    <mat-header-cell *matHeaderCellDef  mat-sort-header> imagenes</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.imagenes }}</mat-cell>
-  </ng-container>
   <ng-container matColumnDef="modificar">
-    <mat-header-cell *matHeaderCellDef  mat-sort-header> modificar informe</mat-header-cell>
-    <mat-cell *matCellDef="let element" ><a  [routerLink]="['/registrarMantenimiento', element.id,idUbicacion]"><mat-icon>update</mat-icon></a></mat-cell>
+    <mat-header-cell *matHeaderCellDef  mat-sort-header> Modificar informe</mat-header-cell>
+    <mat-cell *matCellDef="let element" style="padding-left: 7vh;"><a  [routerLink]="['/registrarMantenimiento', element.id,idUbicacion]"><mat-icon>update</mat-icon></a></mat-cell>
   </ng-container>
   <ng-container matColumnDef="eliminar">
-    <mat-header-cell *matHeaderCellDef  mat-sort-header> eliminar informe</mat-header-cell>
-    <mat-cell *matCellDef="let element"><button class="eliminar-button" (click)="eliminar(element.id)"><mat-icon>delete_forever</mat-icon></button></mat-cell>
+    <mat-header-cell *matHeaderCellDef  mat-sort-header> Eliminar informe</mat-header-cell>
+    <mat-cell *matCellDef="let element" style="padding-left: 5vh;"><button class="eliminar-button" (click)="eliminar(element.id)"><mat-icon>delete</mat-icon></button></mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="desplegarColumnas"></mat-header-row>
@@ -50,3 +66,4 @@
 
 <mat-paginator (page)="eventoPaginador($event)" #paginacion [pageSize]="mantenimientosPorPagina" [pageSizeOptions]="paginaCombo" [length]="totalMantenimientos">
 </mat-paginator>
+

@@ -22,12 +22,16 @@ export class InicioComponent implements OnInit, OnDestroy {
   constructor(
     private seguridadService: SeguridadService,
     private changeDetectorRef: ChangeDetectorRef
-  ) {}
+  ) { }
   ngOnDestroy(): void {
     this.usuarioSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
+    // establecer estadoUsuario en true si hay un usuario activo
+    if (this.seguridadService.onSesion()) {
+      this.estadoUsuario = true;
+    }
     this.usuarioSubscription = this.seguridadService.seguridadCambio.subscribe(
       (status) => {
         this.estadoUsuario = status;

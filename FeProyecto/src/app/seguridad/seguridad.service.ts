@@ -100,8 +100,9 @@ export class SeguridadService {
 
   salirSesion() {
     this.usuario = undefined;
-    localStorage.removeItem('token');
     this.seguridadCambio.next(false);
+    localStorage.removeItem('token');
+    this.token = undefined;
     this.router.navigate(['/login']);
   }
 

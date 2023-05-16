@@ -6,6 +6,7 @@ import { Ubicacion } from 'src/app/ubicaciones/ubicaciones/ubicacion.model';
 import { Subscription } from 'rxjs';
 import { Item } from '../items/item.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Utils } from 'src/app/paginator';
 
 @Component({
   selector: 'app-registrar-item',
@@ -49,6 +50,7 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
   itemGuardado!: Item | any;
 
   itemDef!: Item;
+  util: any;
 
   constructor(private itemService: ItemsService, private ubicacionesService: UbicacionesService, private fb: FormBuilder,private router :Router,private rutaActiva: ActivatedRoute) {
     this.itemForm = this.fb.group({
@@ -124,17 +126,20 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
     });
   }
   ngOnInit(): void {
+    this.util = new Utils();
 
     this.obtenerId();
     console.log(`DATOS INICIALES:
     id elemento: ${this.id}
     id ubicacion: ${this.ubicacionId}`)
     if (this.id != undefined && this.ubicacionId != undefined) {
+
       console.log("editmaos")
       this.esEditar();
     } else if (this.ubicacionId != undefined && this.id == undefined) {
       console.log("añadimos")
       this.ubicacionesService.obtenerUbicacion(this.ubicacionId).subscribe(ubicacion => {
+        this.util.mostrar2(`Añadir Ítem - ${ubicacion.nombre}`);
         this.ubicaciones[0] = ubicacion;
         this.itemForm.patchValue({
           denominacion: ubicacion.nombre,
@@ -155,6 +160,7 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
       this.itemService.obtenerItemById(this.id).subscribe((dato: Item) => {
         this.itemGuardado = dato;
         this.ubicacionesService.obtenerUbicacion(this.ubicacionId).subscribe(ubicacion => {
+          this.util.mostrar2(`Editar Ítem - ${ubicacion.nombre}`);
           this.ubicaciones[0] = ubicacion;
           this.itemForm.patchValue({
             denominacion: ubicacion.nombre,
