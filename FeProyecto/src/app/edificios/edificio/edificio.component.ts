@@ -47,7 +47,7 @@ export class EdificioComponent implements AfterViewInit {
     valor: "edificio"
   }
   timeout: any = null;
- util:Utils;
+  util: Utils;
   //variable para guardar ubicacion en la que guardar el pdf
   ubicacionDef: any
   mantenimientos: any[] = [];
@@ -59,6 +59,7 @@ export class EdificioComponent implements AfterViewInit {
     this.util.mostrar2("Vista de Edificios");
     this.idUbicacion = this.obtenerId();
     this.edificioService.obtenerEdificios(this.edificiosPorPagina, this.paginaActual, this.sort, this.sortDirection, this.filterValue);
+      //cargamos la lista de ubicaciones de tipo Edificio paginado
     this.ubicacionesSubscription = this.edificioService.obtenerActualListenerPag().subscribe((pagination: PaginationUbicaciones) => {
       pagination.data.filter(edificio => edificio.tipo === "edificio")
       this.dataSourceEdificios = new MatTableDataSource<Ubicacion>(pagination.data);
@@ -74,34 +75,15 @@ export class EdificioComponent implements AfterViewInit {
     this.dataSourceEdificios.paginator = this.paginacion;
   }
 
-  mostrarItems(id: string) {
-    this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe(response => {
-      this.ubicacion = response;
-      this.dataSource = this.ubicacion.items;
-    }, e => {
-      console.log("error: " + e);
-    })
-  }
-
-  eliminar(id: string) {
-    this.itemsService.deleteItem(id).subscribe(eliminado => {
-      this.mostrarItems(this.idUbicacion);
-    }, error => {
-      console.log(error);
-    })
-  }
-
-  editItem(id: string) {
-    this.router.navigate(['registrar?id={{id}}']);
-  }
-
   obtenerId() {
     const valores = window.location.search;
     const urlParams = new URLSearchParams(valores);
     this.idUbicacion = urlParams.get('id') + "";
     return urlParams.get('id') + "";
   }
-
+  /*
+  * métodos para paginar
+  */
   hacerFiltro(event: any) {
     clearTimeout(this.timeout);
     var $this = this;
@@ -112,7 +94,7 @@ export class EdificioComponent implements AfterViewInit {
           propiedad: 'nombre',
           valor: event.target.value
         };
-        if ("puerto".includes(event.target.value)){
+        if ("puerto".includes(event.target.value)) {
           filterValueLocal = {
             propiedad: 'tipo',
             valor: "edificio"
@@ -137,8 +119,9 @@ export class EdificioComponent implements AfterViewInit {
     //obtenemos la lista de libros pero con el event.active capturamos la columna que tiene que ser ordenada y la direccion
     this.edificioService.obtenerEdificios(this.edificiosPorPagina, this.paginaActual, event.active, event.direction, this.filterValue);
   }
-
-  //métodos para generar el pdf
+    /*
+    *métodos para generar el pdf
+    */
   construirTabla2(datos, columnas) {
     var body = [];
     body.push(columnas);

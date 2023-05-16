@@ -13,8 +13,6 @@ import { ConfirmDialogComponent } from 'src/app/dialog/confirm-dialog/confirm-di
 import { MatDialog } from '@angular/material/dialog';
 import { CustomPaginator, Utils } from 'src/app/paginator';
 
-
-
 @Component({
   selector: 'app-mantenimientos',
   templateUrl: './mantenimientos.component.html',
@@ -28,7 +26,6 @@ export class MantenimientosComponent implements OnInit {
   mantenimientoData: Mantenimiento[] = [];
   desplegarColumnas = ["descripcion","estado","corregido","observaciones","periocidad","fecha","modificar","eliminar"];
   dataSource;
-
 
   //paginacion
   totalMantenimientos = 0;
@@ -48,7 +45,6 @@ export class MantenimientosComponent implements OnInit {
   private readonly adapter: DateAdapter<Date>, public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    //Pagination
     this.util = new Utils();
 
     this.obtenerId();

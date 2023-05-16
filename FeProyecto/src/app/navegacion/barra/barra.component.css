@@ -2,9 +2,17 @@ a {
   text-decoration: none;
   color: #fff;
 }
+
 a:hover,
-a:active {
+a:active,
+button:hover {
+  border: none;
+  color: #fff;
+  text-decoration: none;
+  vertical-align: middle;
+  outline: none !important; /* Agrega !important para anular cualquier estilo predeterminado */
   color: #dbcde6;
+  cursor: pointer;
 }
 
 .navegacion-menu {
@@ -74,4 +82,9 @@ button {
   box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
   height: 5vh;
   background-color: #4b9fe1;
+}
+
+.titulo a:hover,
+.titulo a:active {
+  color: #fff; /* Anula el color de hover para la clase .titulo */
 }

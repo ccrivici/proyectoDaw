@@ -9,6 +9,7 @@
       #f="ngForm">
       <div fxLayout="column" fxFlex="100">
         <div fxLayout="row" fxLayoutAlign="start start">
+          <!-- SELECCIÓN DE ÍTEM A MANTENER -->
           <mat-form-field>
             <mat-label>Elemento</mat-label>
             <mat-select
@@ -19,7 +20,7 @@
               <mat-option *ngFor="let item of items" value="{{ item.id }}">{{item.marcaModelo}}</mat-option>
             </mat-select>
           </mat-form-field>
-
+          <!-- ESTADO -->
           <mat-form-field>
             <mat-label>Estado</mat-label>
             <mat-select formControlName="estado" name="estado">
@@ -31,7 +32,7 @@
           </mat-form-field>
         </div>
       </div>
-
+          <!-- CORREGIDO -->
       <div fxLayout="column" fxFlex="100">
         <div fxLayout="row" fxLayoutAlign="start start">
           <mat-form-field>
@@ -45,8 +46,34 @@
               <mat-option value="false">No</mat-option>
             </mat-select>
           </mat-form-field>
-
-          <mat-form-field>
+            <!-- OBSERVACIONES -->
+            <mat-form-field>
+              <mat-label>Observaciones</mat-label>
+              <input
+                type="text"
+                formControlName="observaciones"
+                matInput
+                name="observacionMantenimiento"
+                ngModel
+              />
+            </mat-form-field>
+        </div>
+      </div>
+      <!-- PERIOCIDAD -->
+      <div fxLayout="column" fxFlex="100">
+        <div fxLayout="row" fxLayoutAlign="start start">
+          <mat-form-field fxFlex="100">
+            <mat-label>Periodicidad</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="periocidad"
+              name="periocidad"
+              readonly
+            />
+          </mat-form-field>
+          <!-- FECHA DE MANTENIMIENTO -->
+          <mat-form-field fxFlex="100">
             <input
               matInput
               formControlName="fechaMantenimiento"
@@ -62,33 +89,7 @@
           </mat-form-field>
         </div>
       </div>
-
-      <div fxLayout="column" fxFlex="100">
-        <div fxLayout="row" fxLayoutAlign="start start">
-          <mat-form-field fxFlex="100">
-            <mat-label>Periodicidad</mat-label>
-            <input
-              matInput
-              type="text"
-              formControlName="periocidad"
-              name="periocidad"
-              readonly
-            />
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-label>Observaciones</mat-label>
-            <input
-              type="text"
-              formControlName="observaciones"
-              matInput
-              name="observacionMantenimiento"
-              ngModel
-            />
-          </mat-form-field>
-        </div>
-      </div>
-
+      <!-- DESCRIPCIÓN -->
       <div fxLayout="column" fxFlex="85">
         <mat-form-field>
           <mat-label>Descripcion del Mantenimiento</mat-label>

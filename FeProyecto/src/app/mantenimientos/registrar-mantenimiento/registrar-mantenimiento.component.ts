@@ -7,7 +7,6 @@ import { Mantenimiento } from '../mantenimientos/mantenimiento.model';
 import { Item } from 'src/app/items/items/item.model';
 import { ItemsService } from 'src/app/items/items/items.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as moment from 'moment';
 import 'moment/locale/es';
 import { Utils } from 'src/app/paginator';
 declare var require: any;
@@ -20,7 +19,6 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
   selectItem!: Item;
   selectCorregido!: string;
 
-  selected = 'true';
 
   ubicacion!: Ubicacion;
   id!: string;
@@ -59,7 +57,9 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
   goBack() {
     window.history.back();
   }
-
+  /*
+  * Este método es llamado cuando el usuario hace click en el botón de añadir/editar mantenimientos del formulario
+  */
   registrarEditarMantenimiento() {
     if (this.mantenimientoGuardado == undefined) {
       console.log('AÑADIENDO MANTENIMIENTO');
@@ -85,6 +85,7 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
         .obtenerItemById(MANTENIMIENTO.item_id)
         .subscribe((item) => {
           this.itemDef = item;
+           //AÑADIR PERIOCIDAD
           MANTENIMIENTO.periocidad = item.periocidad
           //AÑADIR MANTENIMIENTO
           this.mantenimientoService
@@ -92,14 +93,11 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
             .subscribe((dato: any) => {
               this.mantenimientoDef = dato;
               MANTENIMIENTO.id = dato.id;
-              //AÑADIR PERIOCIDAD
-              console.log(`periocidad del item: ${this.itemDef.periocidad}`)
-              /* this.mantenimientoDef.periocidad = this.itemDef.periocidad; */
-
+              //actualizamos el Mantenimiento recién creado para asignarle el id que devuelve el Backend
               this.mantenimientoService
                 .updateMantenimiento(MANTENIMIENTO.id, this.mantenimientoDef)
                 .subscribe(() => { });
-
+              //buscamos la ubicación a la que pertenece ese Mantenimiento para añadirlo a la lista de Mantenimientos
               this.ubicacionesService
                 .obtenerUbicacion(this.ubicacionId)
                 .subscribe((ubicacion: Ubicacion) => {
@@ -129,7 +127,7 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
           item_id: this.mantenimientoForm.get('elementos')?.value,
           ubicacion_id: this.ubicacionId,
         };
-
+        //comprueba el valor del input select y le asigna valor a la propiedad corregido que es de tipo Boolean
         this.selectCorregido == 'true' ? (MANTENIMIENTO.corregido = true) : (MANTENIMIENTO.corregido = false);
 
         this.mantenimientoService.updateMantenimiento(this.id, MANTENIMIENTO).subscribe(() => { });
@@ -149,14 +147,14 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
 
       })
     }
+    //establecemos un Timeout para que tras haber añadido o actualizado el Mantenimiento cargue la lista de mantenimientos
     setTimeout(() => {
       this.router.navigate(['/mantenimientos', this.ubicacionId]);
     }, 1000)
   }
-/*
-*Este método hace uso de la libreria Moment para sugerir la fecha del mantenimiento según la periocidad asignada al ítem
-*
-*/
+  /*
+  *Este método hace uso de la libreria Moment para sugerir la fecha del mantenimiento según la periocidad asignada al ítem
+  */
   fechaSugerida(periocidad:string){
     const moment = require('moment');
     var date = moment();
@@ -193,10 +191,14 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    //Inicializa una instancia de la clase Utils para modificar la cabecera de la página
     this.util = new Utils();
+    //Obtenemos los id de la ruta
     this.obtenerId();
     this.obtenerUbicacionId();
-    this.mantenimientoForm.get('corregido').setValue('true');
+    /*
+    * lógica para controlar si estamos añadiendo un mantenimiento o modificandolo
+    */
     if (this.id != undefined && this.ubicacionId != undefined) {
       this.esEditar();
     } else if (this.ubicacionId != undefined && this.id == undefined) {
@@ -204,12 +206,14 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
         .obtenerUbicacion(this.ubicacionId)
         .subscribe((ubicacion) => {
           this.util.mostrar2(`Añadir Mantenimiento - ${ubicacion.nombre}`);
-
           this.items = ubicacion.items;
         });
     }
   }
   ngOnDestroy(): void { }
+  /*
+  *Este método se encarga de parsear una fecha recibida como parámetro.
+  */
   parse(date: Date) {
     var fecha = new Date(date)
     return fecha.toLocaleDateString("es-ES")

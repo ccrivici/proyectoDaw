@@ -21,17 +21,11 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
   selectPeriocidad!: string;
   selectCategoria!: string;
 
-
-  //ubicacionesPaginadas:PaginationUbicaciones[] = [];
   ubicaciones: Ubicacion[] = [];
   //borrar?
-  itemsList: Item[] = [];
-  editar = false;
-  mostrar = false;
-  ubicacion!: Ubicacion
   //end borrar
+  ubicacion!: Ubicacion
   ubicacionSubscription!: Subscription;
-  //ubicacionSubscriptionPag!:Subscription;
   //atributos para paginar
   totalUbicaciones = 0;
   ubicacionesPorPagina = 2;
@@ -63,7 +57,9 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
       categoria: ['', Validators.required],
     })
   }
-
+  /*
+  * Este método es llamado cuando el usuario hace click en el botón de añadir/editar ítems del formulario
+  */
   registrarEditarItems() {
     if (this.itemGuardado == undefined) {
       console.log("AÑADIENDO ITEM")
@@ -84,14 +80,13 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
 
         this.ubicacionesService.obtenerUbicacion(this.ubicacionId).subscribe((ubicacion: Ubicacion) => {
           this.ubicacion = ubicacion;
+          //añadimos el Ítem a la  lista de ítems de la Ubicación
           this.ubicacionesService.updateUbicacion(this.ubicacionId, ubicacion, this.itemDef, item.id)
         });
       });
-      this.router.navigate(['/items', this.ubicacionId]);
 
     } else {
-      //modificamos item
-
+      //lógica para modificar el ítem
       const item: Item = {
         id: this.id,
         denominacion: this.itemForm.get('denominacion')?.value,
@@ -102,23 +97,16 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
         periocidad: this.itemForm.get('periocidad')?.value,
         categoria: this.itemForm.get('categoria')?.value
       }
-      this.itemService.updateItem(this.id, item).subscribe(() => {
-        console.log("actualizadoaaaa");
-      });
+      this.itemService.updateItem(this.id, item).subscribe(() => {});
 
       this.ubicacionesService.obtenerUbicacion(this.ubicacionId).subscribe((ubicacion: Ubicacion) => {
           this.ubicacion = ubicacion;
-          console.log(`ubicacion nombre:  ${ubicacion.nombre}
-          ubicacion id:  ${ubicacion.id}
-          `)
           this.ubicacionesService.updateUbicacion(this.ubicacionId, ubicacion, item,item.id)
         });
-        console.log("id ubicacion a añadir: " + this.ubicacionId + " nombre ubi: " + this.ubicacionNombre + " item a añadir: " + item.id)
-        console.log("actualizado bien")
-        //redirigir
-
       }
-      this.router.navigate(['/items', this.ubicacionId]);
+      setTimeout(() => {
+        this.router.navigate(['/items', this.ubicacionId]);
+      }, 1000)
   }
   obtenerUbicacion(id: string) {
     this.ubicacionesService.obtenerUbicacion(id).subscribe((ubicacion: Ubicacion) => {
@@ -126,18 +114,17 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
     });
   }
   ngOnInit(): void {
+    //Inicializa una instancia de la clase Utils para modificar la cabecera de la página
     this.util = new Utils();
-
+    //Obtenemos los id de la ruta
     this.obtenerId();
-    console.log(`DATOS INICIALES:
-    id elemento: ${this.id}
-    id ubicacion: ${this.ubicacionId}`)
+    /*
+    * lógica para controlar si estamos añadiendo un mantenimiento o modificándolo
+    */
     if (this.id != undefined && this.ubicacionId != undefined) {
 
-      console.log("editmaos")
       this.esEditar();
     } else if (this.ubicacionId != undefined && this.id == undefined) {
-      console.log("añadimos")
       this.ubicacionesService.obtenerUbicacion(this.ubicacionId).subscribe(ubicacion => {
         this.util.mostrar2(`Añadir Ítem - ${ubicacion.nombre}`);
         this.ubicaciones[0] = ubicacion;
@@ -147,7 +134,6 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
       });
     }
     else {
-      console.log("AÑADIMOS DE 0 UN ITEM")
       this.ubicacionesService.obtenerUbicacionesList().subscribe((datos: Ubicacion[]) => {
         this.ubicaciones = datos;
       })

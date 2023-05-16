@@ -86,12 +86,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
           this.sortDirection,
           this.filterValue
         );
-        console.log(
-          'nombre ubicacion: ' +
-            this.ubicacion.nombre +
-            ' filter value: ' +
-            this.filterValue.valor
-        );
         this.itemsSubscription = this.itemsService
           .obtenerActualListenerPag()
           .subscribe((pagination: PaginationItems) => {
@@ -119,11 +113,6 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
-        console.log(`
-        id ubi subs: ${this.ubicacion.id}
-        id ubi: ${this.idUbicacion}
-        item a borrar: ${id}
-        `)
       this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe((ubicacion:Ubicacion)=>{
           // Aquí elimina el registro utilizando el ID
           this.itemsService.deleteItem(id).subscribe(() => {
@@ -132,14 +121,11 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
       })
     }
-
     });
-
   }
   obtenerId() {
     this.idUbicacion=  this.rutaActiva.snapshot.params['ubicacionId']
   }
-
   //METODOS PARA PAGINACION
 
   hacerFiltro(event: any) {

@@ -73,29 +73,14 @@ export class PuertoComponent implements OnInit, OnDestroy {
     this.ubicacionesSubscription.unsubscribe();
   }
 
-  mostrarItems(id: string) {
-    this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe(response => {
-      this.ubicacion = response;
-      console.log("nombre: " + this.ubicacion.nombre)
-      this.dataSource = this.ubicacion.items;
-    }, e => {
-      console.log("error: " + e);
-    })
-  }
-
-  eliminar(id: string) {
-    this.itemsService.deleteItem(id).subscribe(eliminado => {
-      this.mostrarItems(this.idUbicacion);
-    }, error => {
-      console.log(error);
-    })
-  }
   obtenerId() {
     const valores = window.location.search;
     const urlParams = new URLSearchParams(valores);
     return urlParams.get('id') + "";
   }
-  //métodos para paginar
+  /*
+  *métodos para paginar
+  */
   eventoPaginador(event: PageEvent): void {
     this.puertosPorPagina = event.pageSize;
     this.paginaActual = event.pageIndex + 1;
@@ -138,7 +123,9 @@ export class PuertoComponent implements OnInit, OnDestroy {
     return fecha.toLocaleDateString("es-ES")
   }
 
-  //métodos para generar el pdf
+  /*
+  *métodos para generar el pdf
+  */
   construirTabla2(datos, columnas) {
     var body = [];
     body.push(columnas);
@@ -163,10 +150,10 @@ export class PuertoComponent implements OnInit, OnDestroy {
 
   crearPdf(ubiId) {
     //obtener mantenimientos de la ubicacion
-    console.log(`ubi id: ${ubiId}`)
     this.ubicacionesService.obtenerUbicacion(ubiId).subscribe((ubicacion: Ubicacion) => {
 
       var cont = 0;
+      //Guardamos los Mantenimientos de la Ubicación en una lista para mostrarlos en el Pdf
       ubicacion.mantenimientos.forEach(element => {
         this.mantenimientos[cont] = {
           descripcion: element.descripcion,
@@ -178,7 +165,7 @@ export class PuertoComponent implements OnInit, OnDestroy {
         }
         cont++;
       })
-
+      //Definimos la cabecera del Pdf
       const pdfDefinition: any = {
         content: [
           {

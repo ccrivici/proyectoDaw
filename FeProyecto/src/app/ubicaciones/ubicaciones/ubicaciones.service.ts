@@ -3,7 +3,6 @@ import { Injectable } from "@angular/core";
 import { Ubicacion } from "./ubicacion.model";
 import { environment } from "src/environments/environment.development";
 import { Subject } from "rxjs";
-import { Pagination } from "src/app/pagination.model";
 import { PaginationUbicaciones } from "./pagination-ubicaciones.model";
 import { Item } from "src/app/items/items/item.model";
 import { Mantenimiento } from "src/app/mantenimientos/mantenimientos/mantenimiento.model";
@@ -22,6 +21,9 @@ export class UbicacionesService{
   ubicacionSubjectDef = new Subject<Ubicacion>();
  ubicacionFiltrada!:Ubicacion;
 
+ /*
+ * Este método se encarga de traer del Backend la lista de Ubicaciones paginadas
+ */
   obtenerUbicacionesPag(totalUbicaciones:number, paginaActual:number, sort:string,sortDirection:string,filterValue:any){
     const request = {
       PageSize:totalUbicaciones,
@@ -36,12 +38,9 @@ export class UbicacionesService{
     });
   }
 
-
-
   obtenerActualListenerPag(){
     return this.ubicacionSubjectPagination.asObservable();
   }
-  //obtener ubicacion por id!!!!
   obtenerUbicacion(id:string){
    return this.http.get<Ubicacion>(this.baseUrl + `/ubicacion/${id}`);
 
@@ -50,8 +49,7 @@ export class UbicacionesService{
     return this.ubicacionSubjectDef;
   }
   /*
-  * Este método se encarga de
-  *
+  * Este método se encarga de actualizar la Ubicación
   */
   updateUbicacion(id:String, ubicacion:Ubicacion,item:Item,idItem:string){
     var modificado = false;
@@ -82,7 +80,6 @@ export class UbicacionesService{
 
     ubicacion.mantenimientos.forEach(element => {
       if (element.id == idMantenimiento){
-        console.log(`id item: ${element.id} buscando: ${idMantenimiento}`)
         element.id = idMantenimiento;
         element.descripcion = mantenimiento.descripcion;
         element.estado = mantenimiento.estado;
@@ -120,13 +117,10 @@ export class UbicacionesService{
     })
 
     this.http.put<Ubicacion>(this.baseUrl + `/ubicacion/${ubicacion.id}`,ubicacion).subscribe((data) => {
-      console.log("cambiadoddddd: "+data)
       setTimeout(()=>{
          window.location.reload();
       },1000)
   });
-
-
   }
 
   deleteMantenimientoFromUbicacion(ubicacion:Ubicacion,mantenimientoId:string){
@@ -139,7 +133,6 @@ export class UbicacionesService{
     })
 
     this.http.put<Ubicacion>(this.baseUrl + `/ubicacion/${ubicacion.id}`,ubicacion).subscribe((data) => {
-      console.log("cambiadoddddd: "+data)
       setTimeout(()=>{
          window.location.reload();
       },1000)
@@ -150,12 +143,6 @@ export class UbicacionesService{
     return this.http.get<Ubicacion[]>(this.baseUrl + '/ubicacion');
   }
 
-  /*obtenerUbicacionesList(){
-    this.http.get<Ubicacion[]>(this.baseUrl + 'api/ubicacion').subscribe((data) => {
-      this.ubicacionesList = data;
-      this.ubicacionSubject.next([...this.ubicacionesList]);
-    });
-  }*/
   obtenerActualListener(){
     return this.ubicacionSubject.asObservable();
   }
