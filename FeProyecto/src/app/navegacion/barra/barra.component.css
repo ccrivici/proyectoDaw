@@ -82,9 +82,11 @@ button {
   box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.3);
   height: 5vh;
   background-color: #4b9fe1;
+  cursor:default;
 }
 
 .titulo a:hover,
 .titulo a:active {
   color: #fff; /* Anula el color de hover para la clase .titulo */
+  cursor:default;
 }

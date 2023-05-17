@@ -61,8 +61,8 @@ export class PuertoComponent implements OnInit, OnDestroy {
     this.util.mostrar2(`Vista de Puertos`);
     this.puertoService.obtenerPuertos(this.puertosPorPagina, this.paginaActual, this.sort, this.sortDirection, this.filterValue);
     this.ubicacionesSubscription = this.puertoService.obtenerActualListenerPag().subscribe((pagination: PaginationUbicaciones) => {
-      pagination.data.filter(edificio => edificio.tipo === "puerto")
-      this.dataSourcePuertos = new MatTableDataSource<Ubicacion>(pagination.data);
+      var result = pagination.data.filter(edificio => edificio.tipo === "puerto")
+      this.dataSourcePuertos = new MatTableDataSource<Ubicacion>(result);
       this.puertasos = pagination.data;
       this.totalPuertos = pagination.totalRows;
     });

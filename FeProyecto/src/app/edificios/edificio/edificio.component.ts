@@ -61,8 +61,8 @@ export class EdificioComponent implements AfterViewInit {
     this.edificioService.obtenerEdificios(this.edificiosPorPagina, this.paginaActual, this.sort, this.sortDirection, this.filterValue);
       //cargamos la lista de ubicaciones de tipo Edificio paginado
     this.ubicacionesSubscription = this.edificioService.obtenerActualListenerPag().subscribe((pagination: PaginationUbicaciones) => {
-      pagination.data.filter(edificio => edificio.tipo === "edificio")
-      this.dataSourceEdificios = new MatTableDataSource<Ubicacion>(pagination.data);
+      var result= pagination.data.filter(edificio => edificio.tipo === "edificio")
+      this.dataSourceEdificios = new MatTableDataSource<Ubicacion>(result);
       this.totalEdificios = pagination.totalRows
     });
   }

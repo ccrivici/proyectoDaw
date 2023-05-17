@@ -12,6 +12,9 @@ import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { ConfirmDialogComponent } from 'src/app/dialog/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomPaginator, Utils } from 'src/app/paginator';
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-mantenimientos',
@@ -40,7 +43,7 @@ export class MantenimientosComponent implements OnInit {
   ubicacion!: Ubicacion;
   timeout: any = null;
   util: any;
-
+  mantenimientos: any[] = [];
   constructor(private mantenimientoService: MantenimientoService,private ubicacionesService:UbicacionesService,private router:Router,private rutaActiva: ActivatedRoute,
   private readonly adapter: DateAdapter<Date>, public dialog: MatDialog) {}
 
@@ -58,8 +61,8 @@ export class MantenimientosComponent implements OnInit {
 
     this.mantenimientoService.obtenerMantenimientosPag(this.mantenimientosPorPagina, this.paginaActual, this.sort, this.sortDirection, this.filterValue);
     this.mantenimientoSubscription = this.mantenimientoService.obtenerActualListener().subscribe((pagination: PaginationMantenimientos) => {
-      pagination.data.filter(mantenimiento => mantenimiento.ubicacion_id == response.id)
-      this.dataSource = new MatTableDataSource<Mantenimiento>(pagination.data);
+      var result = pagination.data.filter(mantenimiento => mantenimiento.ubicacion_id == response.id)
+      this.dataSource = new MatTableDataSource<Mantenimiento>(result);
       this.totalMantenimientos = pagination.totalRows
     });
 
@@ -128,6 +131,7 @@ export class MantenimientosComponent implements OnInit {
             valor: this.idUbicacion
           };
         }
+
         $this.filterValue = filterValueLocal;
 
         //aqui obtenemos los libros pasando como filtro la constante creada antes
@@ -151,4 +155,63 @@ export class MantenimientosComponent implements OnInit {
   goBack() {
     window.history.back();
   }
+/*
+    *métodos para generar el pdf
+    */
+    construirTabla2(datos, columnas) {
+      var body = [];
+      body.push(columnas);
+
+      datos.forEach(function (row) {
+        var dataRow = [];
+        columnas.forEach(function (column) {
+          dataRow.push(row[column] + "");
+        });
+        body.push(dataRow)
+      });
+      return body;
+    }
+    tabla2(datos, columnas) {
+      return {
+        table: {
+          headerRows: 1,
+          body: this.construirTabla2(datos, columnas)
+        }
+      }
+    }
+  crearPdf(ubiId) {
+      //obtener mantenimientos de la ubicacion
+      this.ubicacionesService.obtenerUbicacion(ubiId).subscribe((ubicacion: Ubicacion) => {
+
+        var cont = 0;
+        ubicacion.mantenimientos.forEach(element => {
+          this.mantenimientos[cont] = {
+            descripcion: element.descripcion,
+            periocidad: element.periocidad,
+            estado: element.estado,
+            corregido: element.corregido,
+            observaciones: element.observaciones,
+            fecha: this.parse(element.fecha),
+          }
+          cont++;
+        })
+
+        const pdfDefinition: any = {
+          content: [
+            {
+              text: `Informes de mantenimiento del ${ubicacion.nombre}
+                `, style: 'header'
+            },
+            this.tabla2(this.mantenimientos, ['descripcion', 'periocidad', 'estado', 'corregido', 'observaciones', 'fecha'])
+          ]
+        }
+        const pdf = pdfMake.createPdf(pdfDefinition);
+        this.mantenimientos = [];
+        pdf.open();
+      });
+    }
+
+
+
+
 }

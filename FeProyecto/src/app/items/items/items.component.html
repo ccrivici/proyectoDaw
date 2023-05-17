@@ -3,7 +3,7 @@
     <mat-form-field fxFlex="55%" style="margin-top:10px">
       <input matInput type="text" (keyup)="hacerFiltro($event)" placeholder="Buscar ítem">
     </mat-form-field>
-    <!-- AÑADIR ITEM -->
+    <!-- BOTON AÑADIR ITEM -->
     <button [routerLink]="['/registrar', this.idUbicacion]" fxFlex ="15%"  style="height: 54px; min-height: 100%; min-width: 100%; width: 100%; margin-top:10px;margin-left:80px"
           mat-raised-button
           type="submit"
@@ -12,16 +12,14 @@
             Añadir Item<mat-icon style="padding-left: 5px">
               add_circle</mat-icon></a>
     </button>
-    <!-- AÑADIR MANTENIMIENTO -->
+    <!-- BOTON AÑADIR MANTENIMIENTO -->
     <button [routerLink]="['/registrarMantenimiento', this.idUbicacion]" fxFlex ="15%"  style="height: 54px; min-height: 100%; min-width: 100%; width: 100%; margin-left: 40px; margin-top:10px"
           mat-raised-button
           type="submit"
           value="{{ id }}">
-          <a>
-            Añadir Mantenimiento<mat-icon style="padding-left: 5px">
-              edit_document</mat-icon></a>
+          <a>Añadir Mantenimiento<mat-icon style="padding-left: 5px">edit_document</mat-icon></a>
     </button>
-    <!-- VOLVER -->
+    <!-- BOTON VOLVER -->
     <button  (click)="goBack()" fxFlex ="8%"  style="height: 54px; min-height: 100%; min-width: 100%; width: 100%; margin-left: 40px; margin-top:10px"
     mat-raised-button
     type="submit"

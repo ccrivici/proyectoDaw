@@ -1,28 +1,21 @@
 <section fxLayout="row" fxLayoutAlign="center">
   <mat-card>
-    <form
-      [formGroup]="mantenimientoForm"
-      (ngSubmit)="registrarEditarMantenimiento()"
-      fxLayout="row wrap"
-      fxLayoutAlign="center center"
-      fxLayoutGap="10px"
-      #f="ngForm">
+    <form [formGroup]="mantenimientoForm" (ngSubmit)="registrarEditarMantenimiento()" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm">
       <div fxLayout="column" fxFlex="100">
         <div fxLayout="row" fxLayoutAlign="start start">
           <!-- SELECCIÓN DE ÍTEM A MANTENER -->
           <mat-form-field>
             <mat-label>Elemento</mat-label>
-            <mat-select
-              formControlName="elementos"
-              (selectionChange)="onSelected($event)"
-              name="elementos"
-              [(ngModel)]="selectItem">
+            <mat-icon class="custom-icon" matPrefix style="font-size: 24px;">category</mat-icon>
+            <mat-select formControlName="elementos" (selectionChange)="onSelected($event)" name="elementos" [(ngModel)]="selectItem">
               <mat-option *ngFor="let item of items" value="{{ item.id }}">{{item.marcaModelo}}</mat-option>
             </mat-select>
           </mat-form-field>
           <!-- ESTADO -->
           <mat-form-field>
             <mat-label>Estado</mat-label>
+            <mat-icon class="custom-icon" matPrefix style="font-size: 24px;">rowing</mat-icon>
+
             <mat-select formControlName="estado" name="estado">
               <mat-option value="Favorable">Favorable</mat-option>
               <mat-option value="Defecto Leve">Defecto Leve</mat-option>
@@ -37,25 +30,18 @@
         <div fxLayout="row" fxLayoutAlign="start start">
           <mat-form-field>
             <mat-label>Corregido</mat-label>
-            <mat-select
-              formControlName="corregido"
-              [(ngModel)]="selectCorregido"
-              name="corregido"
-            >
+            <mat-icon class="custom-icon" matPrefix style="font-size: 24px;">rule</mat-icon>
+
+            <mat-select formControlName="corregido" [(ngModel)]="selectCorregido" name="corregido">
               <mat-option value="true">Si</mat-option>
               <mat-option value="false">No</mat-option>
             </mat-select>
           </mat-form-field>
             <!-- OBSERVACIONES -->
             <mat-form-field>
+              <mat-icon class="custom-icon" matPrefix style="font-size: 24px;">assignment</mat-icon>
               <mat-label>Observaciones</mat-label>
-              <input
-                type="text"
-                formControlName="observaciones"
-                matInput
-                name="observacionMantenimiento"
-                ngModel
-              />
+              <input type="text" formControlName="observaciones" matInput name="observacionMantenimiento" ngModel/>
             </mat-form-field>
         </div>
       </div>
@@ -63,28 +49,15 @@
       <div fxLayout="column" fxFlex="100">
         <div fxLayout="row" fxLayoutAlign="start start">
           <mat-form-field fxFlex="100">
+            <mat-icon class="custom-icon" matPrefix style="font-size: 24px;"><span class="material-icons-filled">timer</span></mat-icon>
             <mat-label>Periodicidad</mat-label>
-            <input
-              matInput
-              type="text"
-              formControlName="periocidad"
-              name="periocidad"
-              readonly
-            />
+            <input matInput type="text" formControlName="periocidad" name="periocidad"readonly/>
           </mat-form-field>
           <!-- FECHA DE MANTENIMIENTO -->
           <mat-form-field fxFlex="100">
-            <input
-              matInput
-              formControlName="fechaMantenimiento"
-              placeholder="Fecha del Mantenimiento"
-              [matDatepicker]="picker"
-              name="fechaMantenimiento"
-            />
-            <mat-datepicker-toggle
-              matSuffix
-              [for]="picker"
-            ></mat-datepicker-toggle>
+            <input matInput formControlName="fechaMantenimiento" placeholder="Fecha del Mantenimiento" [matDatepicker]="picker" name="fechaMantenimiento"/>
+            <mat-datepicker-toggle matPrefix [for]="picker">
+            <mat-icon  matDatepickerToggleIcon style="font-size: 24px; color: #333333;">calendar_month</mat-icon></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </div>
@@ -93,30 +66,13 @@
       <div fxLayout="column" fxFlex="85">
         <mat-form-field>
           <mat-label>Descripcion del Mantenimiento</mat-label>
-          <textarea
-            formControlName="descripcion"
-            matInput
-            name="descripcionMantenimiento"
-            ngModel
-            required
-            rows="3"
-          ></textarea>
+          <textarea formControlName="descripcion" matInput name="descripcionMantenimiento" ngModel required rows="3"></textarea>
         </mat-form-field>
       </div>
 
       <div fxLayout="column" fxFlex="100">
-        <button
-          mat-raised-button
-          color="primary"
-          type="submit"
-          [disabled]="f.invalid"
-          style="margin: 0 auto"
-        >
-          <a
-            >Añadir Mantenimiento<mat-icon style="padding-left: 5px"
-              >add_circle</mat-icon
-            ></a
-          >
+        <button mat-raised-button color="primary" type="submit"[disabled]="f.invalid"tyle="margin: 0 auto">
+          <a>Añadir Mantenimiento<mat-icon style="padding-left: 5px">add_circle</mat-icon></a>
         </button>
       </div>
     </form>

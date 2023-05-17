@@ -13,7 +13,7 @@ import { Ubicacion } from 'src/app/ubicaciones/ubicaciones/ubicacion.model';
 import { CustomPaginator, Utils } from 'src/app/paginator';
 
 @Injectable({
-  providedIn:'root'
+  providedIn: 'root'
 })
 
 @Component({
@@ -60,12 +60,12 @@ export class ItemsComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private itemsService: ItemsService,
     private ubicacionesService: UbicacionesService,
-    private router: Router,private rutaActiva: ActivatedRoute
-  ) {}
+    private router: Router, private rutaActiva: ActivatedRoute
+  ) { }
 
-  eliminarRegistro(id: number) {}
+  eliminarRegistro(id: number) { }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void { }
   ngOnInit(): void {
     this.util = new Utils();
 
@@ -89,8 +89,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
         this.itemsSubscription = this.itemsService
           .obtenerActualListenerPag()
           .subscribe((pagination: PaginationItems) => {
-            pagination.data.filter(item => item.denominacion == response.nombre)
-            this.dataSource = new MatTableDataSource<Item>(pagination.data);
+            var result = pagination.data.filter(item => item.denominacion == response.nombre)
+            this.dataSource = new MatTableDataSource<Item>(result);
             this.totalItems = pagination.totalRows;
           });
       },
@@ -113,18 +113,18 @@ export class ItemsComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
-      this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe((ubicacion:Ubicacion)=>{
+        this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe((ubicacion: Ubicacion) => {
           // Aquí elimina el registro utilizando el ID
           this.itemsService.deleteItem(id).subscribe(() => {
             this.ubicacionesService.deleteItemFromUbicacion(ubicacion, id);
           });
 
-      })
-    }
+        })
+      }
     });
   }
   obtenerId() {
-    this.idUbicacion=  this.rutaActiva.snapshot.params['ubicacionId']
+    this.idUbicacion = this.rutaActiva.snapshot.params['ubicacionId']
   }
   //METODOS PARA PAGINACION
 
@@ -133,19 +133,19 @@ export class ItemsComponent implements OnInit, OnDestroy {
     var $this = this;
     //esta función se ejectua cuando el usuario deje de escribir por mas de un segundo
     this.timeout = setTimeout(() => {
-      this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe((response:Ubicacion) => {
+      this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe((response: Ubicacion) => {
 
-      if (event.keycode !== 13) {
-        var filterValueLocal = {
-          propiedad: 'marcaModelo',
-          valor: event.target.value,
-        };
-          if (event.target.value === ""){
-            filterValueLocal = {
-              propiedad: 'denominacion',
-              valor: response.nombre
-            };
-          }
+        if (event.keycode !== 13) {
+          var filterValueLocal = {
+            propiedad: 'marcaModelo',
+            valor: event.target.value,
+          };
+        if (event.target.value === "") {
+          filterValueLocal = {
+            propiedad: 'denominacion',
+            valor: response.nombre
+          };
+        }
           $this.filterValue = filterValueLocal;
 
           //aqui obtenemos los libros pasando como filtro la constante creada antes
@@ -156,8 +156,8 @@ export class ItemsComponent implements OnInit, OnDestroy {
             $this.sortDirection,
             filterValueLocal
           );
-      }
-    });
+        }
+      });
     }, 1000);
   }
   eventoPaginador(event: PageEvent): void {
