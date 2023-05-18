@@ -27,7 +27,6 @@ import { MenuListaComponent } from './navegacion/barra/menu-lista/menu-lista.com
 import { SeguridadService } from './seguridad/seguridad.service';
 import { SeguridadInterceptor } from './seguridad/seguridad-interceptor';
 import { InicioComponent } from './inicio/inicio/inicio.component';
-import { PdfComponent } from './pdf/pdf.component';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core'
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.component';
@@ -65,7 +64,6 @@ export const DateFormats = {
     MenuListaComponent,
     RegistrarMantenimientoComponent,
     InicioComponent,
-    PdfComponent,
     ConfirmDialogComponent
   ],
   imports: [

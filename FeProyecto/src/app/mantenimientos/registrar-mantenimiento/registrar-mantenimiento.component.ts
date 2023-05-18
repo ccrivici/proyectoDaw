@@ -173,7 +173,6 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
          date.add(3,"months");
           break;
      }
-     console.log("fecha2: "+this.parse(date))
      date = this.parse(date);
      (<HTMLInputElement>document.getElementsByName('fechaMantenimiento')[0]).placeholder = `Fecha sugerida: ${date}`;
   }

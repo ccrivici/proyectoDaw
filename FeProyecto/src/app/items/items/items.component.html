@@ -4,35 +4,19 @@
       <input matInput type="text" (keyup)="hacerFiltro($event)" placeholder="Buscar ítem">
     </mat-form-field>
     <!-- BOTON AÑADIR ITEM -->
-    <button [routerLink]="['/registrar', this.idUbicacion]" fxFlex ="15%"  style="height: 54px; min-height: 100%; min-width: 100%; width: 100%; margin-top:10px;margin-left:80px"
-          mat-raised-button
-          type="submit"
-          value="{{ id }}">
-          <a>
-            Añadir Item<mat-icon style="padding-left: 5px">
-              add_circle</mat-icon></a>
+    <button [routerLink]="['/registrar', this.idUbicacion]" fxFlex ="15%"  style="height: 54px; min-height: 100%; min-width: 100%; width: 100%; margin-top:10px;margin-left:80px" mat-raised-button type="submit" value="{{ id }}"> <a>
+      Añadir Item<mat-icon style="padding-left: 5px">add_circle</mat-icon></a>
     </button>
     <!-- BOTON AÑADIR MANTENIMIENTO -->
-    <button [routerLink]="['/registrarMantenimiento', this.idUbicacion]" fxFlex ="15%"  style="height: 54px; min-height: 100%; min-width: 100%; width: 100%; margin-left: 40px; margin-top:10px"
-          mat-raised-button
-          type="submit"
-          value="{{ id }}">
-          <a>Añadir Mantenimiento<mat-icon style="padding-left: 5px">edit_document</mat-icon></a>
+    <button [routerLink]="['/registrarMantenimiento', this.idUbicacion]" fxFlex ="15%"  style="height: 54px; min-height: 100%; min-width: 100%; width: 100%; margin-left: 40px; margin-top:10px" mat-raised-button type="submit" value="{{ id }}"> <a>Añadir Mantenimiento<mat-icon style="padding-left: 5px">edit_document</mat-icon></a>
     </button>
     <!-- BOTON VOLVER -->
-    <button  (click)="goBack()" fxFlex ="8%"  style="height: 54px; min-height: 100%; min-width: 100%; width: 100%; margin-left: 40px; margin-top:10px"
-    mat-raised-button
-    type="submit"
-    value="{{ id }}">
-    <a>
-      Volver<mat-icon style="padding-left: 5px">
-        arrow_back</mat-icon></a>
+    <button  (click)="goBack()" fxFlex ="8%"  style="height: 54px; min-height: 100%; min-width: 100%; width: 100%; margin-left: 40px; margin-top:10px" mat-raised-button type="submit" value="{{ id }}"> <a>
+      Volver<mat-icon style="padding-left: 5px">arrow_back</mat-icon></a>
     </button>
   </div>
 </div>
-<mat-table [dataSource]="dataSource"  matSort
-(matSortChange)="ordenarColumna($event)"
-class="responsive-table">
+<mat-table [dataSource]="dataSource"  matSort (matSortChange)="ordenarColumna($event)" class="responsive-table">
   <ng-container matColumnDef="denominacion">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Denominación</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.denominacion }}</mat-cell>
@@ -73,14 +57,7 @@ class="responsive-table">
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="desplegarColumnas"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: desplegarColumnas"></mat-row>
+  <mat-row *matRowDef="let row; columns: desplegarColumnas; let even = even" [ngClass]="{ 'even-row': even }"></mat-row>
 </mat-table>
-<mat-paginator
-    (page)="eventoPaginador($event)"
-    #paginacion
-    [pageSize]="itemsPorPagina"
-    [pageSizeOptions]="paginaCombo"
-    [length]="totalItems"
-  >
-  </mat-paginator>
+<mat-paginator (page)="eventoPaginador($event)" #paginacion [pageSize]="itemsPorPagina" [pageSizeOptions]="paginaCombo" [length]="totalItems" > </mat-paginator>
 

@@ -115,10 +115,9 @@ export class ItemsComponent implements OnInit, OnDestroy {
       if (confirmed) {
         this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe((ubicacion: Ubicacion) => {
           // Aquí elimina el registro utilizando el ID
-          this.itemsService.deleteItem(id).subscribe(() => {
-            this.ubicacionesService.deleteItemFromUbicacion(ubicacion, id);
-          });
+          this.itemsService.deleteItem(id).subscribe(() => {});
 
+          this.ubicacionesService.deleteItemFromUbicacion(ubicacion, id)
         })
       }
     });

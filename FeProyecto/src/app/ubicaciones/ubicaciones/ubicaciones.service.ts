@@ -6,6 +6,7 @@ import { Subject } from "rxjs";
 import { PaginationUbicaciones } from "./pagination-ubicaciones.model";
 import { Item } from "src/app/items/items/item.model";
 import { Mantenimiento } from "src/app/mantenimientos/mantenimientos/mantenimiento.model";
+import { MantenimientoService } from "src/app/mantenimientos/mantenimientos/mantenimientos.service";
 
 
 @Injectable({
@@ -17,7 +18,8 @@ export class UbicacionesService{
   ubicacionSubjectPagination= new Subject<PaginationUbicaciones[]>();
   ubicacionSubject = new Subject<Ubicacion[]>();
   private ubicacionesPagination!: PaginationUbicaciones[];
-  constructor(private http:HttpClient){}
+
+  constructor(private http:HttpClient,private mantenimientoService: MantenimientoService){}
   ubicacionSubjectDef = new Subject<Ubicacion>();
  ubicacionFiltrada!:Ubicacion;
 
@@ -102,25 +104,28 @@ export class UbicacionesService{
   }
   deleteItemFromUbicacion(ubicacion:Ubicacion,itemId:string){
     var contador = 0;
+    //eliminamos el item de la lista de items
     ubicacion.items.forEach(element =>{
       if (element.id == itemId){
         ubicacion.items.splice(contador,1);
       }
       contador++;
     })
-    contador = 0;
-    ubicacion.mantenimientos.forEach(element =>{
-        if (element.item_id == itemId){
-          ubicacion.mantenimientos.splice(contador,1);
-        }
-        contador++;
-    })
 
-    this.http.put<Ubicacion>(this.baseUrl + `/ubicacion/${ubicacion.id}`,ubicacion).subscribe((data) => {
-      setTimeout(()=>{
-         window.location.reload();
-      },1000)
-  });
+    var mantenimientos = new Array();
+    ubicacion.mantenimientos.forEach(element =>{
+        if (element.item_id != itemId){
+          mantenimientos.push(element);
+        }else{//entra cuando el mant pertenece al item
+          this.mantenimientoService.deleteMantenimiento(element.id).subscribe(()=>{})
+          setTimeout(()=>{},600)
+        }
+    })
+    ubicacion.mantenimientos = mantenimientos;
+    this.http.put<Ubicacion>(this.baseUrl + `/ubicacion/${ubicacion.id}`,ubicacion).subscribe((data) => {});
+    setTimeout(()=>{
+      window.location.reload()
+    },600)
   }
 
   deleteMantenimientoFromUbicacion(ubicacion:Ubicacion,mantenimientoId:string){

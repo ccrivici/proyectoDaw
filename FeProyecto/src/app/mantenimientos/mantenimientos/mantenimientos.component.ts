@@ -210,8 +210,4 @@ export class MantenimientosComponent implements OnInit {
         pdf.open();
       });
     }
-
-
-
-
 }

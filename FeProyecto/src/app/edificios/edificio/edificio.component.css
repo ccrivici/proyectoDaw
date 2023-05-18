@@ -2,7 +2,10 @@ mat-table {
   width: 100%;
   table-layout: auto;
 }
+mat-cell{
+  font-family:Verdana, Geneva, Tahoma, sans-serif ;
 
+}
 mat-table,
 mat-paginator{
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.8); /* Agrega un efecto de sombra */
