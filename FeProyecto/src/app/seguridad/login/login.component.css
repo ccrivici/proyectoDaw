@@ -30,12 +30,14 @@ a {
   display: flex;
   align-items: center;
 }
-
+#icon{
+  color: rgb(34, 20, 159);
+}
 .center-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90%;
+  height: 50%;
   width: 100%;
 }
 

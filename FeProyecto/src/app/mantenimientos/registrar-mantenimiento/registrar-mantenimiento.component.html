@@ -58,7 +58,15 @@
             <input matInput formControlName="fechaMantenimiento" placeholder="Fecha del Mantenimiento" [matDatepicker]="picker" name="fechaMantenimiento"/>
             <mat-datepicker-toggle matPrefix [for]="picker">
             <mat-icon  matDatepickerToggleIcon style="font-size: 24px; color: #333333;">calendar_month</mat-icon></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-datepicker #picker [dateClass]="dateClass"></mat-datepicker>
+            <ng-container *ngIf="fechaSugeridaCoincide">
+              <style>
+                ::ng-deep .mat-calendar .mat-calendar-body .mat-calendar-body-cell.highlight-date-sugerida {
+                  background-color: rgb(255, 166, 0); /* Elige el color que desees para resaltar la celda */
+                  border-radius: 50%; /* Hace que el resaltado sea redondo */
+                }
+              </style>
+            </ng-container>
           </mat-form-field>
         </div>
       </div>

@@ -34,5 +34,12 @@ export class RegistrarComponent implements OnInit {
       token:''
     })
   }
-
+  mostrar(){
+    const input = (<HTMLInputElement>document.getElementById('pswd'));
+    if (input.type == "text"){
+      input.type="password"
+    }else{
+      input.type="text"
+    }
+  }
 }

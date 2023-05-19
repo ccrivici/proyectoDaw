@@ -5,8 +5,7 @@
     </mat-form-field>
     <!-- BOTON AÑADIR MANTENIMIENTO -->
     <button [routerLink]="['/registrarMantenimiento', this.idUbicacion]" fxFlex ="15%"  style="height: 54px; min-height: 100%; min-width: 100%; width: 100%; margin-top:10px;margin-left:80px" mat-raised-button type="submit" value="{{ id }}">
-          <a >
-            Añadir Mantenimiento<mat-icon style="padding-left: 5px">edit_document</mat-icon></a>
+          <a>Añadir Mantenimiento<mat-icon style="padding-left: 5px">edit_document</mat-icon></a>
     </button>
     <!-- BOTON AÑADIR MANTENIMIENTO -->
     <button (click)="crearPdf(this.idUbicacion)" fxFlex ="15%"  style="height: 54px; min-height: 100%; min-width: 100%; width: 100%; margin-top:10px;margin-left:40px" mat-raised-button type="submit" value="{{ id }}">
@@ -20,25 +19,25 @@
 <mat-table [dataSource]="dataSource" matSort (matSortChange)="ordenarColumna($event)">
   <ng-container matColumnDef="descripcion">
     <mat-header-cell *matHeaderCellDef  mat-sort-header> Descripción</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.descripcion }}</mat-cell>
+    <mat-cell *matCellDef="let element">{{element.descripcion}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="estado">
     <mat-header-cell *matHeaderCellDef  mat-sort-header> Estado</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.estado }}</mat-cell>
+    <mat-cell *matCellDef="let element">{{element.estado}}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="corregido">
     <mat-header-cell *matHeaderCellDef  mat-sort-header> Corregido</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.corregido}}</mat-cell>
+    <mat-cell *matCellDef="let element">{{element.corregido}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="observaciones">
     <mat-header-cell *matHeaderCellDef  mat-sort-header> Observaciones</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.observaciones}}</mat-cell>
+    <mat-cell *matCellDef="let element">{{element.observaciones}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="periocidad">
     <mat-header-cell *matHeaderCellDef  mat-sort-header> Periocidad</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{ element.periocidad}}</mat-cell>
+    <mat-cell *matCellDef="let element">{{element.periocidad}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="fecha">
     <mat-header-cell *matHeaderCellDef  mat-sort-header> Fecha</mat-header-cell>

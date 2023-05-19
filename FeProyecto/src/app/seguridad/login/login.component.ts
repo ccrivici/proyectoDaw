@@ -18,4 +18,13 @@ export class LoginComponent {
       password: form.value.password
     })
   }
+
+  mostrar(){
+    const input = (<HTMLInputElement>document.getElementById('pswd'));
+    if (input.type == "text"){
+      input.type="password"
+    }else{
+      input.type="text"
+    }
+  }
 }

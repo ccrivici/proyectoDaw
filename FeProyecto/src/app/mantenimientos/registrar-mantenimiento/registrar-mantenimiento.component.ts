@@ -9,16 +9,18 @@ import { ItemsService } from 'src/app/items/items/items.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import 'moment/locale/es';
 import { Utils } from 'src/app/paginator';
+import { DatePipe } from '@angular/common';
+import { MatCalendarCellClassFunction, MatCalendarCellCssClasses } from '@angular/material/datepicker';
 declare var require: any;
 @Component({
   selector: 'app-registrar-mantenimiento',
   templateUrl: './registrar-mantenimiento.component.html',
   styleUrls: ['./registrar-mantenimiento.component.css'],
+  providers: [DatePipe],
 })
 export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
   selectItem!: Item;
   selectCorregido!: string;
-
 
   ubicacion!: Ubicacion;
   id!: string;
@@ -31,11 +33,12 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
   itemDef!: Item;
 
   //controlar si esta elegido el item
-
   corregido: string | undefined = undefined;
   item!: Item;
   util: any;
-  //borrar?
+  //Variables de Fecha
+  dateClass: MatCalendarCellClassFunction<Date>;
+  fechaSugeridaCoincide = false;
 
   constructor(
     private mantenimientoService: MantenimientoService,
@@ -111,7 +114,6 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
                 });
             });
         });
-
     } else {
       //modificamos item
       this.mantenimientoService.obtenerMantenimientoById(this.id).subscribe((mant: Mantenimiento) => {
@@ -155,27 +157,45 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
   /*
   *Este método hace uso de la libreria Moment para sugerir la fecha del mantenimiento según la periocidad asignada al ítem
   */
-  fechaSugerida(periocidad:string){
+
+  fechaSugerida(periocidad: string) {
     const moment = require('moment');
     var date = moment();
-    date.format()
-      switch (periocidad) {
-       case "diaria":
-         date.add(1,"days");
-         break;
-       case "semanal":
-         date.add(7,"days");
-         break;
-       case "mensual":
-         date.add(1,"months");
-         break;
-       case "trimestral":
-         date.add(3,"months");
-          break;
-     }
-     date = this.parse(date);
-     (<HTMLInputElement>document.getElementsByName('fechaMantenimiento')[0]).placeholder = `Fecha sugerida: ${date}`;
+    date.format();
+
+    switch (periocidad) {
+      case 'diaria':
+        date.add(1, 'days');
+        break;
+      case 'semanal':
+        date.add(7, 'days');
+        break;
+      case 'mensual':
+        date.add(1, 'months');
+        break;
+      case 'trimestral':
+        date.add(3, 'months');
+        break;
+    }
+
+    this.fechaSugeridaCoincide = false;
+
+    var Parsedate = new DatePipe('en-US').transform(date, 'yyyy-MM-dd');
+    console.log('Fecha3: ' + Parsedate);
+
+    this.dateClass = (cellDate: Date): MatCalendarCellCssClasses => {
+      if (moment(cellDate).format('YYYY-MM-DD') === Parsedate) {
+        this.fechaSugeridaCoincide = true;
+        return 'highlight-date-sugerida';
+      }
+      return '';
+    };
+
+    (<HTMLInputElement>(
+      document.getElementsByName('fechaMantenimiento')[0]
+    )).placeholder = `Fecha sugerida: ${Parsedate}`;
   }
+
 /*
 *Este método se ejecuta al seleccionar un ítem para hacerle un mantenimiento
 */
@@ -205,6 +225,7 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
         .obtenerUbicacion(this.ubicacionId)
         .subscribe((ubicacion) => {
           this.util.mostrar2(`Añadir Mantenimiento - ${ubicacion.nombre}`);
+          this.accion= "Añadir"
           this.items = ubicacion.items;
         });
     }
