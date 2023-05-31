@@ -12,8 +12,10 @@ import { MatPaginatorIntl, PageEvent } from '@angular/material/paginator';
 import { ConfirmDialogComponent } from 'src/app/dialog/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { CustomPaginator, Utils } from 'src/app/paginator';
+import { ItemsComponent, ItemsService } from 'src/app/items/items/items.component';
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
+import { Item } from 'src/app/items/items/item.model';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -27,7 +29,8 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export class MantenimientosComponent implements OnInit {
   private mantenimientoSubscription!: Subscription
   mantenimientoData: Mantenimiento[] = [];
-  desplegarColumnas = ["descripcion","estado","corregido","observaciones","periocidad","fecha","modificar","eliminar"];
+  itemData: Item[] = [];
+  desplegarColumnas = ["conjuntoEquipo","descripcion","estado","corregido","observaciones","periocidad","fecha","modificar","eliminar"];
   dataSource;
 
   //paginacion
@@ -44,13 +47,25 @@ export class MantenimientosComponent implements OnInit {
   timeout: any = null;
   util: any;
   mantenimientos: any[] = [];
-  constructor(private mantenimientoService: MantenimientoService,private ubicacionesService:UbicacionesService,private router:Router,private rutaActiva: ActivatedRoute,
-  private readonly adapter: DateAdapter<Date>, public dialog: MatDialog) {}
+  items: any [] = [];
+  constructor(private mantenimientoService: MantenimientoService,
+    private ubicacionesService: UbicacionesService,
+    private router: Router,
+    private rutaActiva: ActivatedRoute,
+    private readonly adapter: DateAdapter<Date>,
+    public dialog: MatDialog, private itemsService: ItemsService) {}
+
 
   ngOnInit(): void {
     this.util = new Utils();
 
     this.obtenerId();
+
+    this.itemsService.obtenerItems().subscribe((items) => {
+      // Aquí puedes hacer lo que necesites con los datos de los items
+      this.itemData = items;
+    });
+
 
     this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe(response=>{
       this.util.mostrar2(`Vista de Mantenimientos - ${response.nombre}`);
@@ -77,6 +92,14 @@ export class MantenimientosComponent implements OnInit {
     })
   })
 }
+
+//Obtener Items y mostrar en la tabla
+item: Item;
+obtenerElemento(element: Mantenimiento): string {
+  this.item = this.itemData.find((item) => item.id === element.item_id);
+  return this.item ? this.item.equipo : '';
+}
+
   parse(date:Date){
     var fecha = new Date(date)
     return fecha.toLocaleDateString("es-ES")
@@ -97,18 +120,17 @@ export class MantenimientosComponent implements OnInit {
       if (confirmed) {
         this.ubicacionesService.obtenerUbicacion(this.idUbicacion).subscribe((ubicacion:Ubicacion)=>{
           this.mantenimientoService.deleteMantenimiento(id).subscribe(data =>{
-            this.ubicacionesService.deleteMantenimientoFromUbicacion(ubicacion,id);
+            this.ubicacionesService.deleteMantenimientoFromUbicacion(ubicacion,id,this.idUbicacion);
           });
         })
 
       }
-
     });
     //actualizamos la lista de items de la ubicacion
   }
   //obtiene el id  y el id de la ubicacion de la url
   obtenerId() {
-    this.idUbicacion=  this.rutaActiva.snapshot.params['ubicacionId'];
+    this.idUbicacion = this.rutaActiva.snapshot.params['ubicacionId'];
     this.id = this.rutaActiva.snapshot.params['id'];
   }
 
@@ -179,13 +201,12 @@ export class MantenimientosComponent implements OnInit {
         }
       }
     }
-  crearPdf(ubiId) {
-      //obtener mantenimientos de la ubicacion
+    crearPdf(ubiId) {
       this.ubicacionesService.obtenerUbicacion(ubiId).subscribe((ubicacion: Ubicacion) => {
-
         var cont = 0;
         ubicacion.mantenimientos.forEach(element => {
           this.mantenimientos[cont] = {
+            conjuntoEquipo: this.obtenerElemento(element), // Pasar element a obtenerElemento()
             descripcion: element.descripcion,
             periocidad: element.periocidad,
             estado: element.estado,
@@ -199,10 +220,10 @@ export class MantenimientosComponent implements OnInit {
         const pdfDefinition: any = {
           content: [
             {
-              text: `Informes de mantenimiento del ${ubicacion.nombre}
-                `, style: 'header'
+              text: `Informes de mantenimiento del ${ubicacion.nombre}`,
+              style: 'header'
             },
-            this.tabla2(this.mantenimientos, ['descripcion', 'periocidad', 'estado', 'corregido', 'observaciones', 'fecha'])
+            this.tabla2(this.mantenimientos, ['conjuntoEquipo', 'descripcion', 'periocidad', 'estado', 'corregido', 'observaciones', 'fecha']) // Usar 'conjuntoEquipo' en lugar de 'elemento'
           ]
         }
         const pdf = pdfMake.createPdf(pdfDefinition);
@@ -210,4 +231,28 @@ export class MantenimientosComponent implements OnInit {
         pdf.open();
       });
     }
+
+
+    getEstadoStyles(estado: string) {
+      let styles = {};
+
+      switch (estado) {
+        case 'Favorable':
+          styles = { color: 'rgb(0, 214, 0)' };
+          break;
+        case 'Defecto Leve':
+          styles = { color: 'rgb(173, 173, 7)' };
+          break;
+        case 'Defecto Grave':
+          styles = { color: 'rgb(255, 165, 0)' };
+          break;
+        case 'Defecto Crítico':
+          styles = { color: 'rgb(255, 23, 23)' };
+          break;
+        default:
+          break;
+      }
+      return styles;
+    }
+
 }

@@ -28,7 +28,7 @@ export class PuertoComponent implements OnInit, OnDestroy {
   ubicacion!: any;
   dataSource = new MatTableDataSource<Item>();
   puertosData: Ubicacion[] = [];
-  //paginacion paginacion
+
   totalPuertos = 0;
   puertosPorPagina = 5;
   paginaCombo = [1, 2, 5, 10];
@@ -40,17 +40,16 @@ export class PuertoComponent implements OnInit, OnDestroy {
     valor: "puerto"
   }
   //variable para mostrar items o mantenimientos
-  mostrar = true;
-  //desplegarColumnasPuerto=["Nombre","Tipo","Ver Items", "Ver Mantenimientos"];
+  //mostrar = true;
   desplegarColumnasPuerto = ["nombre", "items","añadir", "añadirMantenimiento","mantenimientos","generarPdf"];
   dataSourcePuertos = new MatTableDataSource<Ubicacion>();
   puertasos: Ubicacion[] = [];
   private ubicacionesSubscription!: Subscription;
   timeout:any = null;
 
-    //variable para guardar ubicacion en la que guardar el pdf
-    ubicacionDef: any
-    mantenimientos: any[] = [];
+  //variable para guardar ubicacion en la que guardar el pdf
+  ubicacionDef: any
+  mantenimientos: any[] = [];
   util: Utils;
 
   constructor(private itemsService: ItemsService, private ubicacionesService: UbicacionesService, private router: Router,private puertoService :PuertoService) { }
@@ -69,7 +68,7 @@ export class PuertoComponent implements OnInit, OnDestroy {
 
   }
   ngOnDestroy() {
-    this.mostrar = false;
+
     this.ubicacionesSubscription.unsubscribe();
   }
 
@@ -97,7 +96,7 @@ export class PuertoComponent implements OnInit, OnDestroy {
   hacerFiltro(event: any) {
     clearTimeout(this.timeout);
     var $this = this;
-    //esta función se ejectua cuando el usuario deje de escribir por mas de un segundo
+    //esta función se ejecuta cuando el usuario deje de escribir por mas de un segundo
     this.timeout = setTimeout(() => {
       if (event.keycode !== 13) {
         var filterValueLocal = {
@@ -111,7 +110,6 @@ export class PuertoComponent implements OnInit, OnDestroy {
           };
         }
         $this.filterValue = filterValueLocal;
-
         //aqui obtenemos los libros pasando como filtro la constante creada antes
         $this.puertoService.obtenerPuertos($this.puertosPorPagina, $this.paginaActual, $this.sort, $this.sortDirection, filterValueLocal);
       }

@@ -46,6 +46,10 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
   itemDef!: Item;
   util: any;
 
+  //Card alerta
+   mostrarCarta: boolean = false;
+   mensajeItemAnadido: string = "";
+
   constructor(private itemService: ItemsService, private ubicacionesService: UbicacionesService, private fb: FormBuilder,private router :Router,private rutaActiva: ActivatedRoute) {
     this.itemForm = this.fb.group({
       denominacion: ['', Validators.required],
@@ -84,7 +88,7 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
           this.ubicacionesService.updateUbicacion(this.ubicacionId, ubicacion, this.itemDef, item.id)
         });
       });
-
+      this.mostrarAlerta('Ítem Añadido');
     } else {
       //lógica para modificar el ítem
       const item: Item = {
@@ -103,10 +107,11 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
           this.ubicacion = ubicacion;
           this.ubicacionesService.updateUbicacion(this.ubicacionId, ubicacion, item,item.id)
         });
+        this.mostrarAlerta('Ítem Editado');
       }
       setTimeout(() => {
         this.router.navigate(['/items', this.ubicacionId]);
-      }, 1000)
+      }, 2000)
   }
   obtenerUbicacion(id: string) {
     this.ubicacionesService.obtenerUbicacion(id).subscribe((ubicacion: Ubicacion) => {
@@ -176,5 +181,10 @@ export class RegistrarItemComponent implements OnInit, OnDestroy {
     this.ubicacionId=  this.rutaActiva.snapshot.params['ubicacionId'];
     console.log(`id ubicacion: ${this.ubicacionId}`);
     this.id = this.rutaActiva.snapshot.params['id'];
+  }
+
+  mostrarAlerta(mensaje: string) {
+    this.mensajeItemAnadido = mensaje;
+    this.mostrarCarta = true;
   }
 }

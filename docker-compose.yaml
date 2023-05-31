@@ -1,0 +1,64 @@
+version: '3'
+services:
+  feproyecto:
+    hostname: feproyecto
+    build:
+      context: ./FeProyecto
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+  mongodb7:
+    build:
+      context: .
+      dockerfile: Dockerfile-mongo
+    volumes:
+      - /var/lib/docker/volumes/docker/_data:/data/db
+    ports:
+      - "27017:27017"
+  puerto:
+    image: puerto
+    container_name: puerto
+    hostname: puerto
+    build:
+      context: ./BeProyecto/Servicios.api.Puerto
+      dockerfile: Dockerfile
+    depends_on:
+      - mongodb7
+    ports:
+      - "8592:80" 
+  sqlserver:
+    build: .
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Password123$"
+    volumes:
+      - ./bbddDatos:/var/opt/mssql/data
+    ports:
+      - "1433:1433"
+  seguridad:
+    image: seguridad
+    container_name: seguridad
+    hostname: seguridad
+    build:
+      context: ./BeProyecto/Servicios.api.Seguridad
+      dockerfile: Dockerfile
+    depends_on:
+      - sqlserver
+    ports:
+      - "8591:80"
+  gateway:
+    image: gateway
+    hostname: gateway
+    container_name: gateway
+    build:
+      context: ./BeProyecto/Servicios.api.Gateway
+      dockerfile: Dockerfile    
+    restart: always
+    ports:
+      - "8590:80"
+    links:
+      - puerto
+      - seguridad
+    depends_on:
+      - puerto
+      - seguridad

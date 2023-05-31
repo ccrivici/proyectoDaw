@@ -40,6 +40,10 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
   dateClass: MatCalendarCellClassFunction<Date>;
   fechaSugeridaCoincide = false;
 
+  //Card Alert
+  mostrarCarta: boolean = false;
+  mensajeItemAnadido: string = "";
+
   constructor(
     private mantenimientoService: MantenimientoService,
     private ubicacionesService: UbicacionesService,
@@ -114,6 +118,7 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
                 });
             });
         });
+        this.mostrarAlerta('Mantenimiento Añadido');
     } else {
       //modificamos item
       this.mantenimientoService.obtenerMantenimientoById(this.id).subscribe((mant: Mantenimiento) => {
@@ -148,11 +153,12 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
           });
 
       })
+      this.mostrarAlerta('Mantenimiento Editado');
     }
     //establecemos un Timeout para que tras haber añadido o actualizado el Mantenimiento cargue la lista de mantenimientos
     setTimeout(() => {
       this.router.navigate(['/mantenimientos', this.ubicacionId]);
-    }, 1000)
+    }, 2000)
   }
   /*
   *Este método hace uso de la libreria Moment para sugerir la fecha del mantenimiento según la periocidad asignada al ítem
@@ -283,5 +289,10 @@ export class RegistrarMantenimientoComponent implements OnInit, OnDestroy {
   //obtiene el id de la ubicacion de la url
   obtenerUbicacionId() {
     this.ubicacionId = this.rutaActiva.snapshot.params['ubicacionId'];
+  }
+
+  mostrarAlerta(mensaje: string) {
+    this.mensajeItemAnadido = mensaje;
+    this.mostrarCarta = true;
   }
 }

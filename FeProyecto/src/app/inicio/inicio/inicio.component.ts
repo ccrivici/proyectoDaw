@@ -1,11 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core';
+import {ChangeDetectorRef,Component,EventEmitter,OnDestroy,OnInit,Output} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SeguridadService } from 'src/app/seguridad/seguridad.service';
 
@@ -19,10 +12,7 @@ export class InicioComponent implements OnInit, OnDestroy {
   estadoUsuario!: boolean;
   @Output() menuToggle = new EventEmitter<void>();
 
-  constructor(
-    private seguridadService: SeguridadService,
-    private changeDetectorRef: ChangeDetectorRef
-  ) { }
+  constructor( private seguridadService: SeguridadService) { }
   ngOnDestroy(): void {
     this.usuarioSubscription.unsubscribe();
   }
@@ -32,8 +22,7 @@ export class InicioComponent implements OnInit, OnDestroy {
     if (this.seguridadService.onSesion()) {
       this.estadoUsuario = true;
     }
-    this.usuarioSubscription = this.seguridadService.seguridadCambio.subscribe(
-      (status) => {
+    this.usuarioSubscription = this.seguridadService.seguridadCambio.subscribe((status) => {
         this.estadoUsuario = status;
       }
     );

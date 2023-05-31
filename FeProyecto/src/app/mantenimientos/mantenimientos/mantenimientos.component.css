@@ -7,7 +7,7 @@ mat-cell{
 }
 mat-cell,
 mat-header-cell {
-  min-width: 170px;
+  min-width: 150px;
   text-align: left;
   white-space: normal;
   overflow: visible;
@@ -16,7 +16,7 @@ mat-header-cell {
 
 .mat-cell,
 .mat-header-cell {
-  min-width: 170px;
+  min-width: 150px;
 }
 
 .eliminar-button {

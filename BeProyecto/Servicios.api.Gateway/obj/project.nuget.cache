@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vJbkarOk7ATVj0oAMTFijdqMCOFMonHGXGOTDB4gX8iZ05i7towgs99jC8iF1lw8nssZuzb1gtmc2Gc8QPBQ9Q==",
+  "dgSpecHash": "YZoXSTazH+hvy46HV6uAh7lWDe/c3M/SQCVA0Hk+ojz93CqvXyy0NElgB2rm76ohSM+EwfdBzSu+MbAIYl0ueA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\carlos.crivicich\\Desktop\\composeTest\\prueba2\\BeProyecto\\Servicios.api.Gateway\\Servicios.api.Gateway.csproj",
+  "projectFilePath": "C:\\Users\\carlos.crivicich\\Desktop\\composeTest\\prueba22\\prueba4\\BeProyecto\\Servicios.api.Gateway\\Servicios.api.Gateway.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\carlos.crivicich\\.nuget\\packages\\fluentvalidation\\10.3.6\\fluentvalidation.10.3.6.nupkg.sha512",
     "C:\\Users\\carlos.crivicich\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.16\\microsoft.aspnetcore.authentication.jwtbearer.6.0.16.nupkg.sha512",

@@ -6,7 +6,7 @@
 <div class="center-container">
 <mat-table [dataSource]="dataSourcePuertos" matSort (matSortChange)="ordenarColumna($event)" class="responsive-table">
   <ng-container matColumnDef="nombre">
-    <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header >Nombre</mat-header-cell>
     <mat-cell *matCellDef="let element">{{ element.nombre }}</mat-cell>
   </ng-container>
 
@@ -31,7 +31,7 @@
 
   <ng-container matColumnDef="generarPdf">
     <mat-header-cell *matHeaderCellDef >Generar Pdf</mat-header-cell>
-    <mat-cell *matCellDef="let element"><a (click)="crearPdf(element.id)"><mat-icon>picture_as_pdf</mat-icon></a></mat-cell>
+    <mat-cell *matCellDef="let element"><a (click)="crearPdf(element.id)" style="cursor: pointer;"><mat-icon>picture_as_pdf</mat-icon></a></mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="desplegarColumnasPuerto">

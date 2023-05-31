@@ -35,11 +35,12 @@ export class ItemsService{
     return this.itemsSubjectPagination.asObservable();
   }
 
-  obtenerItems() {
+  obtenerItems(): Observable<Item[]> {
     this.http.get<Item[]>(this.baseUrl + '/item').subscribe((data) => {
       this.itemsLista = data;
       this.itemsSubject.next([...this.itemsLista]);
     });
+    return this.http.get<Item[]>(this.baseUrl + '/item');
   }
   obtenerItemById(id:string){
     return this.http.get<Item>(this.baseUrl + `/item/${id}`);
@@ -52,9 +53,6 @@ export class ItemsService{
   }
   guardarItem(item:Item){
     return this.http.post(this.baseUrl+'/item',item);
-  }
-  guardarLibroListener(){
-    return this.itemsSubject.asObservable();
   }
   deleteItem(id: string):Observable<any>{
     return this.http.delete(this.baseUrl+`/item/${id}`);

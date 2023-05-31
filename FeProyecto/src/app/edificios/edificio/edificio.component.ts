@@ -27,7 +27,7 @@ export class EdificioComponent implements AfterViewInit {
 
   idUbicacion!: string;
   ubicacion!: any;
-  desplegarColumnasEdificio = ["nombre", "items", "añadir", "añadirMantenimiento", "mantenimientos", "generarPdf"];
+  desplegarColumnasEdificio = ["nombre", "items","añadir", "añadirMantenimiento","mantenimientos","generarPdf"];
   @ViewChild(MatPaginator) paginacion!: MatPaginator;
   @ViewChild(MatSort) ordenamiento!: MatSort;
 

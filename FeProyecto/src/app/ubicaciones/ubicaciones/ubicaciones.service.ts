@@ -7,6 +7,7 @@ import { PaginationUbicaciones } from "./pagination-ubicaciones.model";
 import { Item } from "src/app/items/items/item.model";
 import { Mantenimiento } from "src/app/mantenimientos/mantenimientos/mantenimiento.model";
 import { MantenimientoService } from "src/app/mantenimientos/mantenimientos/mantenimientos.service";
+import { Router } from "@angular/router";
 
 
 @Injectable({
@@ -19,7 +20,7 @@ export class UbicacionesService{
   ubicacionSubject = new Subject<Ubicacion[]>();
   private ubicacionesPagination!: PaginationUbicaciones[];
 
-  constructor(private http:HttpClient,private mantenimientoService: MantenimientoService){}
+  constructor(private http:HttpClient,private mantenimientoService: MantenimientoService,private router :Router){}
   ubicacionSubjectDef = new Subject<Ubicacion>();
  ubicacionFiltrada!:Ubicacion;
 
@@ -102,7 +103,7 @@ export class UbicacionesService{
         console.log(data)
     });
   }
-  deleteItemFromUbicacion(ubicacion:Ubicacion,itemId:string){
+  deleteItemFromUbicacion(ubicacion:Ubicacion,itemId:string,ubiId:string){
     var contador = 0;
     //eliminamos el item de la lista de items
     ubicacion.items.forEach(element =>{
@@ -124,11 +125,12 @@ export class UbicacionesService{
     ubicacion.mantenimientos = mantenimientos;
     this.http.put<Ubicacion>(this.baseUrl + `/ubicacion/${ubicacion.id}`,ubicacion).subscribe((data) => {});
     setTimeout(()=>{
-      window.location.reload()
+      //window.location.reload()
+      this.router.navigate(['/items', ubiId]);
     },600)
   }
 
-  deleteMantenimientoFromUbicacion(ubicacion:Ubicacion,mantenimientoId:string){
+  deleteMantenimientoFromUbicacion(ubicacion:Ubicacion,mantenimientoId:string,ubiId:string){
     var contador = 0;
     ubicacion.mantenimientos.forEach(element =>{
       if (element.id == mantenimientoId){
@@ -139,7 +141,7 @@ export class UbicacionesService{
 
     this.http.put<Ubicacion>(this.baseUrl + `/ubicacion/${ubicacion.id}`,ubicacion).subscribe((data) => {
       setTimeout(()=>{
-         window.location.reload();
+        window.location.reload();
       },1000)
   });
   }

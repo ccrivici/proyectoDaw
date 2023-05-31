@@ -1,3 +1,10 @@
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<div class="alert alert-success my-4 animate__animated animate__fadeIn" role="alert" *ngIf="mostrarCarta">
+  <h4 class="alert-heading" style="font-size: 1.5rem;">¡Éxito!</h4>
+  <p class="mb-0" style="font-size: 1.2rem;"><mat-icon matSuffix>task_alt</mat-icon> {{ mensajeItemAnadido }}</p>
+</div>
 <section fxLayout="row" fxLayoutAlign="center">
   <mat-card>
 <form
@@ -142,9 +149,11 @@
       <mat-option value="dispositivo de control">Dispositivo de control</mat-option>
       <mat-option value="componentes electricos">Componentes electricos internos de acceso</mat-option>
     </mat-select></mat-form-field>
-  <button mat-raised-button color="primary" type="submit" [disabled]="f.invalid">
-  <a> {{ accion }} Item<mat-icon style="padding-left: 5px;"> add_circle </mat-icon></a>
-</button>
+    <div fxLayout="column" fxFlex="100">
+      <button mat-raised-button color="primary" type="submit" [disabled]="f.invalid">
+        <a> {{ accion }} Item<mat-icon style="padding-left: 2px;"> add_circle </mat-icon></a>
+      </button>
+    </div>
 </form>
 </mat-card>
 </section>

@@ -17,6 +17,11 @@
   </div>
 </div>
 <mat-table [dataSource]="dataSource" matSort (matSortChange)="ordenarColumna($event)">
+  <ng-container matColumnDef="conjuntoEquipo">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Elemento</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{ obtenerElemento(element) }}</mat-cell>
+  </ng-container>
+
   <ng-container matColumnDef="descripcion">
     <mat-header-cell *matHeaderCellDef  mat-sort-header> Descripción</mat-header-cell>
     <mat-cell *matCellDef="let element">{{element.descripcion}}</mat-cell>
@@ -24,7 +29,7 @@
 
   <ng-container matColumnDef="estado">
     <mat-header-cell *matHeaderCellDef  mat-sort-header> Estado</mat-header-cell>
-    <mat-cell *matCellDef="let element">{{element.estado}}</mat-cell>
+    <mat-cell *matCellDef="let element" [ngStyle]="getEstadoStyles(element.estado)">{{ element.estado }}</mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="corregido">

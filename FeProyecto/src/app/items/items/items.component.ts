@@ -99,6 +99,11 @@ export class ItemsComponent implements OnInit, OnDestroy {
       }
     );
   }
+
+  getItems(): Item[] {
+    return this.dataSource.data;
+  }
+
   eliminar(id: string) {
     //eliminamos el elemento
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -117,7 +122,7 @@ export class ItemsComponent implements OnInit, OnDestroy {
           // Aquí elimina el registro utilizando el ID
           this.itemsService.deleteItem(id).subscribe(() => {});
 
-          this.ubicacionesService.deleteItemFromUbicacion(ubicacion, id)
+          this.ubicacionesService.deleteItemFromUbicacion(ubicacion, id,this.idUbicacion)
         })
       }
     });
@@ -187,3 +192,5 @@ export class ItemsComponent implements OnInit, OnDestroy {
     window.history.back();
   }
 }
+export { ItemsService };
+

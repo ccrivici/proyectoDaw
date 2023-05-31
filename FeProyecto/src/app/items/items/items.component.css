@@ -4,7 +4,6 @@ mat-table {
 }
 mat-cell{
   font-family:Verdana, Geneva, Tahoma, sans-serif ;
-
 }
 mat-cell,
 mat-header-cell {
@@ -14,6 +13,7 @@ mat-header-cell {
   overflow: visible;
   justify-content: left;
 }
+
 .even-row {
   background-color: #f5f5f5;
   }

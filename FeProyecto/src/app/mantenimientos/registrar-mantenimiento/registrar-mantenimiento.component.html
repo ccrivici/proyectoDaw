@@ -1,3 +1,10 @@
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<div class="alert alert-success my-4 animate__animated animate__fadeIn" role="alert" *ngIf="mostrarCarta">
+  <h4 class="alert-heading" style="font-size: 1.5rem;">¡Éxito!</h4>
+  <p class="mb-0" style="font-size: 1.2rem;"><mat-icon matSuffix>task_alt</mat-icon> {{ mensajeItemAnadido }}</p>
+</div>
 <section fxLayout="row" fxLayoutAlign="center">
   <mat-card>
     <form [formGroup]="mantenimientoForm" (ngSubmit)="registrarEditarMantenimiento()" fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm">
@@ -62,7 +69,7 @@
             <ng-container *ngIf="fechaSugeridaCoincide">
               <style>
                 ::ng-deep .mat-calendar .mat-calendar-body .mat-calendar-body-cell.highlight-date-sugerida {
-                  background-color: rgb(255, 166, 0); /* Elige el color que desees para resaltar la celda */
+                  background-color: rgb(59, 182, 231); /* Elige el color que desees para resaltar la celda */
                   border-radius: 50%; /* Hace que el resaltado sea redondo */
                 }
               </style>
@@ -79,8 +86,8 @@
       </div>
 
       <div fxLayout="column" fxFlex="100">
-        <button mat-raised-button color="primary" type="submit"[disabled]="f.invalid"tyle="margin: 0 auto">
-          <a>{{ accion }} Mantenimiento<mat-icon style="padding-left: 5px">add_circle</mat-icon></a>
+        <button mat-raised-button color="primary" type="submit"[disabled]="f.invalid">
+          <a>{{ accion }} Mantenimiento<mat-icon style="padding-left: 2px">add_circle</mat-icon></a>
         </button>
       </div>
     </form>
